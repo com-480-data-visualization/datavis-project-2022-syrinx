@@ -19,6 +19,21 @@ Please, fill the following sections about your project.
 
 > Pre-processing of the data set you chose
 > - Show some basic statistics and get insights about the data
+The data needs some cleaning.
+Two parsers have been written by now, in order to treat the **ages** datas, and the current health state of the suspect.
+The toolset used for that is [the combination of antlr and python](https://faun.pub/introduction-to-antlr-python-af8a3c603d23).
+
+The ages of the victims and the ages of the suspects are highly correlated, as shown here:
+
+![Correlation between ages](./milestone_imgs/regage.png "correlation")
+
+We see that the ages of the victims can be really low, with a peak in the first year, whereas the ages of the suspects are centered around 40yo:
+
+![Age distribution](./milestone_imgs/pair_age.png "ages")
+
+We also observe that the health status of the suspect is significantly influenced by their age, and especialy that suspects who were older at the time of the suspected crime have been more likely to have died during or after the facts:
+
+<img src="./milestone_imgs/violin.png" alt="drawing" width="750"/>
 
 ### Related work
 
