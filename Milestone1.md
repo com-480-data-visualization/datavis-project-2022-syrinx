@@ -33,6 +33,14 @@ We also observe that the health status of the suspect is significantly influence
 
 <img src="./milestone_imgs/violin.png" alt="drawing" width="750"/>
 
+While we dig up in the rest of the data, some more statistics about the ages:
+
+| Stats  | *His age* | *Her age* |
+| ------ |:---------:|:---------:|
+| mean   | 40.52     | 39.52     |
+| std    | 15.30     | 18.09     |
+| median | 38        | 37        |
+
 ### Related work
 
 The data for our project has been manually collected and cleaned up by Dawn Wilcox with input from public contributors. It was used only by its creator for the official website of the Women Count USA: Femicide Accountability Project. The data is presented in Airtables for different periods of time from 1950s. Dawn Wilcox also did a mapping of the 2018 database using google maps: each point on the map contains a link to the photograph of a victim and information about the committed crime. Also, the same data was used for statistics presented by the creator during the meeting of the Data against feminicide project. From our point of view, it is an exceptional source of information that should be visualized and presented to the general public.
