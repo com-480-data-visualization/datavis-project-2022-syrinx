@@ -8,4 +8,4 @@
 
 ## Milestone 1
 
-[Milestone 1](Milestones/Milestone1.md)
+[Milestone 1](Milestone1.md)
