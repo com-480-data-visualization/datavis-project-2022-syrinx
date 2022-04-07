@@ -29,6 +29,6 @@ Please, fill the following sections about your project.
 > - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
 
 ## References:
-> 1)
-> 2)
-> 3)
+ 1)
+ 2)
+ 3)
