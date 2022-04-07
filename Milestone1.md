@@ -22,9 +22,9 @@ Please, fill the following sections about your project.
 
 ### Related work
 
+The data for our project has been manually collected and cleaned up by Dawn Wilcox with input from public contributors. It was used only by its creator for the official website of the Women Count USA: Femicide Accountability Project. The data is presented in Airtables for different periods of time from 1950s. Dawn Wilcox also did a mapping of the 2018 database using google maps: each point on the map contains a link to the photograph of a victim and information about the committed crime. Also, the same data was used for statistics presented by the creator during the meeting of the Data against feminicide project. From our point of view, it is an exceptional source of information that should be visualized and presented to the general public.
+However, there are not so many good examples of visualizations for this kind of data. 
+For example, the tables are usually large and difficult to explore. Our goal is to create a website that will be not only an interesting and artistic representation of the information, but also a memorial for thousands of victims of male violence against women. We want to focus our design on the idea that every murdered girl and woman was a unique person with her hobbies and interests, and not just a row in the table. The memorials that we have found on the Internet are mostly databases, the collections of victims’ photos mentioning some personal information and created with the most basic features of data visualization tools.
+Here are some visualizations that we find interesting and inspiring in context of our project: the poppy diagram showing the number of deaths in different war conflicts throughout the history, the web-project dedicated to feminicide in France, beautiful and meaningful colour-gradient visualization of portraits of women appearing on banknotes and a non-standard way of representing a timeline. A visualization of death statistics in Iraq from the New York Times Sunday Opinion.
 
-> - What others have already done with the data?
-> - Why is your approach original?
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
 
