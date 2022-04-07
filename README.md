@@ -3,7 +3,7 @@
 | Student's name  | SCIPER |
 | --------------- | ------ |
 | Matt Amina      |        |
-| Vincent Florian |        |
+| Vincent Florian | 344678 |
 | Serenko Irina   | 337185 |
 
 ## Milestone 1
