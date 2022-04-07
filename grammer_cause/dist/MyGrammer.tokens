@@ -1,0 +1,12 @@
+T__0=1
+T__1=2
+T__2=3
+T__3=4
+DEAD=5
+POLICE=6
+SUICIDE=7
+ALIVE=8
+'none'=1
+'nan'=2
+'NaN'=3
+'NAN'=4
