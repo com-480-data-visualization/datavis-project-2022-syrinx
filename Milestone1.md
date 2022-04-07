@@ -17,8 +17,6 @@ Please, fill the following sections about your project.
 
 ### Exploratory Data Analysis
 
-> Pre-processing of the data set you chose
-> - Show some basic statistics and get insights about the data
 The data needs some cleaning.
 Two parsers have been written by now, in order to treat the **ages** datas, and the current health state of the suspect.
 The toolset used for that is [the combination of antlr and python](https://faun.pub/introduction-to-antlr-python-af8a3c603d23).
