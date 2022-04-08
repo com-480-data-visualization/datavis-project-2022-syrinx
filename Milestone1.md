@@ -16,9 +16,9 @@ The toolset used for that is [the combination of antlr and python](https://faun.
 
 ### Problematic
 
-Data collection and visualization play a role in the way we conceive the world and its issues. Missing datasets highlight how power dynamics influences which data is collected. On the topic of gender inequality, feminicides are an example of missing data.  Indeed, the reality of women being killed by men because of their gender is overlooked. In order to address this issue, several women and groups have tackled the task of gathering data. A group of researchers has created ["Data against femicide"](https://datoscontrafeminicidio.net/en/home-2/) to address this issue. In our project we want to work on the next step. Once we have this data how can we visualize it in an interactive way.
+Data collection and visualization play a role in the way we conceive the world and its issues. Missing datasets highlight how power dynamics influences which data is collected. On the topic of gender inequality, feminicides are an example of missing data.  Indeed, the reality of women being killed by men because of their gender is overlooked. In order to address this issue, several women and groups have tackled the task of gathering data. ["Data against femicide"](https://datoscontrafeminicidio.net/en/home-2/) was created to address this issue. In our project we want to work on visualizing this data in an interactive way.
 
-Our goal is twofold. First of all, we would like to honor the memory of these women by creating a space for their names and histories. Moreover, we want to highlight the dynamics behind this data with some interactive visualization of aggregation.
+Our goal is twofold. We would like to honor the memory of these women by creating a space for their names and histories. Also, we want to highlight the dynamics behind this data with some interactive visualizations.
 
 At this stage of the project we are thinking of 5 differents views:
 - ensemble
@@ -35,14 +35,10 @@ The statistical view takes into account both women and men with basic statistics
 The timeline view is the women's data organized by date. 
 The map is the women's data organized by place of death.
 
-We envision multiple filters, aggregations and transitions. From the ensemble view, a click on a specific icon leads to the portrait view. In the portrait view a click on a specific attribute (e.g. race) leads back to the ensemble view and highlights the corresponding subset of women. A click on the date jumps to the timeline, where women killed around that date can be seen. 
-It would be possible to go from the ensemble to the statistical view.
-The statistical view will have the same filters as the ensemble view.
+From the ensemble view, a click on a specific icon leads to the portrait view. In the portrait view a click on a specific attribute (e.g. race) leads back to the ensemble view and highlights the corresponding subset of women. A click on the date jumps to the timeline, where women killed around that date can be seen. 
+The statistical view has the same filters as the ensemble view.
 The timeline can be to zoomed in or out in the 2018 year, as well as the map.
-The ensemble, portrait and timeline views are thought as tools to remember and honour these dead women. The design will take into account this specificity and only the information related to them will be shown (no suspect age or occupation mentioned).
-
-People that explore our visualization would be able to connect with who were these women, and understand how unique they were, meanwhile, part of a similar and deathly pattern of violence from men against women. 
-
+The ensemble, portrait and timeline views are thought as tools to honour these women. The design takes into account this specificity and only the information related to the victims will be presented in these views. Such data as age of the suspect and relation with the victim will be presented in a statistical view to give more insights into the problem. 
 
 ### Exploratory Data Analysis
 
