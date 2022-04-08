@@ -27,8 +27,7 @@ At this stage of the project we are thinking of 5 differents views :
 - a timeline view 
 - a map view 
 
-The views are sketched here :
-<img src="./milestone_imgs/Sketches of visualization ideas.pdf" alt="drawing" width="750"/>
+The views are sketched [here](https://github.com/com-480-data-visualization/datavis-project-2022-syrinx/tree/main/milestone_imgs)
 
 The ensemble view will display the 1840 women (probably with icons) and filters would highlights a subset of icons based on the criteria.
 The portrait view is a closer look at each women with the information concerning her (age, city, etc...). 
