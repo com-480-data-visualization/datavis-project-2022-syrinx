@@ -42,6 +42,8 @@ The ensemble, portrait and timeline views are thought as tools to honour these w
 
 ### Exploratory Data Analysis
 
+See the [notebook](./syrinx.ipynb).
+
 The ages of the victims and the ages of the suspects are highly correlated, as shown here:
 
 ![Correlation between ages](./milestone_imgs/regage.png "correlation")
