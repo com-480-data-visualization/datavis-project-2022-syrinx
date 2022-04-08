@@ -20,6 +20,21 @@ Data collection and visualization play a role in the way we conceive the world a
 
 Our goal is twofold. First of all, we would like to honor the memory of these women by creating a space for their names and histories. Moreover, we want to highlight the dynamics behind this data with some interactive visualization of aggregation.
 
+At this stage of the project we are thinking of 5 differents views:
+- an ensemble view
+- a portrait view of women related data
+- a statistical 
+- a timeline view of women data
+- a map view 
+
+The ensemble view will display the 1840 women (probably with icons) and filters would highlights a subset of icons based on the criteria.
+The portrait view is a closer look at each women with the information concerning her (age, city, etc...). 
+The statistical view takes into account both women and men data with number such as mean, max, min etc...
+The timeline view is the women data organized by date. 
+The map is the women data organized by date.
+
+We envision multiple filters, aggregations and transitions.
+
 People that explore our visualization would be able to connect with who were these women, and understand how unique they were, meanwhile, part of a similar and deathly pattern of violence from men against women. 
 
 
