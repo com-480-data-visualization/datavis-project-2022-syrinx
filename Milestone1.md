@@ -22,9 +22,9 @@ Our goal is twofold. First of all, we would like to honor the memory of these wo
 
 At this stage of the project we are thinking of 5 differents views:
 - an ensemble view
-- a portrait view of women related data
-- a statistical 
-- a timeline view of women data
+- a portrait view 
+- a statistical view
+- a timeline view 
 - a map view 
 
 The ensemble view will display the 1840 women (probably with icons) and filters would highlights a subset of icons based on the criteria.
@@ -38,7 +38,7 @@ It would be possible to transition from the ensemble to the statistical view wit
 The statistical view will have the same filters as the ensemble views.
 The timeline will contain a brush to zoom in or out in the 2018 year.
 Finally, the map will also have zoom in and out. 
-It is important to realize that the ensemble, portrait and timeline are thought as tools to remember and honour these dead women. The design will take into account this specificity.
+It is important to realize that the ensemble, portrait and timeline are thought as tools to remember and honour these dead women. The design will take into account this specificity and only the information related to them will be shown (no suspect age or occupation mentioned).
 
 People that explore our visualization would be able to connect with who were these women, and understand how unique they were, meanwhile, part of a similar and deathly pattern of violence from men against women. 
 
