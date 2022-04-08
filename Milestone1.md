@@ -18,7 +18,7 @@ The data have been collected by a single person, however some columns aren't con
 Two parsers have been written by now, in order to treat the **ages** datas, and the current health state of the suspect.
 The toolset used for that is [the combination of antlr and python](https://faun.pub/introduction-to-antlr-python-af8a3c603d23).
 
-*femicide : gender-related killings of women and girls* 
+\* *femicide : gender-related killings of women and girls* 
 
 ### Problematic
 
