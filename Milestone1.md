@@ -21,10 +21,14 @@ The toolset used for that is [the combination of antlr and python](https://faun.
 
 > Frame the general topic of your visualization and the main axis that you want to develop.
 > - TOPIC
+>  - What am I trying to show with my visualization?
+>  - Think of an overview for the project, your motivation, and the target audience.
+
 Data collection and visualization play a role in the way we concieve the world and its issues. Around the them of gender equality, a group of researcher focus on the topic of femicide. Indeed, the reality of women being killed by men because of their gender is underestimated. One project addressing this issue is the coalition "Data against femicide"(https://datoscontrafeminicidio.net/en/home-2/) between Catherine D’Ignazio (Data + Feminism Lab @ MIT), Silvana Fumega (ILDA) and Helena Suárez Val (Feminicidio Uruguay). In our project we want to address the next step. Once we have this data how can we visualize them in a interactive way.
-> - What am I trying to show with my visualization?
+
 Our goal is two-folds. First we would like to honor these women memory by creating a space for their names and histories. Secondly, we want to higlight the dynamics that are behind this data with some interactive visualization of aggregation.
-> - Think of an overview for the project, your motivation, and the target audience.
+
+People that expore our visualization would be able to connect with who where this women, and understand how they are unique meanwhile part of a similar and deathly pattern of violence from men against women. 
 
 
 ### Exploratory Data Analysis
