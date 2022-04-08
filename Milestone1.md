@@ -7,14 +7,13 @@ Please, fill the following sections about your project.
 
 > Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
 
-The dataset we have chosen contains informations about feminicide* in USA in 2018. There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe this dataset is of particular interest for multiple reasons. On top on this, we also have the pictures of many of the women. 
-
+The dataset we have chosen contains information about feminicide* in USA in 2018. There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe this dataset is of particular interest for multiple reasons. On top on this, we also have the pictures of many of the women. 
 
 First, the topic is sensitive and requires to deeply think about what we want to show and how to do it properly and efficiently. 
-Secondly, there are information both about time and space which enrich the visualization possibility.
-Finally, the categorical columns such as relationship, or cause of death allows to introduce some filtering.
+Secondly, there is information both about time and space which enriches the visualization possibility.
+Finally, the categorical columns such as relationship, or cause of death allow to introduce some filtering.
 
-The data have been collected by a single person, however some columns aren't consistent and needs some cleaning.
+The data has been collected by a single person, however some columns aren't consistent and need some cleaning.
 Two parsers have been written by now, in order to treat the **ages** datas, and the current health state of the suspect.
 The toolset used for that is [the combination of antlr and python](https://faun.pub/introduction-to-antlr-python-af8a3c603d23).
 
@@ -27,7 +26,7 @@ The toolset used for that is [the combination of antlr and python](https://faun.
 >  - What am I trying to show with my visualization?
 >  - Think of an overview for the project, your motivation, and the target audience.
 
-Data collection and visualization play a role in the way we concieve the world and its issues. Around the them of gender equality, a group of researcher focus on the topic of femicide. Indeed, the reality of women being killed by men because of their gender is underestimated. One project addressing this issue is the coalition "Data against femicide"(https://datoscontrafeminicidio.net/en/home-2/) between Catherine D’Ignazio (Data + Feminism Lab @ MIT), Silvana Fumega (ILDA) and Helena Suárez Val (Feminicidio Uruguay). In our project we want to address the next step. Once we have this data how can we visualize them in a interactive way.
+Data collection and visualization play a role in the way we concieve the world and its issues. Around the them of gender equality, a group of researcher focus on the topic of femicide. Indeed, the reality of women being killed by men because of their gender is underestimated. One project addressing this issue is the coalition ["Data against femicide"](https://datoscontrafeminicidio.net/en/home-2/) between Catherine D’Ignazio (Data + Feminism Lab @ MIT), Silvana Fumega (ILDA) and Helena Suárez Val (Feminicidio Uruguay). In our project we want to address the next step. Once we have this data how can we visualize them in a interactive way.
 
 Our goal is two-folds. First we would like to honor these women memory by creating a space for their names and histories. Secondly, we want to higlight the dynamics that are behind this data with some interactive visualization of aggregation.
 
