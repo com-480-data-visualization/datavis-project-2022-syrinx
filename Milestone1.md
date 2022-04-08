@@ -16,7 +16,7 @@ The toolset used for that is [the combination of antlr and python](https://faun.
 
 ### Problematic
 
-Data collection and visualization play a role in the way we conceive the world and its issues. Missing datasets highlight how power dynamics influences which data is collected. On the topic of gender inequality, feminicides are an example of missing data.  Indeed, the reality of women being killed by men because of their gender is overlooked. In order to address this issue, several women and groups have tackled the task of gathering data. ["Data against femicide"](https://datoscontrafeminicidio.net/en/home-2/) was created to address this issue. In our project we want to work on visualizing this data in an interactive way.
+On the topic of gender inequality, femicide is an example of missing data.  Indeed, the reality of women being killed by men because of their gender is overlooked. In order to address this issue, several women and groups have tackled the task of gathering data. ["Data against femicide"](https://datoscontrafeminicidio.net/en/home-2/) was created to address this issue. In our project we want to work on visualizing this data in an interactive way.
 
 Our goal is twofold. We would like to honor the memory of these women by creating a space for their names and histories. Also, we want to highlight the dynamics behind this data with some interactive visualizations.
 
