@@ -48,7 +48,7 @@ The ages of the victims and the ages of the suspects are highly correlated, as s
 
 ![Correlation between ages](./milestone_imgs/regage.png "correlation")
 
-If we look at the histogram of relationship between victim and suspect, we see that in most cases the suspect was in romantic relationships with the victim. It could be the reason for the correlation in ages.
+If we look at the [histogram](./Additional$20statistics.ipynb) of relationship between victim and suspect, we see that in most cases the suspect was in romantic relationships with the victim. It could be the reason for the correlation in ages.
 
 ![Relationship with the victim](./milestone_imgs/Histogram%20Relationship.png)
 
