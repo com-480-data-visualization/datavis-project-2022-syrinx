@@ -7,7 +7,7 @@ Please, fill the following sections about your project.
 
 > Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
 
-The dataset we have chosen contains informations about feminicide in USA in 2018. There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe this dataset is of particular interest for multiple reasons. On top on this, we also have the pictures of many of the women. 
+The dataset we have chosen contains informations about feminicide* in USA in 2018. There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe this dataset is of particular interest for multiple reasons. On top on this, we also have the pictures of many of the women. 
 
 
 First, the topic is sensitive and requires to deeply think about what we want to show and how to do it properly and efficiently. 
@@ -18,7 +18,7 @@ The data have been collected by a single person, however some columns aren't con
 Two parsers have been written by now, in order to treat the **ages** datas, and the current health state of the suspect.
 The toolset used for that is [the combination of antlr and python](https://faun.pub/introduction-to-antlr-python-af8a3c603d23).
 
-
+*femicide : gender-related killings of women and girls* 
 
 ### Problematic
 
