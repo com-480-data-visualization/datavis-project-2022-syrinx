@@ -33,7 +33,12 @@ The statistical view takes into account both women and men data with number such
 The timeline view is the women data organized by date. 
 The map is the women data organized by date.
 
-We envision multiple filters, aggregations and transitions.
+We envision multiple filters, aggregations and transitions. From the ensemble view, a click on a specific icon would lead to the portrait view. In the portrait view a click on a specific attributes, for example the race, would go back to the ensemble view and highlights the subset of women with same caracteristic. A click on the date would jump to the timeline, where women allegedly killed around that date would be visible too. 
+It would be possible to transition from the ensemble to the statistical view with a button on the ensemble view.
+The statistical view will have the same filters as the ensemble views.
+The timeline will contain a brush to zoom in or out in the 2018 year.
+Finally, the map will also have zoom in and out. 
+It is important to realize that the ensemble, portrait and timeline are thought as tools to remember and honour these dead women. The design will take into account this specificity.
 
 People that explore our visualization would be able to connect with who were these women, and understand how unique they were, meanwhile, part of a similar and deathly pattern of violence from men against women. 
 
