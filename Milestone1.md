@@ -1,10 +1,10 @@
 ### Dataset
 
-The dataset we have chosen contains information about femicide* in USA in 2018. It is a subset of a larger dataset that has been manually collected and cleaned up by Dawn Wilcox with input from public contributors. It was used only by its creator for the official website of the [Women Count USA: Femicide Accountability Project](https://womencountusa.org/the-databases). The data is presented in Airtables for different periods of time from 1950s. We were able to obtain the CSV file for the 2018 period after emails exchange with the author herself. 
+The dataset we have chosen contains information about femicide* in USA in 2018. It is a subset of a larger dataset that has been manually collected and cleaned up by Dawn Wilcox with input from public contributors. It was used only by its creator for the official website of the [Women Count USA: Femicide Accountability Project](https://womencountusa.org/the-databases). The data is presented in Airtables for different periods of time from 1950s. We were able to obtain the CSV file for the 2018 period after emails exchange with the author herself.
 
-There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe, this dataset is of particular interest for multiple reasons. On top of this, we also have pictures of many of the women that we are going to use in our visualization. 
+There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe, this dataset is of particular interest for multiple reasons. On top of this, we also have pictures of many of the women that we are going to use in our visualization.
 
-First, the topic is sensitive and requires us to deeply think about what we want to show and how to do it properly and efficiently. 
+First, the topic is sensitive and requires us to deeply think about what we want to show and how to do it properly and efficiently.
 Secondly, there is information both about time and space which enriches the visualization possibility.
 Finally, the categorical columns such as relationship, or cause of death allow to introduce some filtering.
 
@@ -12,7 +12,7 @@ The data has been collected by a single person, however, some columns aren't con
 Two parsers have been written by now, in order to treat the **ages** columns, and the current health state of the suspect.
 The toolset used for that is [the combination of antlr and python](https://faun.pub/introduction-to-antlr-python-af8a3c603d23).
 
-\* *femicide : gender-related killings of women and girls* 
+\* *femicide : gender-related killings of women and girls*
 
 ### Problematic
 
@@ -22,23 +22,23 @@ Our goal is twofold. We would like to honor the memory of these women by creatin
 
 At this stage of the project we are thinking of 5 differents views:
 - ensemble
-- portrait 
+- portrait
 - statistical
-- timeline 
-- map 
+- timeline
+- map
 
 The views are sketched [here](https://github.com/com-480-data-visualization/datavis-project-2022-syrinx/blob/main/milestone_imgs/Sketches%20of%20visualization%20ideas.pdf)
 
 The ensemble view displays women with icons, filters highlight a subset of icons based on the chosen criteria.
-The portrait view is a closer look at each woman with the information concerning her age, city, etc.. 
+The portrait view is a closer look at each woman with the information concerning her age, city, etc...
 The statistical view takes into account both women and men with basic statistics.
-The timeline view is the women's data organized by date. 
+The timeline view is the women's data organized by date.
 The map is the women's data organized by place of death.
 
-From the ensemble view, a click on a specific icon leads to the portrait view. In the portrait view a click on a specific attribute (e.g. race) leads back to the ensemble view and highlights the corresponding subset of women. A click on the date jumps to the timeline, where women killed around that date can be seen. 
+From the ensemble view, a click on a specific icon leads to the portrait view. In the portrait view a click on a specific attribute (e.g. race) leads back to the ensemble view and highlights the corresponding subset of women. A click on the date jumps to the timeline, where women killed around that date can be seen.
 The statistical view has the same filters as the ensemble view.
 The timeline can be to zoomed in or out in the 2018 year, as well as the map.
-The ensemble, portrait and timeline views are thought as tools to honour these women. The design takes into account this specificity and only the information related to the victims will be presented in these views. Such data as age of the suspect and relation with the victim will be presented in a statistical view to give more insights into the problem. 
+The ensemble, portrait and timeline views are thought as tools to honour these women. The design takes into account this specificity and only the information related to the victims will be presented in these views. Such data as age of the suspect and relation with the victim will be presented in a statistical view to give more insights into the problem.
 
 ### Exploratory Data Analysis
 
@@ -63,6 +63,11 @@ While we are digging into the rest of the data, some more statistics about the a
 | mean   | 40.52     | 39.52     |
 | std    | 15.30     | 18.09     |
 | median | 38        | 37        |
+
+The see how were those computations made, see [the notebook we made](syrinx.ipynb).
+
+Future investigations:
+> We will later on work on other variables, to filter, clean, and present the data that we need.
 
 ### Related work
 
