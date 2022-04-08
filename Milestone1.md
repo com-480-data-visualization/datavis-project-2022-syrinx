@@ -7,7 +7,10 @@ Please, fill the following sections about your project.
 
 > Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
 
-The dataset we have chosen contains informations about feminicide in USA in 2018. There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe this dataset is of particular interest for multiple reasons. First, the topic is sensitive and requires to deeply think about what we want to show and how to do it properly and efficiently. 
+The dataset we have chosen contains informations about feminicide in USA in 2018. There are 1840 entries, each case has 26 attributes. For our data visualization we are interested in using mainly the following ones: date of death, her name, her age, her race/ethnicity, city, state, relationship, suspect age, suspect race/ethnicity and cause of death. We believe this dataset is of particular interest for multiple reasons. On top on this, we also have the pictures of many of the women. 
+
+
+First, the topic is sensitive and requires to deeply think about what we want to show and how to do it properly and efficiently. 
 Secondly, there are information both about time and space which enrich the visualization possibility.
 Finally, the categorical columns such as relationship, or cause of death allows to introduce some filtering.
 
