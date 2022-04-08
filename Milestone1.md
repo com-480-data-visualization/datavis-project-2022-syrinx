@@ -20,12 +20,15 @@ Data collection and visualization play a role in the way we conceive the world a
 
 Our goal is twofold. First of all, we would like to honor the memory of these women by creating a space for their names and histories. Moreover, we want to highlight the dynamics behind this data with some interactive visualization of aggregation.
 
-At this stage of the project we are thinking of 5 differents views:
+At this stage of the project we are thinking of 5 differents views :
 - an ensemble view
 - a portrait view 
 - a statistical view
 - a timeline view 
 - a map view 
+
+The views are sketched here :
+<img src="./milestone_imgs/Sketches of visualization ideas.pdf" alt="drawing" width="750"/>
 
 The ensemble view will display the 1840 women (probably with icons) and filters would highlights a subset of icons based on the criteria.
 The portrait view is a closer look at each women with the information concerning her (age, city, etc...). 
