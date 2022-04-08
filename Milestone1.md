@@ -16,31 +16,30 @@ The toolset used for that is [the combination of antlr and python](https://faun.
 
 ### Problematic
 
-Data collection and visualization play a role in the way we conceive the world and its issues. Missing datasets highlight how power dynamics influences which data is collected. On the topic of gender inequality, feminicides are an example of missing data.  Indeed, the reality of women being killed by men because of their gender is overlooked. In order to address this issue, several women and groups have tackled the task of gathering data. A group of researchers with Catherine D’Ignazio (Data + Feminism Lab @ MIT), Silvana Fumega (ILDA) and Helena Suárez Val (Feminicidio Uruguay) have created ["Data against femicide"](https://datoscontrafeminicidio.net/en/home-2/) to address this issue. In our project we want to work on the next step. Once we have this data how can we visualize it in an interactive way.
+Data collection and visualization play a role in the way we conceive the world and its issues. Missing datasets highlight how power dynamics influences which data is collected. On the topic of gender inequality, feminicides are an example of missing data.  Indeed, the reality of women being killed by men because of their gender is overlooked. In order to address this issue, several women and groups have tackled the task of gathering data. A group of researchers has created ["Data against femicide"](https://datoscontrafeminicidio.net/en/home-2/) to address this issue. In our project we want to work on the next step. Once we have this data how can we visualize it in an interactive way.
 
 Our goal is twofold. First of all, we would like to honor the memory of these women by creating a space for their names and histories. Moreover, we want to highlight the dynamics behind this data with some interactive visualization of aggregation.
 
-At this stage of the project we are thinking of 5 differents views :
-- an ensemble view
-- a portrait view 
-- a statistical view
-- a timeline view 
-- a map view 
+At this stage of the project we are thinking of 5 differents views:
+- ensemble
+- portrait 
+- statistical
+- timeline 
+- map 
 
 The views are sketched [here](https://github.com/com-480-data-visualization/datavis-project-2022-syrinx/blob/main/milestone_imgs/Sketches%20of%20visualization%20ideas.pdf)
 
-The ensemble view will display the 1840 women (probably with icons) and filters would highlights a subset of icons based on the criteria.
-The portrait view is a closer look at each women with the information concerning her (age, city, etc...). 
-The statistical view takes into account both women and men data with number such as mean, max, min etc...
-The timeline view is the women data organized by date. 
-The map is the women data organized by date.
+The ensemble view displays women with icons, filters highlight a subset of icons based on the chosen criteria.
+The portrait view is a closer look at each woman with the information concerning her age, city, etc.. 
+The statistical view takes into account both women and men with basic statistics.
+The timeline view is the women's data organized by date. 
+The map is the women's data organized by place of death.
 
-We envision multiple filters, aggregations and transitions. From the ensemble view, a click on a specific icon would lead to the portrait view. In the portrait view a click on a specific attributes, for example the race, would go back to the ensemble view and highlights the subset of women with same caracteristic. A click on the date would jump to the timeline, where women allegedly killed around that date would be visible too. 
-It would be possible to transition from the ensemble to the statistical view with a button on the ensemble view.
-The statistical view will have the same filters as the ensemble views.
-The timeline will contain a brush to zoom in or out in the 2018 year.
-Finally, the map will also have zoom in and out. 
-It is important to realize that the ensemble, portrait and timeline are thought as tools to remember and honour these dead women. The design will take into account this specificity and only the information related to them will be shown (no suspect age or occupation mentioned).
+We envision multiple filters, aggregations and transitions. From the ensemble view, a click on a specific icon leads to the portrait view. In the portrait view a click on a specific attribute (e.g. race) leads back to the ensemble view and highlights the corresponding subset of women. A click on the date jumps to the timeline, where women killed around that date can be seen. 
+It would be possible to go from the ensemble to the statistical view.
+The statistical view will have the same filters as the ensemble view.
+The timeline can be to zoomed in or out in the 2018 year, as well as the map.
+The ensemble, portrait and timeline views are thought as tools to remember and honour these dead women. The design will take into account this specificity and only the information related to them will be shown (no suspect age or occupation mentioned).
 
 People that explore our visualization would be able to connect with who were these women, and understand how unique they were, meanwhile, part of a similar and deathly pattern of violence from men against women. 
 
@@ -69,10 +68,8 @@ While we are digging into the rest of the data, some more statistics about the a
 
 ### Related work
 
-There exist some visualization of femicide data. Dawn Wilcox made a [mapping of the 2018 database](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.google.com%2Fmaps%2Fd%2Fedit%3Fmid%3D1fD8ocpC4HYuOuNlivmAcxXVxY6_YaeKC%26usp%3Dsharing%26fbclid%3DIwAR1LWcOFOx-1JYxFjgXUhYCisuHHWWfxu2iw_qTNLmT5h8qDd0bXajE6b0M&h=AT1lbDaDjkxvYNrOPhlFrVJYmzhyYsif8g2VevTGqjelpuW9uDF6aYa0RU3I0c6WDQd9AC52HVZ3gIiG7GUjuqnwtB-PCddyxglfiGNUn2gHG-7bO1Mbvwn5ygbWTAotkyw2BZVN63J3MZnP8gPwY8HnuQ&__tn__=-UK-R&c[0]=AT0khRhezKSzP04dh-IrKGjQ8fxYv6L1I36YqKtSPM0o8mTDZi37OjafeJZR38CJRAfUlWY21qt687wZjtib_8sr_Tx0MBCkBhhy8ZaUhywNtX5AVol2Fl-FLO0H_IAPG5It0vGr7yWMsDilX6FYBc-rzRYLdc4rEGYJkL_Q3ixm2ew) using google maps: each point on the map contains a link to the photograph of a victim and information about the committed crime. Also, the same data was used for statistics presented by the creator during the meeting of the [Data against feminicide project](https://datoscontrafeminicidio.net/en/2021-edition/). As another example, María Salguero, who works on the problem of femicide in Mexico, produced a [map](https://mapafeminicidios.blogspot.com/p/inicio.html) with pins corresponding to cases. In this visualization the user can select a pin and see the related information.
+Dawn Wilcox made a [mapping of the 2018 database](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.google.com%2Fmaps%2Fd%2Fedit%3Fmid%3D1fD8ocpC4HYuOuNlivmAcxXVxY6_YaeKC%26usp%3Dsharing%26fbclid%3DIwAR1LWcOFOx-1JYxFjgXUhYCisuHHWWfxu2iw_qTNLmT5h8qDd0bXajE6b0M&h=AT1lbDaDjkxvYNrOPhlFrVJYmzhyYsif8g2VevTGqjelpuW9uDF6aYa0RU3I0c6WDQd9AC52HVZ3gIiG7GUjuqnwtB-PCddyxglfiGNUn2gHG-7bO1Mbvwn5ygbWTAotkyw2BZVN63J3MZnP8gPwY8HnuQ&__tn__=-UK-R&c[0]=AT0khRhezKSzP04dh-IrKGjQ8fxYv6L1I36YqKtSPM0o8mTDZi37OjafeJZR38CJRAfUlWY21qt687wZjtib_8sr_Tx0MBCkBhhy8ZaUhywNtX5AVol2Fl-FLO0H_IAPG5It0vGr7yWMsDilX6FYBc-rzRYLdc4rEGYJkL_Q3ixm2ew) using google maps: each point on the map contains a link to the photograph of a victim and information about the committed crime. Also, the same data was used for statistics presented by the creator during the meeting of the [Data against feminicide project](https://datoscontrafeminicidio.net/en/2021-edition/). As another example, María Salguero produced a [map](https://mapafeminicidios.blogspot.com/p/inicio.html) with pins corresponding to cases of femicide in Mexico.
 
 However, there are not so many good examples of visualizations for this kind of data. For example, the [tables](https://airtable.com/shrjQBwYvk08cbHu2/tblR739BUJgxxQqrt) are usually large and difficult to explore. Our goal is to create a website that will be not only an interesting and artistic representation of the information, but also a memorial for thousands of victims of male violence against women. We want to focus our design on the idea that every murdered girl and woman was a unique person with her hobbies and interests, and not just a row in the table. The memorials that we have found on the Internet are mostly [databases](https://womencountusa.org/the-databases), the [collections](https://gunmemorial.org) of victims’ photos mentioning some personal information and created with the most basic features of data visualization tools, [see also](https://www.aapf.org/in-memorium-old).
 
-Here are some visualizations that we find interesting and inspiring in context of our project: the [poppy diagram](https://iibawards-prod.s3.amazonaws.com/projects/images/000/000/375/large.jpg?1403857589) showing the number of deaths in different war conflicts throughout the history with a lot of information in the design itself and delicate with respect to the issue at hand. The [web-project](https://www.gabriellemerite.com/portfolio-item/death-at-home/) dedicated to feminicide in France in the spirit of a portfolio highlights how we would like to portray each women and their singularity. The beautiful and meaningful colour-gradient [visualization](https://www.behance.net/gallery/96434017/Noteable-Women?tracking_source=project_owner_other_projects%5C) of portraits of women appearing on banknotes with a non-standard way of representing a timeline is our inspiration for our own timeline. Finally in order to get an ensemble view, the following visualization of [death statistics in Iraq](https://i.pinimg.com/originals/e7/f3/eb/e7f3eb9bea609baab00c24ecc4918c94.jpg) from the New York Times Sunday Opinion caught our attention.
-
-
+Here are some visualizations that we find interesting and inspiring in context of our project: the [poppy diagram](https://iibawards-prod.s3.amazonaws.com/projects/images/000/000/375/large.jpg?1403857589) showing the number of deaths in different war conflicts throughout the history with a lot of information in the design itself and delicate with respect to the issue at hand. The [web-project](https://www.gabriellemerite.com/portfolio-item/death-at-home/) dedicated to feminicide in France in the spirit of a portfolio highlights how we would like to portray each woman and their singularity. The beautiful and meaningful colour-gradient [visualization](https://www.behance.net/gallery/96434017/Noteable-Women?tracking_source=project_owner_other_projects%5C) of portraits of women appearing on banknotes with a non-standard way of representing a timeline is our inspiration for our own timeline. Also, the following visualization of [death statistics in Iraq](https://i.pinimg.com/originals/e7/f3/eb/e7f3eb9bea609baab00c24ecc4918c94.jpg) from the New York Times Sunday Opinion caught our attention.
