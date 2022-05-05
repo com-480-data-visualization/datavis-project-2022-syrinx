@@ -1,0 +1,54 @@
+
+/*
+Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
+*/
+html, body, figure {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	overflow-y:scroll;
+}
+
+/* Default font and size */
+body {
+
+	width: 100vw;
+	height: 100vh;
+	margin-top: -300px;
+
+	/* center vertically */
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-content: center;
+
+	/* background behind the plot */
+	background: rgb(40, 40, 40);
+
+	/* default text */
+	font-family: sans-serif;
+	font-size: 1.1rem;
+	overflow-y: scroll;
+}
+
+p, h1, h2, h3 {
+	color: #badde1;
+}
+h1 {
+	text-align: center;
+}
+p {
+	column-count: 2;
+	column-rule-style: solid;
+	column-rule-width: 1px;
+}
+
+div {
+	border-style: solid;
+	border-radius: 10;
+	padding: 10px;
+	margin: 10px;
+	border-color: #badde1;
+	position:fixed;
+}
