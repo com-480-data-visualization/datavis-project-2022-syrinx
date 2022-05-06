@@ -34,14 +34,14 @@ Exploratory Statistical View 1       |   Exploratory Statistical View 2
 Exploratory Statistical View 3
 ![ Exploratory statistical View 3](./milestone_imgs/Exploratory_Statistical_view3.png "Exploratory_Statistical_view3")
 
-The goal of the exploratory statistical view is to visualize both the data related to the victims as well as the killers at the same time. The exploratory mode show all the data, i.e. one line per case and highlights the relationship and the murder details. The same data is also presented in an aggregated way to understand what are the tendances on both the victim and the killer data.
+The goal of the exploratory statistical view is to visualize both the data related to the victims as well as the killers at the same time. The exploratory mode shows all the data, i.e. one line per case and highlights the relationship and the murder details. The same data is also presented in an aggregated way to show the trends in both the victim and the killer data.
 
 
  Aggregated Statistical View 1           |   Aggregated Statistical View 2
 :-------------------------:|:-------------------------:
 ![ Aggregated statistical View 1 ](./milestone_imgs/Aggregation_Statistical_view1.png "Aggregated_Statistical_view1")  |  ![ Aggregated statistical View 2 ](./milestone_imgs/Aggregation_Statistical_view2.png "Aggregated_Statistical_view2")
 
-The aggregated statistical view shows bar chart for data on women and men sides. For categorical data present for both sets (e.g. women race and men race) the graph will be assymetrical. For categorical data that pertain to both gender together (eg relationship) the graph will be symmetrical. For the ordinal data, we will define some categories (e.g. age) for the aggreagation.
+The aggregated statistical view shows bar chart for data on women and men sides. For categorical data present for both sets (e.g. women race and men race) the graph will be asymmetrical. For categorical data that pertain to both genders together (e.g. relationship) the graph will be symmetrical. For the ordinal data, we will define some categories (e.g. age) for the aggreagation.
 
 
 ### Tools and Lectures Needed
