@@ -1,6 +1,6 @@
 ### Project Goals
 
-The goal of our project is to provide a visualization of a femicide data. The data we visualize has been collected in a political context and can be labelled as “counter data” meaning that it answers a need to reveal a phenomenon usually hidden or marginalized.
+The goal of our project is to provide a visualization of femicide data. The data we visualize has been collected in a political context and can be labelled as “counter data” meaning that it answers a need to reveal a phenomenon usually hidden or marginalized.
 
 We think about three types of personas for our website. First, the people concerned by femicide because one of their relatives died from it. For this user, our goal is to provide a virtual “memorial” and show that their loved ones are not forgotten. The portrait view design follows this goal focusing on the women data and providing an emotional design. The link to other views allow to contextualize these brutal deaths in a larger issue. We would like to add a resource page to provide some option for care in this difficult context.
 
@@ -41,7 +41,7 @@ The goal of the exploratory statistical view is to visualize both the data relat
 :-------------------------:|:-------------------------:
 ![ Aggregated statistical View 1 ](./milestone_imgs/Aggregation_Statistical_view1.png "Aggregated_Statistical_view1")  |  ![ Aggregated statistical View 2 ](./milestone_imgs/Aggregation_Statistical_view2.png "Aggregated_Statistical_view2")
 
-The aggregated statistical view shows bar chart for data on women and men sides. For categorical data present for both sets (e.g. women race and men race) the graph will be asymmetrical. For categorical data that pertain to both genders together (e.g. relationship) the graph will be symmetrical. For the ordinal data, we will define some categories (e.g. age) for the aggreagation.
+The aggregated statistical view shows bar chart for data on women and men sides. For categorical data present for both sets (e.g. women's races and men's races) the graph will be asymmetrical. For categorical data that pertain to both genders together (e.g. relationship) the graph will be symmetrical. For the ordinal data, we will define some categories (e.g. age) for the aggreagation.
 
 
 ### Tools and Lectures Needed
