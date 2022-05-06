@@ -8,6 +8,12 @@ Portrait View 1           |  Portrait View 2
 Portrait View 3           |  Portrait View 4
 ![Portrait View 3](./milestone_imgs/Portrait_view3.jpg "Portrait View 3")  |  ![Portrait View 4](./milestone_imgs/Portrait_view4.jpg "Portrait View 4")
 
+Ensemble View 1           |  Ensemble View 2
+:-------------------------:|:-------------------------:
+![Ensemble View 1](./milestone_imgs/Ensemble_view1.jpg "Ensemble View 1")  |  ![Ensemble View 2](./milestone_imgs/Ensemble_view2.jpg "Ensemble View 2")
+Ensemble View 3
+![Ensemble View 3](./milestone_imgs/Ensemble_view3.jpg "Ensemble View 3") 
+
 
 ### Tools and Lectures Needed
 
