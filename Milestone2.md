@@ -35,6 +35,8 @@ The goal of the exploratory statistical view is to visualize both the data relat
 :-------------------------:|:-------------------------:
 ![ Aggregated statistical View 1 ](./milestone_imgs/Aggregation_Statistical_view1.png "Aggregated_Statistical_view1")  |  ![ Aggregated statistical View 2 ](./milestone_imgs/Aggregation_Statistical_view2.png "Aggregated_Statistical_view2")
 
+The aggregated statistical view shows bar chart for data on women and men sides. For categorical data present for both sets (e.g. women race and men race) the graph will be assymetrical. For categorical data that pertain to both gender together (eg relationship) the graph will be symmetrical. For the ordinal data, we will define some categories (e.g. age) for the aggreagation.
+
 
 ### Tools and Lectures Needed
 For the portrait view:
