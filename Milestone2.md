@@ -61,6 +61,8 @@ In general: We need the first seven lectures to understand the basics of creatin
 "Storytelling" - one of the most important letures in the context of our project because our main goal is to honor the memory of women killed by men, as well as to highlight the problem of femicide nowadays.
 
  "Tabular data" - for working with a tabular data, creating visualizations for the statistical view.
+ 
+For getting additional knowledge necessary for completing our project we are going to rely on the following sources: "Interactive Data Visualization for the Web" by Scott Murray and "Visualization Analysis & Design" by Tamara Munzner.
 
 ### Extra Ideas
 
