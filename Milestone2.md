@@ -24,9 +24,9 @@ Ensemble View 3
 
  Exploratory statistical View 1           |   Exploratory statistical View 2
 :-------------------------:|:-------------------------:
-![ Exploratory statistical View 1 ](./milestone_imgs/Exploratory_Statistical_view1.jpg "Exploratory_Statistical_view1")  |  ![ Exploratory statistical View 2 ](./milestone_imgs/Exploratory_Statistical_view2.jpg "Exploratory_Statistical_view2")
+![ Exploratory statistical View 1 ](./milestone_imgs/Exploratory_Statistical_view1.png "Exploratory_Statistical_view1")  |  ![ Exploratory statistical View 2 ](./milestone_imgs/Exploratory_Statistical_view2.png "Exploratory_Statistical_view2")
 Ensemble View 3
-![ Exploratory statistical View 3](./milestone_imgs/Exploratory_Statistical_view3.jpg "Exploratory_Statistical_view3") 
+![ Exploratory statistical View 3](./milestone_imgs/Exploratory_Statistical_view3.png "Exploratory_Statistical_view3") 
 
 ### Tools and Lectures Needed
 For the portrait view:
