@@ -25,8 +25,16 @@ Ensemble View 3
  Exploratory statistical View 1           |   Exploratory statistical View 2
 :-------------------------:|:-------------------------:
 ![ Exploratory statistical View 1 ](./milestone_imgs/Exploratory_Statistical_view1.png "Exploratory_Statistical_view1")  |  ![ Exploratory statistical View 2 ](./milestone_imgs/Exploratory_Statistical_view2.png "Exploratory_Statistical_view2")
-Ensemble View 3
+Exploratory statistical View 3
 ![ Exploratory statistical View 3](./milestone_imgs/Exploratory_Statistical_view3.png "Exploratory_Statistical_view3") 
+
+The goal of the exploratory statistical view is to visualize both the data related to the victims as well as the killers at the same time. The exploratory mode show all the data, i.e. one line per case and highlights the relationship and the murder details. The same data is also presented in an aggregated way to understand what are the tendances on both the victim and the killer data. 
+
+
+ Aggregated statistical View 1           |   Aggregated statistical View 2
+:-------------------------:|:-------------------------:
+![ Aggregated statistical View 1 ](./milestone_imgs/Aggregation_Statistical_view1.png "Aggregated_Statistical_view1")  |  ![ Aggregated statistical View 2 ](./milestone_imgs/Aggregation_Statistical_view2.png "Aggregated_Statistical_view2")
+
 
 ### Tools and Lectures Needed
 For the portrait view:
