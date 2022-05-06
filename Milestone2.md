@@ -1,10 +1,10 @@
 ### Project Goals
 
-The goal of our project is to provide a visualization of a feminicide data. The data we visualize has been collected in a political context and can be labelled as “counter data” meaning that it answers a need to reveal a phenomenon usually hidden or marginalized. 
+The goal of our project is to provide a visualization of a feminicide data. The data we visualize has been collected in a political context and can be labelled as “counter data” meaning that it answers a need to reveal a phenomenon usually hidden or marginalized.
 
 We think about three types of personas for our website. First, the people concerned by feticide because one of their relatives died from it. For this user, our goal is to provide a virtual “memorial” and show that their loved ones are not forgotten. The portrait view design follows this goal focusing on the women data and providing an emotional design. The link to other views allow to contextualize these brutal deaths in a larger issue. We would like to add a ressource page to provide some option for care in this difficult context.
 
-The second and third persona, are respectively a militant in search of data to support  their cause and a curious mind looking to know more after discovering the topic. 
+The second and third persona, are respectively a militant in search of data to support  their cause and a curious mind looking to know more after discovering the topic.
 For both these personas, the ensemble view as well as the statistical view let them explore the dataset to get an better idea of who are the victimes and what we know about it. For these personas we would like to add a page with links to groups that organize on the topic.
 
 
@@ -25,16 +25,16 @@ Here are the sketches for the ensemble view. The starting view (Ensemble View 1)
 Ensemble View 1           |  Ensemble View 2
 :-------------------------:|:-------------------------:
 ![Ensemble View 1](./milestone_imgs/Ensemble_view1.jpg "Ensemble View 1")  |  ![Ensemble View 2](./milestone_imgs/Ensemble_view2.jpg "Ensemble View 2")
-Ensemble View 3            
+Ensemble View 3
 ![Ensemble View 3](./milestone_imgs/Ensemble_view3.jpg "Ensemble View 3")
 
-Exploratory Statistical View 1       |   Exploratory Statistical View 2 
+Exploratory Statistical View 1       |   Exploratory Statistical View 2
 :-------------------------:|:-------------------------:
 ![ Exploratory statistical View 1 ](./milestone_imgs/Exploratory_Statistical_view1.png "Exploratory_Statistical_view1") | ![ Exploratory statistical View 2 ](./milestone_imgs/Exploratory_Statistical_view2.png "Exploratory_Statistical_view2")
 Exploratory Statistical View 3
-![ Exploratory statistical View 3](./milestone_imgs/Exploratory_Statistical_view3.png "Exploratory_Statistical_view3") 
+![ Exploratory statistical View 3](./milestone_imgs/Exploratory_Statistical_view3.png "Exploratory_Statistical_view3")
 
-The goal of the exploratory statistical view is to visualize both the data related to the victims as well as the killers at the same time. The exploratory mode show all the data, i.e. one line per case and highlights the relationship and the murder details. The same data is also presented in an aggregated way to understand what are the tendances on both the victim and the killer data. 
+The goal of the exploratory statistical view is to visualize both the data related to the victims as well as the killers at the same time. The exploratory mode show all the data, i.e. one line per case and highlights the relationship and the murder details. The same data is also presented in an aggregated way to understand what are the tendances on both the victim and the killer data.
 
 
  Aggregated Statistical View 1           |   Aggregated Statistical View 2
@@ -75,3 +75,7 @@ Another idea is to create a map view with a map of crimes committed in different
 ### Project Prototype Review
 
 [Folder with a project prototype](page)
+
+This page is a first glance on the skeleton of the "Ensemble View".
+It tries to have an [SPA](https://developer.mozilla.org/en/docs/Glossary/SPA) approach for now, but it might later be linked to other pages with a `<nav>` section if needed.
+See [there](./milestone_imgs/skeleton.html) a preview of the skeleton itself.
