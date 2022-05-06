@@ -1,5 +1,13 @@
 ### Project Goals
 
+The goal of our project is to provide a visualization of a feminicide data. The data we visualize has been collected in a political context and can be labelled as “counter data” meaning that it answers a need to reveal a phenomenon usually hidden or marginalized. 
+
+We think about three types of personas for our website. First, the people concerned by feticide because one of their relatives died from it. For this user, our goal is to provide a virtual “memorial” and show that their loved ones are not forgotten. The portrait view design follows this goal focusing on the women data and providing an emotional design. The link to other views allow to contextualize these brutal deaths in a larger issue. We would like to add a ressource page to provide some option for care in this difficult context.
+
+The second and third persona, are respectively a militant in search of data to support  their cause and a curious mind looking to know more after discovering the topic. 
+For both these personas, the ensemble view as well as the statistical view let them explore the dataset to get an better idea of who are the victimes and what we know about it. For these personas we would like to add a page with links to groups that organize on the topic.
+
+
 ### Core Visualization
 
 Our minimal viable product includes 3 different visualizations linked with each other: portrait view, ensemble view and statistical view (with an exploratory and a aggregation mode).
