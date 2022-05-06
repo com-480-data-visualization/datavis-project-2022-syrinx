@@ -2,6 +2,12 @@
 
 ### Core Visualization
 
+The sketches for the portrait view of our visualization are presented below. The idea is to create a "memorial" of each victim. The schematic representation can be seen in Portrait View 1: name of the victim is in the center of the circle, with a picture of the victim if it is present in the dataset. The selected year is shown as a large circle (for now we have only data for 2018, if we get more data, a feature to select year will be added to the page). Smaller circles show the age.
+Age as smaller circles (each circle is a year)
+Date of death on the year circle (the position is based on the date)
+Cause of death as symbol next to the death date
+Country/State as right corner information (state shape)
+Race/Ethnicity as left corner information (each circle is a race/ethnicity)
 Portrait View 1           |  Portrait View 2
 :-------------------------:|:-------------------------:
 ![Portrait View 1](./milestone_imgs/Portrait_view1.jpg "Portrait View 1")  |  ![Portrait View 2](./milestone_imgs/Portrait_view2.jpg "Portrait View 2")
