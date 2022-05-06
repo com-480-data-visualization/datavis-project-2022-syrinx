@@ -22,6 +22,13 @@ Ensemble View 3
 
 
 ### Tools and Lectures Needed
+For the portrait view:
+
+For the ensemble view:
+
+For the statistical view:
+
+In general:
 
 ### Extra Ideas
 
