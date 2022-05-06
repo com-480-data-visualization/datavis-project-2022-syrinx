@@ -25,6 +25,11 @@ Ensemble View 3
 
 ### Extra Ideas
 
+To enhance the visualization in our project, we can implement 2 additional views for our website: the timeline view and the map view (see [sketches](./milestone_imgs/Data Viz Femicide Project.pdf)).
+
+The idea of the timeline view is to present femicide cases in the dimension of time as a story with victims' photographs and names surrounded by women killed around the chosen date. The timeline view is linked with the portrait view by the date of murder element in the portrait view. The timeline can be  zoomed in and out in the 2018 year.
+Another idea is to create a map view with a map of crimes committed in different states of the USA in 2018. This visualization would help to show some additional insights into the data (states with the largest/smallest number of femicide cases, the distribution in a space domain).
+
 ### Project Prototype Review
 
 [Folder with a project prototype](page)
