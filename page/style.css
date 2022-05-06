@@ -2,23 +2,25 @@
 /*
 Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
 */
-html, body, figure {
-	width: 100%;
+html, body {
 	padding: 0;
 	margin: 0;
 	border: 0;
-	overflow-y:scroll;
+}
+* {
+	box-sizing: border-box;
+	max-height: 100%;
 }
 
 /* Default font and size */
 body {
 
+	margin-top: 300px;
 	width: 100vw;
 	height: 100vh;
-	margin-top: -300px;
 
 	/* center vertically */
-	display: flex;
+	display: inline;
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-content: center;
@@ -50,5 +52,4 @@ div {
 	padding: 10px;
 	margin: 10px;
 	border-color: #badde1;
-	position:fixed;
 }
