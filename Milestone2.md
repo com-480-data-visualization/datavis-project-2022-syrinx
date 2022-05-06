@@ -45,13 +45,28 @@ The aggregated statistical view shows bar chart for data on women and men sides.
 
 
 ### Tools and Lectures Needed
+
+In general: We need the first seven lectures to understand the basics of creating interactive visualizations in the browser. Here is a short over
+
+"Web Development", "Javascript part 1", "More Javascript", "D3.js" - learning about HTML for structuring the webpage, CSS for the styles of elements, SVG for describing graphics, JS and d3.js for creating complex data visualizations.
+
+"Data" - working with the data: exploration, pre-processing, cleaning, analysis, using for data visualization.
+
+"Interactions", "More interactive d3.js" - learning about adding interactivity to our data visualization, very important for all 3 components of our core visualization
+
+"Mark, channel" - creating different elements of our visualizations to represent items and links.
+
+"Perception colors", "Designing viz", "Do and dont in viz" - studying the basics of design process and designing our visualization.
+
+"Storytelling" - one of the most important letures in the context of our project because our main goal is to honor the memory of women killed by men, as well as to highlight the problem of femicide nowadays.
+
+In particular:
+
 For the portrait view:
 
 For the ensemble view:
 
-For the statistical view:
-
-In general:
+For the statistical view: lecture "Tabular data"
 
 ### Extra Ideas
 
@@ -59,7 +74,7 @@ To enhance the visualization in our project, we can implement 2 additional views
 
 The idea of the timeline view is to present femicide cases in the dimension of time as a story with victims' photographs and names surrounded by women killed around the chosen date. The timeline view is linked with the portrait view by the date of murder element in the portrait view. The timeline can be  zoomed in and out in the 2018 year.
 
-Another idea is to create a map view with a map of crimes committed in different states of the USA in 2018. This visualization would help to show some additional insights into the data (states with the largest/smallest number of femicide cases, the distribution in a space domain).
+Another idea is to create a map view with a map of crimes committed in different states of the USA in 2018. This visualization would help to show some additional insights into the data (states with the largest/smallest number of femicide cases, the distribution in a space domain). To implement this idea we will also need to use the material from lectures "Maps" and "Practical maps".
 
 ### Project Prototype Review
 
