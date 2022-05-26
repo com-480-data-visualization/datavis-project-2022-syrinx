@@ -82,10 +82,12 @@ function grow_details() {
 		.attr("r", 80)
 		.attr("fill", "rgba(40, 40, 40, 0.9)");
 
-	for ([i, str] of this.__data__["HER NAME"].split(" ").entries()) {
+	const iterator = this.__data__["HER NAME"].split(" ");
+	const up = Math.floor(iterator.length / 2);
+	for ([i, str] of iterator.entries()) {
 		sel.append("text")
 			.attr("x", scaleX(20))
-			.attr("y", scaleY(19 + 2*i))
+			.attr("y", scaleY(20 + 2*(i + 1 - up)))
 			.text(() => str)
 			.attr("pointer-events", "none")
 			.style("text-anchor", "middle")
@@ -93,6 +95,21 @@ function grow_details() {
 			.attr("fill", "white")
 			.transition(NEW_TRANSIT())
 			.attr("font-size", "10px");
+	}
+	for (let i=0; i<this.__data__["HER AGE"]; i++) {
+		sel.append("circle")
+			.attr("id", "age_circle")
+			.attr("cx", scaleX(20))
+			.attr("cy", scaleY(20))
+			.attr("r", 0)
+			.attr("pointer-events", "none")
+			.attr("fill", "none")
+			.attr("stroke", "white")
+			.attr("stroke-width", 0.1)
+			.transition(NEW_TRANSIT())
+			.attr("cx", scaleX(20) + 4 * (Math.random() - 0.5))
+			.attr("cy", scaleY(20) + 4 * (Math.random() - 0.5))
+			.attr("r", 45 + 20 * Math.random())
 	}
 
 }
@@ -106,6 +123,11 @@ function shrink_back() {
 	d3.selectAll("#big")
 		.transition(NEW_TRANSIT())
 		.attr("fill", "rgba(40, 40, 40, 0.5)")
+		.attr("r", 0)
+		.on("end", function () {this.remove();});
+
+	d3.selectAll("#age_circle")
+		.transition(NEW_TRANSIT())
 		.attr("r", 0)
 		.on("end", function () {this.remove();});
 
