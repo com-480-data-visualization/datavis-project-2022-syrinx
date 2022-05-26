@@ -386,4 +386,5 @@ function createButtons() {
 		.style("width", "100%")
 		.text(d => d);
 }
-whenDocumentLoaded(createButtons)
+whenDocumentLoaded(createButtons);
+whenDocumentLoaded(screen.orientation.lock("portrait-primary"));
