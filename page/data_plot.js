@@ -134,11 +134,12 @@ function make_star(angle, end) {
 	}, accumulator);
 }
 
-function make_shooting_star() {
+function make_shooting_star(date) {
 	// Angle between pi and 3pi/2 (lower-left corner).
 	let angle = Math.PI * (1.0 + 0.5*Math.random());
 	let begin_ray = 70 + 4*Math.random();
 	let end_ray = 90 + 4*Math.random();
+	let center_text = (begin_ray + end_ray) / 2;
 	// Start point of the line
 	let begin = {
 		"x": center.x + Math.cos(angle)*begin_ray,
@@ -149,8 +150,9 @@ function make_shooting_star() {
 		"x": center.x + Math.cos(angle)*end_ray,
 		"y": center.y - Math.sin(angle)*end_ray
 	};
+	var container = d3.select("#centerInfos");
 	// We add the line, and at the end of the animation we make the star shape
-	d3.select("#centerInfos")
+	container
 		.append("line")
 		.attr("id", "shooting_star")
 		.attr("stroke-width", 0.1)
@@ -167,6 +169,27 @@ function make_shooting_star() {
 		.attr("x2", end.x)
 		.attr("y2", end.y)
 		.on("end", () => make_star(angle, end));
+	container
+		.append("text")
+		.attr("x", center.x)
+		.attr("y", center.y)
+		.attr("pointer-events", "none")
+		//.attr("transform", "rotate(" + (Math.round((-angle % Math.PI)*100) / 100).toString() + "rad)")
+		// .style({
+		// 	"text-anchor": "middle",
+		// 	"transform": "rotate(" + (Math.round((-angle % Math.PI)*100) / 100).toString() + "rad)"
+		// })
+		.style("text-anchor", "center")
+		//.style("transform", "rotate(" + (Math.round((-angle % Math.PI)*100) / 100).toString() + "rad)")
+		.attr("font-size", "0px")
+		.attr("fill", "white")
+		.text(() => date.replace(/^\s+|\s+$/g, ''))
+		.transition(NEW_TRANSIT())
+		.attr("x", center.x + center_text*Math.cos(angle))// + Math.cos(angle-Math.PI/2))
+		.attr("y", center.y - center_text*Math.sin(angle))// - Math.sin(angle-Math.PI/2))
+		.attr("dx", -20)
+		.attr("dy", -5)
+		.attr("font-size", "5px")
 }
 
 function grow_details() {
@@ -193,7 +216,7 @@ function grow_details() {
 		.attr("r", 120)
 		//.attr("fill", "rgba(40, 40, 40, 0.9)")
 		.attr("fill", "url(#gradient)")
-		.on("end", make_shooting_star);
+		.on("end", () => make_shooting_star(this.__data__["DATE"]));
 	sel.append("circle")
 		.attr("id", "big")
 		.attr("cx", center.x)
@@ -261,9 +284,11 @@ function shrink_back() {
 		.attr("r", 0)
 		.on("end", function () {this.remove();});
 
-	// Shrink victim name.
+	// Shrink victim name + date.
 	d3.selectAll("text")
 		.transition(NEW_TRANSIT())
+		.attr("x", center.x)
+		.attr("y", center.y)
 		.attr("font-size", "0px")
 		.on("end", function () {this.remove();});
 
@@ -290,9 +315,9 @@ d3.selection.prototype.define_circles = function() {
 		.on(
 			"mouseup", shrink_back
 		)
-		.on(
-			"mouseout", shrink_back
-		)
+		// .on(
+		// 	"mouseout", shrink_back
+		// )
 		.attr("fill",
 			d => colorDict[d["HER RACE / ETHNICITY"]]
 		);
