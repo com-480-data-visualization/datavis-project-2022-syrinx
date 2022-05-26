@@ -62,31 +62,100 @@ const colorDict = {
 var DATA;
 const NEW_TRANSIT = (() => d3.transition().duration(1500));
 
-function circles(data) {
-	frame = d3.select('#plot');
 
-	var circles = frame.selectAll("circle").data(data);
+
+function grow_details() {
+	d3.select(this)
+		.transition(NEW_TRANSIT())
+		.attr("r", 5)
+		.attr("fill", "rgb(40, 40, 40)");
+
+	const sel = d3.select("#centerInfos");
+	sel.append("circle")
+		.attr("id", "big")
+		.attr("cx", scaleX(20))
+		.attr("cy", scaleY(20))
+		.attr("r", 0)
+		.attr("pointer-events", "none")
+		.attr("fill", "rgba(40, 40, 40, 0.5)")
+		.transition(NEW_TRANSIT())
+		.attr("r", 80)
+		.attr("fill", "rgba(40, 40, 40, 0.9)");
+
+	for ([i, str] of this.__data__["HER NAME"].split(" ").entries()) {
+		sel.append("text")
+			.attr("x", scaleX(20))
+			.attr("y", scaleY(19 + 2*i))
+			.text(() => str)
+			.attr("pointer-events", "none")
+			.style("text-anchor", "middle")
+			.attr("font-size", "0px")
+			.attr("fill", "white")
+			.transition(NEW_TRANSIT())
+			.attr("font-size", "10px");
+	}
+
+}
+
+function shrink_back() {
+	d3.select(this)
+		.transition(NEW_TRANSIT())
+		.attr("r", 1.5)
+		.attr("fill", d => colorDict[d["HER RACE / ETHNICITY"]]);
+
+	d3.selectAll("#big")
+		.transition(NEW_TRANSIT())
+		.attr("fill", "rgba(40, 40, 40, 0.5)")
+		.attr("r", 0)
+		.on("end", function () {this.remove();});
+
+	d3.selectAll("text")
+		.transition(NEW_TRANSIT())
+		.attr("font-size", "0px")
+		.on("end", function () {this.remove();});
+}
+
+d3.selection.prototype.define_circles = function() {
+	return this
+		.attr("id", "circle")
+		.attr("stroke", "white")
+		.attr("stroke-width", 0.5)
+		.attr("r", 1.5)
+		.on(
+			"mousedown", grow_details
+		)
+		.on(
+			"mouseup", shrink_back
+		)
+		.attr("fill",
+			d => colorDict[d["HER RACE / ETHNICITY"]]
+		);
+}
+
+function circles(data) {
+	frame = d3.select('#data');
+
+	var circles = frame.selectAll("#circle").data(data);
 	const xs = placeX();
 	const ys = placeY();
 	circles.enter().append("circle")
 		.attr("cx", _ => scaleX(xs.next().value))
 		.attr("cy", _ => scaleY(ys.next().value))
-		.attr("r", 0)
+		.define_circles()
 		.attr("fill", "none")
-		.attr("stroke", "white")
-		.attr("stroke-width", 0.5)
+		.attr("r", 0)
 		.transition(NEW_TRANSIT())
 		.attr("r", 1.5)
-		//.transition(transit)
 		.attr("fill",
-			d => colorDict[d["HER RACE / ETHNICITY"]]);
+			d => colorDict[d["HER RACE / ETHNICITY"]]
+		);
+	d3.selectAll("#circle")
 	circles.exit().remove();
 	DATA = data;
 }
 
 
 
-d3.csv("/data/data.csv").then(result => circles(result));
 
 function sortBy(ethnicity) {
 	const xs = placeX();
@@ -94,30 +163,23 @@ function sortBy(ethnicity) {
 
 	firstXs = placeX();
 	firstYs = placeY();
-	
+
 	let count_ethnicity = 0;
 	DATA.map(row => {
 		if (!row["HER RACE / ETHNICITY"].localeCompare(ethnicity)) count_ethnicity++;
 		});
-	console.log(count_ethnicity);
 
 	nextXs = placeX(count_ethnicity);
 	nextYs = placeY(count_ethnicity);
 
-
-	frame = d3.select('#plot');
-	frame.selectAll("circle").remove();
+	frame = d3.select('#data');
+	frame.selectAll("#circle").remove();
 
 	var circles = frame.selectAll("circle").data(DATA);
 	circles.enter().append("circle")
 		.attr("cx", _ => scaleX(xs.next().value))
 		.attr("cy", _ => scaleY(ys.next().value))
-		.attr("stroke", "white")
-		.attr("stroke-width", 0.5)
-		.attr("r", 1.5)
-		.attr("fill",
-			d => colorDict[d["HER RACE / ETHNICITY"]]
-		)
+		.define_circles()
 		.transition(NEW_TRANSIT())
 		.attr("cx", d => {
 			if (!d["HER RACE / ETHNICITY"].localeCompare(ethnicity)) return scaleX(firstXs.next().value);
@@ -127,12 +189,14 @@ function sortBy(ethnicity) {
 			if (!d["HER RACE / ETHNICITY"].localeCompare(ethnicity)) return scaleY(firstYs.next().value);
 			else return scaleY(nextYs.next().value);
 		})
-		
+
 	circles.exit().remove();
 }
 
 
 function createButtons() {
+	d3.csv("/data/data.csv").then(result => circles(result));
+
 	d3.select("#race_select").selectAll("button").data(Object.keys(colorDict))
 		.enter()
 		.append("button")
