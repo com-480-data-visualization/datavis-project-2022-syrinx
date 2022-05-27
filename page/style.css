@@ -20,6 +20,7 @@ div.container{
 #selectors {
 	display: flex;
 	flex-direction: row;
+	max-width: 1000px;
 }
 .column_buttons {
 	display: flex;

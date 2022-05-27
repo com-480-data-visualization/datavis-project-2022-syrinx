@@ -207,13 +207,7 @@ function make_shooting_star(date) {
 		.attr("x", center.x)
 		.attr("y", center.y)
 		.attr("pointer-events", "none")
-		//.attr("transform", "rotate(" + (Math.round((-angle % Math.PI)*100) / 100).toString() + "rad)")
-		// .style({
-		// 	"text-anchor": "middle",
-		// 	"transform": "rotate(" + (Math.round((-angle % Math.PI)*100) / 100).toString() + "rad)"
-		// })
 		.style("text-anchor", "center")
-		//.style("transform", "rotate(" + (Math.round((-angle % Math.PI)*100) / 100).toString() + "rad)")
 		.attr("font-size", "0px")
 		.attr("fill", "white")
 		.text(() => date.replace(/^\s+|\s+$/g, ''))
@@ -243,11 +237,9 @@ function grow_details() {
 		.attr("cy", center.y)
 		.attr("r", 0)
 		.attr("pointer-events", "none")
-		//.attr("fill", "rgba(40, 40, 40, 0.5)")
 		.attr("fill", "url(#gradient)")
 		.transition(NEW_TRANSIT())
 		.attr("r", 120)
-		//.attr("fill", "rgba(40, 40, 40, 0.9)")
 		.attr("fill", "url(#gradient)")
 		.on("end", () => make_shooting_star(this.__data__["DATE"]));
 	sel.append("circle")
@@ -348,9 +340,6 @@ d3.selection.prototype.define_circles = function() {
 		.on(
 			"mouseup", shrink_back
 		)
-		// .on(
-		// 	"mouseout", shrink_back
-		// )
 		.attr("fill",
 			d => colorDict[d["HER RACE / ETHNICITY"]]
 		);
@@ -382,6 +371,9 @@ function circles(data) {
 }
 
 
+const REPLACE_REGEX1 = /\(|\)|,|\/|\s/g;
+const REPLACE_REGEX2 = /=/g;
+const REPLACE_REGEX3 = /\/|,/g;
 
 
 // Moves all circles in the general view to a new position,
@@ -416,7 +408,8 @@ function sortBy(type, selected) {
 			else return 0.5;
 		})
 	// Put border on button
-	d3.select("#" + selected.replace(/\/|\s/g, "_")).style("border", "2px solid #FFFFFF")
+	d3.selectAll(".circle_mover").style("opacity", 0.3)
+	d3.select("#" + selected.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".")).style("opacity", 1.0)
 }
 
 // Show the list of buttons for the race selection
@@ -430,10 +423,14 @@ function show_race_selector() {
 	d3.select("#race_select").selectAll("button").data(Object.keys(colorDict))
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(/\/|\s/g, "_"))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("class", "circle_mover")
 		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d + "')")
 		.style("background-color", d => colorDict[d])
 		.style("width", "100%")
+		.style("border", d => "2px solid " + colorDict[d])
+		.on("mouseenter", function(){d3.select(this).style("border", "2px solid #FFFFFF")})
+		.on("mouseleave", function(){d3.select(this).style("border", "2px solid " + colorDict[this.__data__])})
 		.text(d => d);
 }
 // Show the list of buttons for the state selection
@@ -447,10 +444,14 @@ function show_state_selector() {
 	d3.select("#state_select").selectAll("button").data(states)
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(/\/|\s/g, "_"))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("class", "circle_mover")
 		.attr("onClick", d => "sortBy('STATE', '" + d + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
+		.style("border", d => "2px solid " + stringToColor(d))
+		.on("mouseenter", function(){d3.select(this).style("border", "2px solid #FFFFFF")})
+		.on("mouseleave", function(){d3.select(this).style("border", "2px solid " + stringToColor(this.__data__))})
 		.text(d => d);
 }
 
@@ -464,10 +465,14 @@ function show_relationship_selector() {
 	d3.select("#relashionship_select").selectAll("button").data(relationships)
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(/\/|\s/g, "_"))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("class", "circle_mover")
 		.attr("onClick", d => "sortBy('RELATIONSHIP', '" + d + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
+		.style("border", d => "2px solid " + stringToColor(d))
+		.on("mouseenter", function(){d3.select(this).style("border", "2px solid #FFFFFF")})
+		.on("mouseleave", function(){d3.select(this).style("border", "2px solid " + stringToColor(this.__data__))})
 		.text(d => d);
 }
 
@@ -500,6 +505,9 @@ function createButtons() {
 		.attr("onClick", _ => "show_race_selector()")
 		.style("background-color", "blue")
 		.attr('id', "Race_button")
+		.style("border", "2px solid blue")
+		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid blue")})
 		.text(_ => "Race/Ethnicity");
 	type_buttons
 		.append("button")
@@ -508,12 +516,18 @@ function createButtons() {
 		.style("width", 100)
 		.style("height", 10)
 		.attr('id', "State_button")
+		.style("border", "2px solid green")
+		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid green")})
 		.text(_ => "State");
 	type_buttons
 		.append("button")
 		.attr("onClick", _ => "show_relationship_selector()")
 		.style("background-color", "pink")
 		.attr('id', "Relationship_button")
+		.style("border", "2px solid pink")
+		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid pink")})
 		.text(_ => "Relationship with\nthe aggressor");
 
 }
