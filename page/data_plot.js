@@ -384,6 +384,8 @@ function circles(data) {
 
 
 
+// Moves all circles in the general view to a new position,
+// sorted through a criterium called "type"
 function sortBy(type, selected) {
 	let firstXs = placeX();
 	let firstYs = placeY();
@@ -398,22 +400,9 @@ function sortBy(type, selected) {
 
 	frame = d3.select('#data');
 	let circles = frame.selectAll("#circle");
+	// Make all the circles move to their new position
 	circles
 		.transition(NEW_TRANSIT())
-		// .each(function (d, _) {
-		// 	if (!d[type].localeCompare(selected)) {
-		// 		d3.select(this)
-		// 			.transition(NEW_TRANSIT())
-		// 			.attr("cx", _ => scaleX(firstXs.next().value))
-		// 			.attr("cy", _ => scaleY(firstYs.next().value));
-		// 	} else {
-		// 		d3.select(this)
-		// 			.transition(NEW_TRANSIT())
-		// 			.attr("opacity", 0.5)
-		// 			.attr("cx", _ => scaleX(nextXs.next().value))
-		// 			.attr("cy", _ => scaleY(nextYs.next().value));
-		// 	}
-		// });
 		.attr("cx", d => {
 			if (!d[type].localeCompare(selected)) return scaleX(firstXs.next().value);
 			else return scaleX(nextXs.next().value);
@@ -426,15 +415,22 @@ function sortBy(type, selected) {
 			if (!d[type].localeCompare(selected)) return 1.0;
 			else return 0.5;
 		})
+	// Put border on button
+	d3.select("#" + selected.replace(/\/|\s/g, "_")).style("border", "2px solid #FFFFFF")
 }
 
 // Show the list of buttons for the race selection
 function show_race_selector() {
+	d3.select("#Race_button").style("opacity", 1.0);
+	d3.select("#State_button").style("opacity", 0.3);
+	d3.select("#Relationship_button").style("opacity", 0.3);
+
 	d3.select("#relashionship_select").selectAll("button").remove()
 	d3.select("#state_select").selectAll("button").remove()
 	d3.select("#race_select").selectAll("button").data(Object.keys(colorDict))
 		.enter()
 		.append("button")
+		.attr("id", d => d.replace(/\/|\s/g, "_"))
 		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d + "')")
 		.style("background-color", d => colorDict[d])
 		.style("width", "100%")
@@ -442,11 +438,16 @@ function show_race_selector() {
 }
 // Show the list of buttons for the state selection
 function show_state_selector() {
+	d3.select("#Race_button").style("opacity", 0.3);
+	d3.select("#State_button").style("opacity", 1.0);
+	d3.select("#Relationship_button").style("opacity", 0.3);
+
 	d3.select("#race_select").selectAll("button").remove()
 	d3.select("#relashionship_select").selectAll("button").remove()
 	d3.select("#state_select").selectAll("button").data(states)
 		.enter()
 		.append("button")
+		.attr("id", d => d.replace(/\/|\s/g, "_"))
 		.attr("onClick", d => "sortBy('STATE', '" + d + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
@@ -454,11 +455,16 @@ function show_state_selector() {
 }
 
 function show_relationship_selector() {
+	d3.select("#Race_button").style("opacity", 0.3);
+	d3.select("#State_button").style("opacity", 0.3);
+	d3.select("#Relationship_button").style("opacity", 1.0);
+
 	d3.select("#race_select").selectAll("button").remove()
 	d3.select("#state_select").selectAll("button").remove()
 	d3.select("#relashionship_select").selectAll("button").data(relationships)
 		.enter()
 		.append("button")
+		.attr("id", d => d.replace(/\/|\s/g, "_"))
 		.attr("onClick", d => "sortBy('RELATIONSHIP', '" + d + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
@@ -493,7 +499,7 @@ function createButtons() {
 		.append("button")
 		.attr("onClick", _ => "show_race_selector()")
 		.style("background-color", "blue")
-		.attr('id', "Race/Ethnicity_button")
+		.attr('id', "Race_button")
 		.text(_ => "Race/Ethnicity");
 	type_buttons
 		.append("button")
