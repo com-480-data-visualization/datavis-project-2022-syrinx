@@ -55,14 +55,47 @@ const colorDict = {
 	'Black / African American': "maroon",
 	'Asian': "gold",
 	'White': "bisque",
-    'Unknown / Unreleased': "rgb(40, 40, 40)",
-	'Other (see About Her)': "rgb(40, 40, 40)",
+    'Unknown / Unreleased': "black",
+	'Other (see About Her)': "black",
     'Native American / Alaska Native': "darkviolet",
-	'Two or more races': "rgb(40, 40, 40)",
+	'Two or more races': "black",
     'Native Hawaiian / Other Pacific Islander': "darkblue",
-	"nan": "rgb(40, 40, 40)",
-    'Two or more races,Black / African American,White': "rgb(40, 40, 40)"
+	"nan": "black",
+    'Two or more races,Black / African American,White': "black"
+};
+const states = ['CA', 'GA', 'NY', 'OH', 'FL', 'TN', 'MD', 'NC', 'IL', 'NJ', 'AR',
+       'MI', 'OR', 'PA', 'AL', 'AZ', 'KY', 'TX', 'KS', 'MN', 'NM', 'MA',
+       'MO', 'NV', 'ME', 'MT', 'VA', 'WA', 'WV', 'WI', 'MS', 'LA', 'CO',
+       'IN', 'SC', 'OK', 'IA', 'PR', 'CT', 'AK', 'RI', 'VT', 'ID', 'SD',
+       'UT', 'NE', 'HI', 'ND', 'NH', 'DE', 'WY', 'DC', 'nan'];
+const relationships = ['Husband', 'Acquaintance', 'Stranger', 'Unknown / Unreleased',
+       'Boyfriend', "Son / Stepson / Partner's Son / Daughter's Partner",
+       'Estranged Husband', 'Fiancé / Ex-Fiancé',
+       "Brother / Stepbrother / Partner or Sibling's Brother / Brother-in-Law",
+       'Ex-Boyfriend', 'Ex-Husband',
+       "Father / Stepfather / Mother's Partner / Father-in-Law", 'Friend',
+       'Uncle / Nephew / Cousin',
+       'Neighbor / Roommate / Landlord / Tenant',
+       'Student/Classmate (Current or Former)',
+       'Repairman / Service Provider', "Caregiver / Caregiver's Relative",
+       'Work-Related', 'Grandfather / Grandson Relationship', 'Hitman'];
+
+// https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
+// A function to get a random color from any string.
+// Useful for conversions State->color
+function stringToColor(str) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  var colour = '#';
+  for (var i = 0; i < 3; i++) {
+    var value = (hash >> (i * 8)) & 0xFF;
+    colour += ('00' + value.toString(16)).substr(-2);
+  }
+  return colour;
 }
+
 var DATA;
 const NEW_TRANSIT = (() => d3.transition().duration(1500));
 
@@ -351,34 +384,86 @@ function circles(data) {
 
 
 
-function sortBy(ethnicity) {
-	const xs = placeX();
-	const ys = placeY();
+function sortBy(type, selected) {
+	let firstXs = placeX();
+	let firstYs = placeY();
 
-	firstXs = placeX();
-	firstYs = placeY();
-
-	let count_ethnicity = 0;
+	let count_selected = 0;
 	DATA.map(row => {
-		if (!row["HER RACE / ETHNICITY"].localeCompare(ethnicity)) count_ethnicity++;
+		if (!row[type].localeCompare(selected)) count_selected++;
 		});
 
-	nextXs = placeX(count_ethnicity);
-	nextYs = placeY(count_ethnicity);
+	nextXs = placeX(count_selected);
+	nextYs = placeY(count_selected);
 
 	frame = d3.select('#data');
-	frame.selectAll("#circle")
+	let circles = frame.selectAll("#circle");
+	circles
 		.transition(NEW_TRANSIT())
+		// .each(function (d, _) {
+		// 	if (!d[type].localeCompare(selected)) {
+		// 		d3.select(this)
+		// 			.transition(NEW_TRANSIT())
+		// 			.attr("cx", _ => scaleX(firstXs.next().value))
+		// 			.attr("cy", _ => scaleY(firstYs.next().value));
+		// 	} else {
+		// 		d3.select(this)
+		// 			.transition(NEW_TRANSIT())
+		// 			.attr("opacity", 0.5)
+		// 			.attr("cx", _ => scaleX(nextXs.next().value))
+		// 			.attr("cy", _ => scaleY(nextYs.next().value));
+		// 	}
+		// });
 		.attr("cx", d => {
-			if (!d["HER RACE / ETHNICITY"].localeCompare(ethnicity)) return scaleX(firstXs.next().value);
+			if (!d[type].localeCompare(selected)) return scaleX(firstXs.next().value);
 			else return scaleX(nextXs.next().value);
 		})
 		.attr("cy", d => {
-			if (!d["HER RACE / ETHNICITY"].localeCompare(ethnicity)) return scaleY(firstYs.next().value);
+			if (!d[type].localeCompare(selected)) return scaleY(firstYs.next().value);
 			else return scaleY(nextYs.next().value);
+		})
+		.attr("opacity", d => {
+			if (!d[type].localeCompare(selected)) return 1.0;
+			else return 0.5;
 		})
 }
 
+// Show the list of buttons for the race selection
+function show_race_selector() {
+	d3.select("#relashionship_select").selectAll("button").remove()
+	d3.select("#state_select").selectAll("button").remove()
+	d3.select("#race_select").selectAll("button").data(Object.keys(colorDict))
+		.enter()
+		.append("button")
+		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d + "')")
+		.style("background-color", d => colorDict[d])
+		.style("width", "100%")
+		.text(d => d);
+}
+// Show the list of buttons for the state selection
+function show_state_selector() {
+	d3.select("#race_select").selectAll("button").remove()
+	d3.select("#relashionship_select").selectAll("button").remove()
+	d3.select("#state_select").selectAll("button").data(states)
+		.enter()
+		.append("button")
+		.attr("onClick", d => "sortBy('STATE', '" + d + "')")
+		.style("background-color", d => stringToColor(d))
+		.style("width", "100%")
+		.text(d => d);
+}
+
+function show_relationship_selector() {
+	d3.select("#race_select").selectAll("button").remove()
+	d3.select("#state_select").selectAll("button").remove()
+	d3.select("#relashionship_select").selectAll("button").data(relationships)
+		.enter()
+		.append("button")
+		.attr("onClick", d => "sortBy('RELATIONSHIP', '" + d + "')")
+		.style("background-color", d => stringToColor(d))
+		.style("width", "100%")
+		.text(d => d);
+}
 
 function createButtons() {
 	d3.csv("/data/data.csv").then(result => circles(result));
@@ -403,13 +488,28 @@ function createButtons() {
 		.attr("stop-color", "rgb(40,40,40)")
 		.attr("stop-opacity", "40%");
 
-	d3.select("#race_select").selectAll("button").data(Object.keys(colorDict))
-		.enter()
+	let type_buttons = d3.select("#type_button");
+	type_buttons
 		.append("button")
-		.attr("onClick", d => "sortBy('" + d + "')")
-		.style("background-color", d => colorDict[d])
-		.style("width", "100%")
-		.text(d => d);
+		.attr("onClick", _ => "show_race_selector()")
+		.style("background-color", "blue")
+		.attr('id', "Race/Ethnicity_button")
+		.text(_ => "Race/Ethnicity");
+	type_buttons
+		.append("button")
+		.attr("onClick", _ => "show_state_selector()")
+		.style("background-color", "green")
+		.style("width", 100)
+		.style("height", 10)
+		.attr('id', "State_button")
+		.text(_ => "State");
+	type_buttons
+		.append("button")
+		.attr("onClick", _ => "show_relationship_selector()")
+		.style("background-color", "pink")
+		.attr('id', "Relationship_button")
+		.text(_ => "Relationship with\nthe aggressor");
+
 }
 whenDocumentLoaded(createButtons);
-whenDocumentLoaded(screen.orientation.lock("portrait-primary"));
+//whenDocumentLoaded(screen.orientation.lock("portrait-primary"));
