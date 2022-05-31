@@ -118,6 +118,28 @@ const center = {
 	"y": scaleY(center_ns.y)
 };
 
+// Make the Iframe with the content of the personal view
+function show_personal_view() {
+	d3.select("#centerInfos")
+		.html(null);
+	d3.select("#data")
+		.html(null);
+	d3.select("#plot")
+		.attr("height", 0);
+	d3.select("#plotdiv")
+		.append("iframe")
+		.attr("id", "personalview_frame")
+		.attr("width", "100%")
+		.attr("height", "1000px")
+		.attr("scrolling", "no")
+		.attr("position", "absolute")
+		.attr("top", 0)
+		.attr("left", 0)
+		.attr("z-index", 9)
+		.attr("src", "./portrait/portrait_view.html");
+}
+
+// Makes the star at the end of the shooting_star.
 function make_star(angle, end) {
 	let RADIUS = 4;
 	let center_star = {
@@ -161,12 +183,16 @@ function make_star(angle, end) {
 				.attr("x1", last.x)
 				.attr("y1", last.y)
 				.attr("x2", next.x)
-				.attr("y2", next.y);
+				.attr("y2", next.y)
+				.on(
+					"end", () => {if (i == list_points.length - 1) show_personal_view()}
+				);
 		}
 		return next;
 	}, accumulator);
 }
 
+// Builds the shooting star at a random angle
 function make_shooting_star(date) {
 	// Angle between pi and 3pi/2 (lower-left corner).
 	let angle = Math.PI * (1.0 + 0.5*Math.random());

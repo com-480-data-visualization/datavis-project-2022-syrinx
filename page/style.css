@@ -85,4 +85,9 @@ div.skeleton {
 	padding: 10px;
 	margin: 10px;
 	border-color: #badde1;
+	overflow: auto;
+}
+#plotdiv {
+	display: flex;
+	flex-direction: column;
 }
