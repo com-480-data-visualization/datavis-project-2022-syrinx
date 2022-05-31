@@ -379,9 +379,9 @@ function show_relationship_plot() {
 function downloadData(){
 //Here the comment below is a plot for age. For the relationship plot there is a different file with data.
 
-  d3.csv("/data/Race_Age.csv").then(result => race_barplot(result));
-  //d3.csv("/data/Race_Age.csv").then(result => age_barplot(result));
-  //d3.csv("/data/Relationship.csv").then(result => relationship_barplot(result));
+  d3.csv("/data_statistical/Race_Age.csv").then(result => race_barplot(result));
+  //d3.csv("/data_statistical/Race_Age.csv").then(result => age_barplot(result));
+  //d3.csv("/data_statistical/Relationship.csv").then(result => relationship_barplot(result));
 
   let type_buttons = d3.select("#type_button");
 	type_buttons
