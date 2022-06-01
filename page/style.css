@@ -44,6 +44,8 @@ body {
 	justify-content: center;
 	align-content: center;
 
+	text-align: center;
+
 	/* background behind the plot */
 	background: rgb(40, 40, 40);
 

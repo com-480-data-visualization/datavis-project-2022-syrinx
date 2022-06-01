@@ -130,13 +130,14 @@ function show_personal_view() {
 		.append("iframe")
 		.attr("id", "personalview_frame")
 		.attr("width", "100%")
-		.attr("height", "1000px")
-		.attr("scrolling", "no")
-		.attr("position", "absolute")
-		.attr("top", 0)
-		.attr("left", 0)
-		.attr("z-index", 9)
-		.attr("src", "./portrait/portrait_view.html");
+		.attr("height", "600px")
+		//.attr("height", "100%")
+		//.attr("scrolling", "no")
+		// .attr("position", "absolute")
+		// .attr("top", 0)
+		// .attr("left", 0)
+		// .attr("z-index", 9)
+		.attr("src", "./portrait/portrait_view_minimal.html");
 }
 
 // Makes the star at the end of the shooting_star.
