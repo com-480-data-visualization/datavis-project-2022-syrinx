@@ -52,19 +52,19 @@ function* placeY(c0=0) {
        'Two or more races,Black / African American,White'], dtype=object)
 */
 // Association race->color
-// const colorDict = {
-// 	"Latina/x": "deeppink",
-// 	'Black / African American': "maroon",
-// 	'Asian': "gold",
-// 	'White': "bisque",
-//     'Unknown / Unreleased': "black",
-// 	'Other (see About Her)': "black",
-//     'Native American / Alaska Native': "darkviolet",
-// 	'Two or more races': "black",
-//     'Native Hawaiian / Other Pacific Islander': "darkblue",
-// 	"nan": "black",
-//     'Two or more races,Black / African American,White': "black"
-// };
+const raceColorDict = {
+	"Latina/x": "deeppink",
+	'Black / African American': "maroon",
+	'Asian': "gold",
+	'White': "bisque",
+    'Unknown / Unreleased': "black",
+	'Other (see About Her)': "black",
+    'Native American / Alaska Native': "darkviolet",
+	'Two or more races': "black",
+    'Native Hawaiian / Other Pacific Islander': "darkblue",
+	"nan": "black",
+    'Two or more races,Black / African American,White': "black"
+};
 const states = ['CA', 'GA', 'NY', 'OH', 'FL', 'TN', 'MD', 'NC', 'IL', 'NJ', 'AR',
        'MI', 'OR', 'PA', 'AL', 'AZ', 'KY', 'TX', 'KS', 'MN', 'NM', 'MA',
        'MO', 'NV', 'ME', 'MT', 'VA', 'WA', 'WV', 'WI', 'MS', 'LA', 'CO',
@@ -390,7 +390,7 @@ function shrink_back() {
 	d3.select(this)
 		.transition(NEW_TRANSIT())
 		.attr("r", 1.5)
-		.attr("fill", d => colorDict[d["HER RACE / ETHNICITY"]]);
+		.attr("fill", d => raceColorDict[d["HER RACE / ETHNICITY"]]);
 
 	// Shrink big circle.
 	d3.selectAll("#big")
@@ -436,7 +436,7 @@ d3.selection.prototype.define_circles = function() {
 			"mouseup", shrink_back
 		)
 		.attr("fill",
-			d => colorDict[d["HER RACE / ETHNICITY"]]
+			d => raceColorDict[d["HER RACE / ETHNICITY"]]
 		);
 }
 
@@ -459,7 +459,7 @@ function circles(data) {
 		.transition(NEW_TRANSIT())
 		.attr("r", 1.5)
 		.attr("fill",
-			d => colorDict[d["HER RACE / ETHNICITY"]]
+			d => raceColorDict[d["HER RACE / ETHNICITY"]]
 		);
 	circles.exit().remove(); // Handle excess data
 	DATA = data;
@@ -516,17 +516,17 @@ function show_race_selector() {
 
 	d3.select("#relashionship_select").selectAll("button").remove()
 	d3.select("#state_select").selectAll("button").remove()
-	d3.select("#race_select").selectAll("button").data(Object.keys(colorDict))
+	d3.select("#race_select").selectAll("button").data(Object.keys(raceColorDict))
 		.enter()
 		.append("button")
 		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
 		.attr("class", "circle_mover")
 		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d + "')")
-		.style("background-color", d => colorDict[d])
+		.style("background-color", d => raceColorDict[d])
 		.style("width", "100%")
-		.style("border", d => "2px solid " + colorDict[d])
+		.style("border", d => "2px solid " + raceColorDict[d])
 		.on("mouseenter", function(){d3.select(this).style("border", "2px solid #FFFFFF")})
-		.on("mouseleave", function(){d3.select(this).style("border", "2px solid " + colorDict[this.__data__])})
+		.on("mouseleave", function(){d3.select(this).style("border", "2px solid " + raceColorDict[this.__data__])})
 		.text(d => d);
 }
 // Show the list of buttons for the state selection
