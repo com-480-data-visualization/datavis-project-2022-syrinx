@@ -706,6 +706,19 @@ var STATS_STATE = {
 			d3.select("#Relationship_button")
 				.attr("onClick", _ => "show_relationship_selector()")
 				.style("opacity", 1.0);
+			switch (this.current_mode) {
+				case 0:
+					break;
+				case 1:
+					show_race_selector();
+					break;
+				case 2:
+					show_state_selector();
+					break;
+				case 3:
+					show_relationship_selector();
+					break;
+			}
 		}
 	}
 }
