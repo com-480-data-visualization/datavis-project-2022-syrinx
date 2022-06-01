@@ -84,7 +84,6 @@ button {
 div.skeleton {
 	border-style: solid;
 	border-radius: 10;
-	padding: 10px;
 	margin: 10px;
 	border-color: #badde1;
 	overflow: auto;

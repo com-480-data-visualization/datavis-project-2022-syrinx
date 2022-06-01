@@ -52,19 +52,19 @@ function* placeY(c0=0) {
        'Two or more races,Black / African American,White'], dtype=object)
 */
 // Association race->color
-const colorDict = {
-	"Latina/x": "deeppink",
-	'Black / African American': "maroon",
-	'Asian': "gold",
-	'White': "bisque",
-    'Unknown / Unreleased': "black",
-	'Other (see About Her)': "black",
-    'Native American / Alaska Native': "darkviolet",
-	'Two or more races': "black",
-    'Native Hawaiian / Other Pacific Islander': "darkblue",
-	"nan": "black",
-    'Two or more races,Black / African American,White': "black"
-};
+// const colorDict = {
+// 	"Latina/x": "deeppink",
+// 	'Black / African American': "maroon",
+// 	'Asian': "gold",
+// 	'White': "bisque",
+//     'Unknown / Unreleased': "black",
+// 	'Other (see About Her)': "black",
+//     'Native American / Alaska Native': "darkviolet",
+// 	'Two or more races': "black",
+//     'Native Hawaiian / Other Pacific Islander': "darkblue",
+// 	"nan": "black",
+//     'Two or more races,Black / African American,White': "black"
+// };
 const states = ['CA', 'GA', 'NY', 'OH', 'FL', 'TN', 'MD', 'NC', 'IL', 'NJ', 'AR',
        'MI', 'OR', 'PA', 'AL', 'AZ', 'KY', 'TX', 'KS', 'MN', 'NM', 'MA',
        'MO', 'NV', 'ME', 'MT', 'VA', 'WA', 'WV', 'WI', 'MS', 'LA', 'CO',
@@ -120,20 +120,20 @@ const center = {
 	"y": scaleY(center_ns.y)
 };
 
-// Make the Iframe with the content of the personal view
-function show_personal_view(d_point) {
+// Remove the circles and the svg frame for the ensemble view
+function remove_ensemble() {
 	d3.select("#centerInfos")
 		.html(null);
 	d3.select("#data")
 		.html(null);
 	d3.select("#plot")
 		.attr("height", 0);
-	// d3.select("#plotdiv")
-	// 	.append("iframe")
-	// 	.attr("id", "personalview_frame")
-	// 	.attr("width", "100%")
-	// 	.attr("height", "600px")
-	// 	.attr("src", "./portrait/portrait_view_minimal.html");
+}
+
+// Make the Iframe with the content of the personal view
+function show_personal_view(d_point) {
+	remove_ensemble();
+
 	d3.select("#plotdiv")
 		.append("svg")
 		.attr("id", "Portrait")
@@ -184,6 +184,8 @@ function show_personal_view(d_point) {
 		d3.selectAll("#State_button")
 			.remove()
 		d3.select("#Relationship_button")
+			.remove()
+		d3.select("#stats_button")
 			.remove()
 		d3.selectAll("#selector_button")
 			.selectAll(".circle_mover")
@@ -507,6 +509,7 @@ function sortBy(type, selected) {
 
 // Show the list of buttons for the race selection
 function show_race_selector() {
+	STATS_STATE.current_mode = 1;
 	d3.select("#Race_button").style("opacity", 1.0);
 	d3.select("#State_button").style("opacity", 0.3);
 	d3.select("#Relationship_button").style("opacity", 0.3);
@@ -528,6 +531,7 @@ function show_race_selector() {
 }
 // Show the list of buttons for the state selection
 function show_state_selector() {
+	STATS_STATE.current_mode = 2;
 	d3.select("#Race_button").style("opacity", 0.3);
 	d3.select("#State_button").style("opacity", 1.0);
 	d3.select("#Relationship_button").style("opacity", 0.3);
@@ -548,7 +552,9 @@ function show_state_selector() {
 		.text(d => d);
 }
 
+// Show the list of buttons for the relationship selection
 function show_relationship_selector() {
+	STATS_STATE.current_mode = 3;
 	d3.select("#Race_button").style("opacity", 0.3);
 	d3.select("#State_button").style("opacity", 0.3);
 	d3.select("#Relationship_button").style("opacity", 1.0);
@@ -567,6 +573,141 @@ function show_relationship_selector() {
 		.on("mouseenter", function(){d3.select(this).style("border", "2px solid #FFFFFF")})
 		.on("mouseleave", function(){d3.select(this).style("border", "2px solid " + stringToColor(this.__data__))})
 		.text(d => d);
+}
+
+function clean_plots() {
+	d3.select("#men_plot").html("")
+	d3.select("#women_plot").html("")
+	d3.select("#classical_labels").html("")
+	d3.select("#PressAButton").remove();
+
+}
+function race_stats(results) {
+	STATS_STATE.current_mode = 1;
+	d3.select("#Race_button").style("opacity", 1.0);
+	d3.select("#State_button").style("opacity", 0.3);
+	d3.select("#Relationship_button").style("opacity", 0.3);
+	clean_plots();
+	race_barplot(results);
+}
+function age_stats(results) {
+	STATS_STATE.current_mode = 2;
+	d3.select("#Race_button").style("opacity", 0.3);
+	d3.select("#State_button").style("opacity", 1.0);
+	d3.select("#Relationship_button").style("opacity", 0.3);
+	clean_plots();
+	age_barplot(results);
+}
+function relationship_stats(results) {
+	STATS_STATE.current_mode = 3;
+	d3.select("#Race_button").style("opacity", 0.3);
+	d3.select("#State_button").style("opacity", 0.3);
+	d3.select("#Relationship_button").style("opacity", 1.0);
+	clean_plots();
+	relationship_barplot(results);
+}
+
+var STATS_STATE = {
+	toggle: false,
+	current_mode: 0,
+	// Toggle the statistic view
+	toggle_statistics: function () {
+		// Clean right buttons
+		d3.select("#race_select").selectAll("button").remove()
+		d3.select("#state_select").selectAll("button").remove()
+		d3.select("#relashionship_select").selectAll("button").remove()
+
+		// Setup
+		d3.select("#stats_button")
+			.style("opacity", this.toggle ? 0.3 : 1.0);
+		this.toggle = !this.toggle;
+		if (this.toggle) {
+			remove_ensemble();
+			let pdiv = d3.select("#plotdiv")
+				.attr("display", "flex")
+				.attr("overflow", "none")
+				.attr("flex-direction", "column");
+			pdiv
+				.append("svg")
+				.attr("id", "his_her_labels")
+				.attr("viewbox", "-10 -10 330 40")
+				.attr("height", "50px")
+				.attr("width", "50%");
+			pdiv
+				.append("div")
+				.attr("class", "mirrored")
+				.style("display", "flex")
+				.style("flex-direction", "row")
+				.style("overflow", 'hidden')
+				.style("flex-wrap", "nowrap");
+			let mirror = d3.select(".mirrored");
+			mirror
+				.append("svg")
+				.attr("id", "women_plot")
+				.attr("viewbox", "-10 -10 220 300");
+			mirror
+				.append("svg")
+				.attr("id", "classical_labels")
+				.attr("height", "300px")
+				.attr("viewbox", "-10 -10 220 100");
+			mirror
+				.append("svg")
+				.attr("id", "men_plot")
+				.attr("viewbox", "-10 -10 220 300");
+			d3.select("#Race_button")
+			 	.attr("onClick", "d3.csv('Statistical_page/data_statistical/Race_Age.csv').then(result => race_stats(result))");
+			d3.select("#State_button")
+				.text(_ => "Age")
+			 	.attr("onClick", "d3.csv('Statistical_page/data_statistical/Race_Age.csv').then(result => age_stats(result))");
+			d3.select("#Relationship_button")
+			 	.attr("onClick", "d3.csv('Statistical_page/data_statistical/Relationship.csv').then(result => relationship_stats(result))");
+			switch (this.current_mode) {
+				// 0 -> No button clicked
+				case 0:
+					d3.select(".mirrored")
+						.insert("text", "#classical_labels") // Insert text before the labels slot.
+						.attr("id", "PressAButton")
+						.attr("fill", "white")
+						.text(_ => "Select a criterion for which you want to show some statistics")
+						.attr("x", 0)
+						.attr("y", 0)
+					 	.attr("font-size", "2em");
+					break;
+				// 1 -> Race
+				case 1:
+					d3.csv('Statistical_page/data_statistical/Race_Age.csv').then(result => race_stats(result));
+					break;
+				// 2 -> Age
+				case 2:
+					d3.csv('Statistical_page/data_statistical/Race_Age.csv').then(result => age_stats(result));
+					break;
+				// 3 -> rel
+				case 3:
+					d3.csv('Statistical_page/data_statistical/Relationship.csv').then(result => relationship_stats(result));
+					break;
+			}
+		} else {
+			// Wipe clean
+			clean_plots();
+			d3.select("#his_her_labels").remove();
+			d3.select(".mirrored").remove();
+			d3.csv("/data/data.csv").then(result => circles(result));
+			d3.select("#plot")
+				.attr("height", "100%");
+
+			// Reset the buttons
+			d3.select("#Race_button")
+				.attr("onClick", _ => "show_race_selector()")
+				.style("opacity", 1.0);
+			d3.select("#State_button")
+				.attr("onClick", _ => "show_state_selector()")
+				.text(_ => "State")
+				.style("opacity", 1.0);
+			d3.select("#Relationship_button")
+				.attr("onClick", _ => "show_relationship_selector()")
+				.style("opacity", 1.0);
+		}
+	}
 }
 
 function createButtons() {
@@ -622,6 +763,16 @@ function createButtons() {
 		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
 		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid pink")})
 		.text(_ => "Relationship with\nthe aggressor");
+	type_buttons
+		.append("button")
+		.style("opacity", 0.3)
+		.attr("onClick", _ => "STATS_STATE.toggle_statistics()")
+		.style("background-color", "black")
+		.attr('id', "stats_button")
+		.style("border", "2px solid black")
+		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid black")})
+		.text(_ => "Toggle\nStatistics");
 
 }
 whenDocumentLoaded(createButtons);
