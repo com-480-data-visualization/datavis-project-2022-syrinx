@@ -186,7 +186,8 @@ function show_personal_view(d_point) {
 		d3.select("#Relationship_button")
 			.remove()
 		d3.selectAll("#selector_button")
-			.html(null);
+			.selectAll(".circle_mover")
+			.remove();
 		d3.selectAll("#stats")
 			.html(null);
 	}
