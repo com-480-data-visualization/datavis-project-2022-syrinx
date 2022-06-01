@@ -667,11 +667,11 @@ var STATS_STATE = {
 					d3.select(".mirrored")
 						.insert("text", "#classical_labels") // Insert text before the labels slot.
 						.attr("id", "PressAButton")
-						.attr("fill", "white")
 						.text(_ => "Select a criterion for which you want to show some statistics")
 						.attr("x", 0)
 						.attr("y", 0)
-					 	.attr("font-size", "2em");
+					 	.attr("font-size", "2em")
+						.style('color', 'white');
 					break;
 				// 1 -> Race
 				case 1:
