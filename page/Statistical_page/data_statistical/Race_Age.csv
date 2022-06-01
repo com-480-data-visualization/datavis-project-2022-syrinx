@@ -1,0 +1,12 @@
+,race_label,her_race_count,his_race_count,age_label,her_age_count,his_age_count
+0,White,880,650,0-10,61,3
+1,Black / African American,505,548,10-20,171,117
+2,Latina/x,245,262,20-30,413,407
+3,Unknown / Unreleased,131,189,30-40,384,456
+4,Asian,37,38,40-50,322,330
+5,Native American / Alaska Native,16,4,50-60,222,264
+6,Other (see About Her),13,8,60-70,131,97
+7,Two or more races,5,1,70-80,86,67
+8,Native Hawaiian / Other Pacific Islander,5,3,80-90,29,20
+9,No Information,2,137,90+,7,2
+10,"Two or more races,Black / African American,White",1,0,No information,14,77
