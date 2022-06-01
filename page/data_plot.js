@@ -1,3 +1,4 @@
+// import { DatePlot, AgePlot, RacePlot, StatePlot } from "./portrait/portrait_view.js";
 /*
         Run the action when we are sure the DOM has been loaded
         https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
@@ -15,6 +16,7 @@ function whenDocumentLoaded(action) {
                 action();
         }
 }
+
 
 
 // Scales to convert coordinates from the domain frame to the target "range" frame,
@@ -119,29 +121,92 @@ const center = {
 };
 
 // Make the Iframe with the content of the personal view
-function show_personal_view() {
+function show_personal_view(d_point) {
 	d3.select("#centerInfos")
 		.html(null);
 	d3.select("#data")
 		.html(null);
 	d3.select("#plot")
 		.attr("height", 0);
+	// d3.select("#plotdiv")
+	// 	.append("iframe")
+	// 	.attr("id", "personalview_frame")
+	// 	.attr("width", "100%")
+	// 	.attr("height", "600px")
+	// 	.attr("src", "./portrait/portrait_view_minimal.html");
 	d3.select("#plotdiv")
-		.append("iframe")
-		.attr("id", "personalview_frame")
+		.append("svg")
+		.attr("id", "Portrait")
+		.attr("viewbox", "-10, -10, 400, 220")
+		.attr("preserveAspectRatio", "xMidYMid meet")
 		.attr("width", "100%")
-		.attr("height", "600px")
-		//.attr("height", "100%")
-		//.attr("scrolling", "no")
-		// .attr("position", "absolute")
-		// .attr("top", 0)
-		// .attr("left", 0)
-		// .attr("z-index", 9)
-		.attr("src", "./portrait/portrait_view_minimal.html");
+		.attr("height", "450px");
+	let sel_port = d3.select("#Portrait");
+	sel_port
+		.append("svg")
+		.attr("x", 0)
+		.attr("y", 100)
+		.attr("id", "date_and_age_Plot")
+		.attr("viewbox", "-30, -10, 400, 300")
+		.attr("width", "100%")
+		.attr("height", "100%");
+	sel_port
+		.append("svg")
+		.attr("x", 300)
+		.attr("y", 0)
+		.attr("id", "statePlot")
+		.attr("viewbox", "-860 0 1065 800")
+		.attr("width", "100%")
+		.attr("height", "100%");
+	sel_port
+		.append("svg")
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("id", "racePlot")
+		.attr("viewbox", "50 0 400 300")
+		.attr("width", "100%")
+		.attr("height", "100%");
+	sel_port
+		.append("svg")
+		.attr("x", 20)
+		.attr("y", 400)
+		.attr("id", "buttons_portrait")
+		.attr("viewbox", "0 -100 400 100");
+	let datePlot = new DatePlot('date_and_age_Plot', d_point);
+	let agePlot = new AgePlot('date_and_age_Plot', d_point);
+	let statePlot = new StatePlot('statePlot', d_point);
+	let racePlot = new RacePlot('racePlot', d_point);
+
+	// Remove selector buttons, and replace them by the new ones
+	const clean_buttons = () => {
+		d3.selectAll("#Race_button")
+			.remove()
+		d3.selectAll("#State_button")
+			.remove()
+		d3.select("#Relationship_button")
+			.remove()
+		d3.selectAll("#selector_button")
+			.html(null);
+		d3.selectAll("#stats")
+			.html(null);
+	}
+	clean_buttons();
+
+	// Add new buttons
+	make_portrait_buttons("#buttons_portrait");
+
+	// Listen to the possible return of the ensemble view
+	document.getElementById("main_div").addEventListener("go_to_ensemble", () => {
+		d3.select("#Portrait").remove();
+		d3.select("#plot")
+			.attr("height", "100%");
+		clean_buttons();
+		createButtons();
+	})
 }
 
 // Makes the star at the end of the shooting_star.
-function make_star(angle, end) {
+function make_star(angle, end, data_p) {
 	let RADIUS = 4;
 	let center_star = {
 		"x": end.x + Math.cos(angle)*RADIUS,
@@ -186,7 +251,7 @@ function make_star(angle, end) {
 				.attr("x2", next.x)
 				.attr("y2", next.y)
 				.on(
-					"end", () => {if (i == list_points.length - 1) show_personal_view()}
+					"end", () => {if (i == list_points.length - 1) show_personal_view(data_p)}
 				);
 		}
 		return next;
@@ -194,7 +259,7 @@ function make_star(angle, end) {
 }
 
 // Builds the shooting star at a random angle
-function make_shooting_star(date) {
+function make_shooting_star(data_p) {
 	// Angle between pi and 3pi/2 (lower-left corner).
 	let angle = Math.PI * (1.0 + 0.5*Math.random());
 	let begin_ray = 70 + 4*Math.random();
@@ -228,7 +293,7 @@ function make_shooting_star(date) {
 		.attr("y1", begin.y)
 		.attr("x2", end.x)
 		.attr("y2", end.y)
-		.on("end", () => make_star(angle, end));
+		.on("end", () => make_star(angle, end, data_p));
 	container
 		.append("text")
 		.attr("x", center.x)
@@ -237,7 +302,7 @@ function make_shooting_star(date) {
 		.style("text-anchor", "center")
 		.attr("font-size", "0px")
 		.attr("fill", "white")
-		.text(() => date.replace(/^\s+|\s+$/g, ''))
+		.text(() => data_p["DATE"].replace(/^\s+|\s+$/g, ''))
 		.transition(NEW_TRANSIT())
 		.attr("x", center.x + center_text*Math.cos(angle))// + Math.cos(angle-Math.PI/2))
 		.attr("y", center.y - center_text*Math.sin(angle))// - Math.sin(angle-Math.PI/2))
@@ -268,7 +333,7 @@ function grow_details() {
 		.transition(NEW_TRANSIT())
 		.attr("r", 120)
 		.attr("fill", "url(#gradient)")
-		.on("end", () => make_shooting_star(this.__data__["DATE"]));
+		.on("end", () => make_shooting_star(this.__data__));
 	sel.append("circle")
 		.attr("id", "big")
 		.attr("cx", center.x)
