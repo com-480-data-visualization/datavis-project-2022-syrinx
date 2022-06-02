@@ -775,22 +775,22 @@ function createButtons() {
 	type_buttons
 		.append("button")
 		.attr("onClick", _ => "show_race_selector()")
-		.style("background-color", "blue")
+		.style("background-color", "#07393C")
 		.attr('id', "Race_button")
-		.style("border", "2px solid blue")
+		.style("border", "2px solid #07393C")
 		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
-		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid blue")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid #07393C")})
 		.text(_ => "Race/Ethnicity");
 	type_buttons
 		.append("button")
 		.attr("onClick", _ => "show_state_selector()")
-		.style("background-color", "green")
+		.style("background-color", "#99B2DD")
 		.style("width", 100)
 		.style("height", 10)
 		.attr('id', "State_button")
-		.style("border", "2px solid green")
+		.style("border", "2px solid #99B2DD")
 		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
-		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid green")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid #99B2DD")})
 		.text(_ => "State");
 	type_buttons
 		.append("button")
