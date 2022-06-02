@@ -177,8 +177,8 @@ for (let i=0; i<data["HER AGE"]; i++) {
 // Date plot functions
 // CONSTANTS
 // PARAMETERS
- const INNER_RADIUS = 125
-const OUTER_RADIUS = 126
+ const INNER_RADIUS = 120
+const OUTER_RADIUS = 121
 
 
 
@@ -189,7 +189,7 @@ function date_to_angle(data){
 
 
   const date1 = new Date('2018/01/01');
-  const date2 = new Date(data.DATE);
+  const date2 = new Date('2018/06/30');//new Date(data.DATE);
 
       // time difference
       const diffTime = Math.abs(date2 - date1);
@@ -210,11 +210,11 @@ function y_marker(outer_radius, data){
 }
 function x_marker_line(outer_radius, data){
   DEATH_DATE_ANGLE = date_to_angle(data);
-  return  200 + outer_radius* 1.25 * Math.sin(DEATH_DATE_ANGLE)
+  return  200 + outer_radius* 1.30 * Math.sin(DEATH_DATE_ANGLE)
 }
 function y_marker_line(outer_radius, data){
   DEATH_DATE_ANGLE = date_to_angle(data);
-  return 150 - outer_radius * 1.25 * Math.cos(DEATH_DATE_ANGLE)
+  return 150 - outer_radius * 1.30 * Math.cos(DEATH_DATE_ANGLE)
 }
 // Date plot constructor
 class DatePlot {
@@ -232,12 +232,10 @@ class DatePlot {
                 const Y_MARKER = 150 - OUTER_RADIUS* Math.cos(death_date_angle)
 
                 // for text
-                const X_TEXT = 200 + OUTER_RADIUS*1.05 * Math.sin(death_date_angle) // a ratio is applied to move the text inside (<1) or outside (>1) the circle
-                const Y_TEXT = 150 - OUTER_RADIUS*1.05* Math.cos(death_date_angle)
+                const X_TEXT = 200 + OUTER_RADIUS*1.06 * Math.sin(death_date_angle) // a ratio is applied to move the text inside (<1) or outside (>1) the circle
+                const Y_TEXT = 150 - OUTER_RADIUS*1.06* Math.cos(death_date_angle)
 
-                // for end of line
-                const X_LINE = 200 + OUTER_RADIUS* 1.25 * Math.sin(death_date_angle) // a ratio is applied to move the text inside (<1) or outside (>1) the circle
-                const Y_LINE = 150 - OUTER_RADIUS* 1.25 * Math.cos(death_date_angle)
+
 
                 const ROT_TEXT = -90 +  death_date_angle*180/Math.PI
 
@@ -305,20 +303,29 @@ class DatePlot {
                      .text("2018")
                      .attr("x",X_YEAR-6)
                      .attr("y",Y_YEAR+12)
-                     .style("font", "8px HelveticaNeue-Light ")
+                     .style("font", "7px HelveticaNeue-Light ")
                      .style("fill", STROKE_COL);
 
 
                 // add death date text
                 d3.select("#"+svg_element_id)
                   .append("text")
-                .text("   "+data.DATE)
+                .text(data.DATE)
                 .attr("transform","rotate("+ROT_TEXT+","+X_TEXT+","+Y_TEXT+")")
-                .attr("x",X_TEXT)
-                .attr("y",Y_TEXT)
-                .style("font", "8px  HelveticaNeue-Light")
+                .attr("x",X_TEXT-2)
+                .attr("y",Y_TEXT-2)
+                .style("font", "7px  HelveticaNeue-Light")
                 .style("fill", STROKE_COL);
 
+                // append small line
+                var dot_line =  d3.select("#"+svg_element_id)
+                    .append("line")
+                    .attr("x1",d => x_marker(OUTER_RADIUS,data))
+                    .attr("x2",d => x_marker_line(OUTER_RADIUS,data))
+                    .attr("y1",d => y_marker(OUTER_RADIUS,data))
+                    .attr("y2",d => y_marker_line(OUTER_RADIUS,data))
+                    .attr("stroke",STROKE_COL)
+                    .attr("stroke-width",0.4);
 
                 // append small dot marker
                 var dot_marker1 = d3.select("#"+svg_element_id)
@@ -338,15 +345,7 @@ class DatePlot {
                     .attr("fill","transparent");
 
 
-                // append small line
-                var dot_line =  d3.select("#"+svg_element_id)
-                    .append("line")
-                    .attr("x1",d => x_marker(OUTER_RADIUS,data))
-                    .attr("x2",d => x_marker_line(OUTER_RADIUS,data))
-                    .attr("y1",d => y_marker(OUTER_RADIUS,data))
-                    .attr("y2",d => y_marker_line(OUTER_RADIUS,data))
-                    .attr("stroke",STROKE_COL)
-                    .attr("stroke-width",0.4);
+
 
 
 
@@ -692,14 +691,16 @@ function randomNumber(min, max) {
 }
 
 // parameters
-var rec_width = 60;
-var rec_height = 20;
+var rec_width = 55;
+var rec_height = 15;
+
+
 
 var buttonExploreBorder = d3.select(b_id).append("rect")
   .attr("width",rec_width)
   .attr("height", rec_height)
   .attr("stroke", STROKE_COL)
-    .attr("stroke-width", "0.5")
+  .attr("stroke-width", "0.5")
   .attr("fill", "transparent")
   .attr("transform", "translate(150,22.5)")
   .on("click", function(d) {
