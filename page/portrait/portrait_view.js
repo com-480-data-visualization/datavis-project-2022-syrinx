@@ -106,25 +106,44 @@ for (let i=0; i<data["HER AGE"]; i++) {
       .attr("cy",  150 + 4 * (Math.random() - 0.5))
       //.attr("r",   parseInt(data["HER AGE"]) + 10 * (Math.random()))
       .attr("r",  parseInt(data["HER AGE"])+ 6 * (Math.random()))
-        .on('end',function(){
-                 for (let i = 0; i <= names.length; i++) {
-                   d3.select("#"+svg_element_id).
-                		append("text")
-                			.attr("x", 0)
-                			.attr("y", -6+parseInt(12*(i)))
-                			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
-                			.attr("pointer-events", "none")
-                			.style("text-anchor", "middle")
-                			.style("font", "10px  HelveticaNeue-Light")
-                			.style("fill", STROKE_COL)
-                      .attr("transform", "translate(200,150)")
-                	}
-                })
+        // .on('end',function(){
+        //          for (let i = 0; i <= names.length; i++) {
+        //            d3.select("#"+svg_element_id).
+        //         		append("text")
+        //         			.attr("x", 0)
+        //         			.attr("y", -6+parseInt(12*(i)))
+        //         			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
+        //         			.attr("pointer-events", "none")
+        //         			.style("text-anchor", "middle")
+        //         			.style("font", "10px  HelveticaNeue-Light")
+        //         			.style("fill", STROKE_COL)
+        //               .attr("transform", "translate(200,150)")
+        //         	}
+        //         })
       };
 
-                   }
 
-
+ // name
+  for (let i = 0; i <= names.length; i++) {
+            d3.select("#"+svg_element_id).
+         		append("text")
+         			.attr("x", 0)
+         			.attr("y", -6+parseInt(14*(i)))
+         			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
+              // doesnt work.style("font-size", "1 px" )//HelveticaNeue-Light")
+              .attr("opacity","0%")
+         			.attr("pointer-events", "none")
+         			.style("text-anchor", "middle")
+         			.style("fill", STROKE_COL)
+               .attr("transform", "translate(200,150)")
+               .transition()
+               .delay(1000)
+               .duration(3000)
+               // //.attr("y", -6+parseInt(12*(i)))
+               // //.style("font-size", "10px")//  HelveticaNeue-Light")
+               .attr("opacity","100%")
+         	}
+ }
 
 // //attach data to the selection
 //  var age_circles = d3.select("#"+svg_element_id).selectAll("circle").data(data)
