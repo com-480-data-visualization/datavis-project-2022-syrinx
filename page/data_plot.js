@@ -491,9 +491,13 @@ function circles(data) {
 }
 
 
+// Replace parenthesis, commas, slashes, and spaces in ids
 const REPLACE_REGEX1 = /\(|\)|,|\/|\s/g;
 const REPLACE_REGEX2 = /=/g;
+// Replace slashes and commas only
 const REPLACE_REGEX3 = /\/|,/g;
+/bin/bash: line 1: q: command not found
+const REPLACE_REGEX4 = /'/g;
 
 
 // Moves all circles in the general view to a new position,
@@ -529,7 +533,7 @@ function sortBy(type, selected) {
 		})
 	// Put border on button
 	d3.selectAll(".circle_mover").style("opacity", 0.3)
-	d3.select("#" + selected.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".")).style("opacity", 1.0)
+	d3.select("#" + selected.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_")).style("opacity", 1.0)
 }
 
 // Show the list of buttons for the race selection
@@ -544,9 +548,9 @@ function show_race_selector() {
 	d3.select("#race_select").selectAll("button").data(Object.keys(raceColorDict))
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_"))
 		.attr("class", "circle_mover")
-		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d + "')")
+		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d.replace(REPLACE_REGEX4, "\\'") + "')")
 		.style("background-color", d => raceColorDict[d])
 		.style("width", "100%")
 		.style("border", d => "2px solid " + raceColorDict[d])
@@ -566,9 +570,9 @@ function show_state_selector() {
 	d3.select("#state_select").selectAll("button").data(states)
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_"))
 		.attr("class", "circle_mover")
-		.attr("onClick", d => "sortBy('STATE', '" + d + "')")
+		.attr("onClick", d => "sortBy('STATE', '" + d.replace(REPLACE_REGEX4, "\\'") + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
 		.style("border", d => "2px solid " + stringToColor(d))
@@ -589,9 +593,9 @@ function show_relationship_selector() {
 	d3.select("#relashionship_select").selectAll("button").data(relationships)
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_"))
 		.attr("class", "circle_mover")
-		.attr("onClick", d => "sortBy('RELATIONSHIP', '" + d + "')")
+		.attr("onClick", d => "sortBy('RELATIONSHIP', '" + d.replace(REPLACE_REGEX4, "\\'") + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
 		.style("border", d => "2px solid " + stringToColor(d))
