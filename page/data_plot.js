@@ -134,6 +134,7 @@ function remove_ensemble() {
 function show_personal_view(data_p) {
 	remove_ensemble();
 
+
   d3.select("#myPortrait")
       .attr("height", "100%");
 //   .attr("id","additional_div")
