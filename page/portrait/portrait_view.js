@@ -51,7 +51,7 @@ class AgePlot {
 
 
               const names = data["HER NAME"].split(" ");
-              console.log(names.length)
+
                    	// Center the text a bit
 
                      // Split the name into first name / family name for each victim.
@@ -121,7 +121,7 @@ for (let i=0; i<data["HER AGE"]; i++) {
                 	}
                 })
       };
-      console.log(data["HER AGE"] + 4 * (Math.random()))
+
                    }
 
 
@@ -171,7 +171,7 @@ function date_to_angle(data){
 
   const date1 = new Date('2018/01/01');
   const date2 = new Date(data.DATE);
-console.log(data.DATE)
+
       // time difference
       const diffTime = Math.abs(date2 - date1);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -439,7 +439,7 @@ const states_dict = {"al"  :"m 643,467.4 .4,-7.3 -.9,-1.2 -1.7,-.7 -2.5,-2.8 .5,
 "dc"  :"m 803.5,252 -2.6,-1.8 -1,1.7 .5,.4 .4,.1 .6,.5 .3,.7 -.1,.5 .2,.5 z" ,
 "ut"  :"m 233.2,217.9 3.3,-21.9 -47.9,-8.2 -21,109 46.2,8.2 40,6 11.5,-88.3 z"
 }
-console.log(states_dict)
+
 // State information
 class StatePlot{
   constructor(svg_element_id, data){
@@ -495,7 +495,7 @@ class StatePlot{
     .transition()
     .duration(6000)
     .attr("stroke-dashoffset", 0);
-    console.log(data.STATE)
+
     // add STATE name in the center of the box
     d3.select("#"+svg_element_id)
     .append("text")
@@ -783,7 +783,7 @@ var buttonNext_text = d3.select(b_id)
   .style("textAlign", "center")
   .on("click", function(d) {
     const event_ensemble = new Event("go_to_ensemble");
-    console.log('In the event_senmeble')
+
     document.getElementById("main_div").dispatchEvent(event_ensemble);
   })
   .on("mouseover", function(){
@@ -817,12 +817,12 @@ var buttonPreviousBorder = d3.select(b_id).append("rect")
       myupdate(list_data[0])
   })
   .on("mouseover", function(){
-        console.log('the mouseover worked!')
+
         buttonPrevious.attr("fill", STROKE_COL);
         buttonPrevious_Text.style("fill",BG_COL);
   })
   .on("mouseout", function(){
-        console.log('the mouseover worked!')
+
         buttonPrevious.attr("fill", 'transparent');
         buttonPrevious_Text.style("fill",BG_COL);
   });
@@ -838,12 +838,12 @@ var buttonPrevious_Text = d3.select(b_id)
       myupdate(list_data[0])
   })
   .on("mouseover", function(){
-        console.log('the mouseover worked!')
+
         buttonPrevious.attr("fill", STROKE_COL);
         buttonPrevious_Text.style("fill",BG_COL);
   })
   .on("mouseout", function(){
-        console.log('the mouseover worked!')
+
         buttonPrevious.attr("fill", 'transparent');
         buttonPrevious_Text.style("fill",BG_COL);
   });
