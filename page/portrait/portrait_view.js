@@ -1,19 +1,19 @@
 /*
-       Run the action when we are sure the DOM has been loaded
-       https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
-       Example:
-       whenDocumentLoaded(() => {
-               console.log('loaded!');
-               document.getElementById('some-element');
-       });
+			 Run the action when we are sure the DOM has been loaded
+			 https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
+			 Example:
+			 whenDocumentLoaded(() => {
+							 console.log('loaded!');
+							 document.getElementById('some-element');
+			 });
 */
 function whenDocumentLoaded(action) {
-       if (document.readyState === "loading") {
-               document.addEventListener("DOMContentLoaded", action);
-       } else {
-               // `DOMContentLoaded` already fired
-               action();
-       }
+			 if (document.readyState === "loading") {
+							 document.addEventListener("DOMContentLoaded", action);
+			 } else {
+							 // `DOMContentLoaded` already fired
+							 action();
+			 }
 }
 
 
@@ -25,152 +25,93 @@ STROKE_COL = '#C2C1A5';
 // Visualisation 1.1
 // Personal Information - Age
 class AgePlot {
-        constructor(svg_element_id, data) {
-
-              function range(start, end) {
-              	/* generate a range : [start, start+1, ..., end-1, end] */
-              	var len = end - start + 1;
-              	var a = new Array(len);
-                // this is a starting radius that keeps space for the name
-                var SPACER = 50; // not more because 101
-              	for (let i = 0; i < len; i++) a[i] = SPACER + start + i;
-              	return a;
-              }
-              var age_text = d3.select("#"+svg_element_id)
-                  .append("text")
-                  .text(data['HER AGE'] + ' yo')
-                  .attr("x",188) //200-12
-                  .attr("y",165+parseInt(data['HER AGE']))
-                  .style("font", "1px  HelveticaNeue-Light")
-                  .style("fill", STROKE_COL)
-                     .transition()
-                     .duration(4400)
-                     .style("font", "8px  HelveticaNeue-Light")
-                     .style("fill", STROKE_COL)
-
+	constructor(svg_element_id, data) {
+		function range(start, end) {
+			/* generate a range : [start, start+1, ..., end-1, end] */
+			var len = end - start + 1;
+			var a = new Array(len);
+			// this is a starting radius that keeps space for the name
+			var SPACER = 50; // not more because 101
+			for (let i = 0; i < len; i++) a[i] = SPACER + start + i;
+			return a;
+		}
+		var age_text = d3.select("#"+svg_element_id)
+				.append("text")
+				.text(data['HER AGE'] + ' yo')
+				.attr("x",188) //200-12
+				.attr("y",165+parseInt(data['HER AGE']))
+				.style("font", "1px  HelveticaNeue-Light")
+				.style("fill", STROKE_COL)
+					 .transition()
+					 .duration(4400)
+					 .style("font", "8px  HelveticaNeue-Light")
+					 .style("fill", STROKE_COL)
 
 
-              const names = data["HER NAME"].split(" ");
 
-                   	// Center the text a bit
+		const names = data["HER NAME"].split(" ");
 
-                     // Split the name into first name / family name for each victim.
+		// Center the text a bit
 
-              var age_circle = d3.select("#"+svg_element_id)
-                  // .append("circle")
-                  //    .attr("cx",200)
-                  //    .attr("cy",150)
-                  //    .attr("r", 1)
-                  //    .attr("stroke",'#0B1A39')
-                  //    .attr("fill",'transparent')
-                  //    .attr("stroke-width",0.2)
-                  //    .transition()
-                  //    .duration(data['HER AGE']*100)
-                  //    .attr("r",data['HER AGE'])
-                  //    .on('end',function(){
-                  //      d3.select("#"+svg_element_id)
-                  //      .transition()
-                  //            .duration(100)
-                  //            .on('end',function(){
-                  //              for (let i = 0; i <= names.length; i++) {
-                  //                d3.select("#"+svg_element_id).
-                  //             		append("text")
-                  //             			.attr("x", 0)
-                  //             			.attr("y", -6+parseInt(12*(i)))
-                  //             			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
-                  //             			.attr("pointer-events", "none")
-                  //             			.style("text-anchor", "middle")
-                  //             			.style("font", "10px  HelveticaNeue-Light")
-                  //             			.attr("fill", "black")
-                  //                   .attr("transform", "translate(200,150)")
-                  //             	}
-                // })
-                // })
+		// Split the name into first name / family name for each victim.
 
-/// multiple circles//
-//Produce a circle per year of age (at death time).
-// The center is random, and the ray is random.
-for (let i=0; i<data["HER AGE"]; i++) {
-  age_circle.append("circle")
-    .attr("id", "age_circle")
-    .attr("cx", 200)
-    .attr("cy",150)
-    .attr("r", 0)
-    .attr("pointer-events", "none")
-    .attr("fill", "none")
-    .attr("stroke", STROKE_COL)
-    .attr("stroke-width", 0.1)
-    .transition()
-    .duration(4000)
-      .attr("cx",  200 + 4 * (Math.random() - 0.5))
-      .attr("cy",  150 + 4 * (Math.random() - 0.5))
-      //.attr("r",   parseInt(data["HER AGE"]) + 10 * (Math.random()))
-      .attr("r",  parseInt(data["HER AGE"])+ 6 * (Math.random()))
-        // .on('end',function(){
-        //          for (let i = 0; i <= names.length; i++) {
-        //            d3.select("#"+svg_element_id).
-        //         		append("text")
-        //         			.attr("x", 0)
-        //         			.attr("y", -6+parseInt(12*(i)))
-        //         			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
-        //         			.attr("pointer-events", "none")
-        //         			.style("text-anchor", "middle")
-        //         			.style("font", "10px  HelveticaNeue-Light")
-        //         			.style("fill", STROKE_COL)
-        //               .attr("transform", "translate(200,150)")
-        //         	}
-        //         })
-      };
-
-
- // name
-  for (let i = 0; i <= names.length; i++) {
-            d3.select("#"+svg_element_id).
-         		append("text")
-         			.attr("x", 0)
-         			.attr("y", -6+parseInt(14*(i)))
-         			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
-              // doesnt work.style("font-size", "1 px" )//HelveticaNeue-Light")
-              .style("font", "10px HelveticaNeue-Light")
-              .attr("opacity","0%")
-         			.attr("pointer-events", "none")
-         			.style("text-anchor", "middle")
-         			.style("fill", STROKE_COL)
-               .attr("transform", "translate(200,150)")
-               .transition()
-               .delay(1000)
-               .duration(3000)
-               // //.attr("y", -6+parseInt(12*(i)))
-               // //.style("font-size", "10px")//  HelveticaNeue-Light")
-               .attr("opacity","100%")
-         	}
- }
-
-// //attach data to the selection
-//  var age_circles = d3.select("#"+svg_element_id).selectAll("circle").data(data)
-// // change radius of old nodes
-// age_circles.attr("r",data.age)
-// // if new circles
-// var age_circle_Enter = age_circles.enter().attr("fill",red)
-// //remove old nodes
-// var age_circle_remove = age_circles.exit().remove()
-
-              // //---- BLOCK for multiple circles
-              // const radii = range(1,data.age);
-              // console.log(radii);
-              //
-              // d3.select("#portrait")
-              //   .selectAll("circles")
-              //     .data(radii)
-              //     .enter()
-              //     .append("circle")
-              //        .attr("cx",200)
-              //        .attr("cy",150)
-              //        .attr("r", function(d) { return d })
-              //        .attr("stroke",'#0B1A39')
-              //        .attr("fill",'transparent')
-              //        .attr("stroke-width",0.2);
-              //      }
+		var age_circle = d3.select("#"+svg_element_id);
+		/// multiple circles//
+		//Produce a circle per year of age (at death time).
+		// The center is random, and the ray is random.
+		for (let i=0; i<data["HER AGE"]; i++) {
+			age_circle.append("circle")
+				.attr("id", "age_circle")
+				.attr("cx", 200)
+				.attr("cy",150)
+				.attr("r", 0)
+				.attr("pointer-events", "none")
+				.attr("fill", "none")
+				.attr("stroke", STROKE_COL)
+				.attr("stroke-width", 0.1)
+				.transition()
+				.duration(4000)
+					.attr("cx",  200 + 4 * (Math.random() - 0.5))
+					.attr("cy",  150 + 4 * (Math.random() - 0.5))
+					//.attr("r",   parseInt(data["HER AGE"]) + 10 * (Math.random()))
+					.attr("r",  parseInt(data["HER AGE"])+ 6 * (Math.random()))
+						// .on('end',function(){
+						//          for (let i = 0; i <= names.length; i++) {
+						//            d3.select("#"+svg_element_id).
+						//         		append("text")
+						//         			.attr("x", 0)
+						//         			.attr("y", -6+parseInt(12*(i)))
+						//         			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
+						//         			.attr("pointer-events", "none")
+						//         			.style("text-anchor", "middle")
+						//         			.style("font", "10px  HelveticaNeue-Light")
+						//         			.style("fill", STROKE_COL)
+						//               .attr("transform", "translate(200,150)")
+						//         	}
+						//         })
+		};
+		// name
+		for (let i = 0; i <= names.length; i++) {
+							d3.select("#"+svg_element_id).
+							append("text")
+								.attr("x", 0)
+								.attr("y", -6+parseInt(14*(i)))
+								.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
+								// doesnt work.style("font-size", "1 px" )//HelveticaNeue-Light")
+								.style("font", "10px HelveticaNeue-Light")
+								.attr("opacity","0%")
+								.attr("pointer-events", "none")
+								.style("text-anchor", "middle")
+								.style("fill", STROKE_COL)
+								 .attr("transform", "translate(200,150)")
+								 .transition()
+								 .delay(1000)
+								 .duration(3000)
+								 // //.attr("y", -6+parseInt(12*(i)))
+								 // //.style("font-size", "10px")//  HelveticaNeue-Light")
+								 .attr("opacity","100%")
+		}
+	}
 }
 // Visualisation 1.2
 // Personal Information - Date
@@ -178,181 +119,168 @@ for (let i=0; i<data["HER AGE"]; i++) {
 // Date plot functions
 // CONSTANTS
 // PARAMETERS
- const INNER_RADIUS = 120
+const INNER_RADIUS = 120
 const OUTER_RADIUS = 121
 
 
 
 // function to transform date to angle /!\ this works for 2018 only
-function date_to_angle(data){
+function date_to_angle(_){
 
-  // parsing the DATE field of the csv file. Originally in the format 1/1/2018
-
-
-  const date1 = new Date('2018/01/01');
-  const date2 = new Date('2018/06/30');//new Date(data.DATE);
-
-      // time difference
-      const diffTime = Math.abs(date2 - date1);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays*2*Math.PI/365
+	// parsing the DATE field of the csv file. Originally in the format 1/1/2018
 
 
-  }
+	const date1 = new Date('2018/01/01');
+	const date2 = new Date('2018/06/30');//new Date(data.DATE);
+
+	// time difference
+	const diffTime = Math.abs(date2 - date1);
+	const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+	return diffDays*2*Math.PI/365
+}
 // to modify the position of marker based on date
 function x_marker(outer_radius, data){
-  DEATH_DATE_ANGLE = date_to_angle(data);
-  X_MARKER = 200 + outer_radius *Math.sin(DEATH_DATE_ANGLE);
-  return X_MARKER
+	DEATH_DATE_ANGLE = date_to_angle(data);
+	X_MARKER = 200 + outer_radius *Math.sin(DEATH_DATE_ANGLE);
+	return X_MARKER
 }
 function y_marker(outer_radius, data){
-  DEATH_DATE_ANGLE = date_to_angle(data);
-  return 150 - outer_radius *Math.cos(DEATH_DATE_ANGLE)
+	DEATH_DATE_ANGLE = date_to_angle(data);
+	return 150 - outer_radius *Math.cos(DEATH_DATE_ANGLE)
 }
 function x_marker_line(outer_radius, data){
-  DEATH_DATE_ANGLE = date_to_angle(data);
-  return  200 + outer_radius* 1.30 * Math.sin(DEATH_DATE_ANGLE)
+	DEATH_DATE_ANGLE = date_to_angle(data);
+	return  200 + outer_radius* 1.30 * Math.sin(DEATH_DATE_ANGLE)
 }
 function y_marker_line(outer_radius, data){
-  DEATH_DATE_ANGLE = date_to_angle(data);
-  return 150 - outer_radius * 1.30 * Math.cos(DEATH_DATE_ANGLE)
+	DEATH_DATE_ANGLE = date_to_angle(data);
+	return 150 - outer_radius * 1.30 * Math.cos(DEATH_DATE_ANGLE)
 }
 // Date plot constructor
 class DatePlot {
-        constructor(svg_element_id, data) {
+	constructor(svg_element_id, data) {
+		const death_date_angle = date_to_angle(data)  // angle corresponding to the death date on the year circle
+		// yearstart
+		const X_YEAR = 200
+		const Y_YEAR = 150 - OUTER_RADIUS
 
-              const death_date_angle = date_to_angle(data)  // angle corresponding to the death date on the year circle
+		// for marker (i.e. mark on the circle)
+		const X_MARKER = 200 + OUTER_RADIUS* Math.sin(death_date_angle) // a ratio is applied to move the text inside (<1) or outside (>1) the circle
+		const Y_MARKER = 150 - OUTER_RADIUS* Math.cos(death_date_angle)
 
-
-                // yearstart
-                const X_YEAR = 200
-                const Y_YEAR = 150 - OUTER_RADIUS
-
-                // for marker (i.e. mark on the circle)
-                const X_MARKER = 200 + OUTER_RADIUS* Math.sin(death_date_angle) // a ratio is applied to move the text inside (<1) or outside (>1) the circle
-                const Y_MARKER = 150 - OUTER_RADIUS* Math.cos(death_date_angle)
-
-                // for text
-                const X_TEXT = 200 + OUTER_RADIUS*1.06 * Math.sin(death_date_angle) // a ratio is applied to move the text inside (<1) or outside (>1) the circle
-                const Y_TEXT = 150 - OUTER_RADIUS*1.06* Math.cos(death_date_angle)
+		// for text
+		const X_TEXT = 200 + OUTER_RADIUS*1.06 * Math.sin(death_date_angle) // a ratio is applied to move the text inside (<1) or outside (>1) the circle
+		const Y_TEXT = 150 - OUTER_RADIUS*1.06* Math.cos(death_date_angle)
 
 
 
-                const ROT_TEXT = -90 +  death_date_angle*180/Math.PI
+		const ROT_TEXT = -90 +  death_date_angle*180/Math.PI
 
 
-                // function to draw the arc from 1st January to death date
-                var arcGenLife = d3.arc()
-                          .innerRadius(INNER_RADIUS) // this controls the width of the arc
-                          .outerRadius(OUTER_RADIUS)
-                          .startAngle(0) //Always start at =
-                          .endAngle(death_date_angle); //we need to map date to angle
+		// function to draw the arc from 1st January to death date
+		var arcGenLife = d3.arc()
+							.innerRadius(INNER_RADIUS) // this controls the width of the arc
+							.outerRadius(OUTER_RADIUS)
+							.startAngle(0) //Always start at =
+							.endAngle(death_date_angle); //we need to map date to angle
 
-                // Complete circle for year
-                var arcGenDeath = d3.arc()
-                          .innerRadius(INNER_RADIUS) // this controls the width of the arc
-                          .outerRadius(OUTER_RADIUS)
-                          .startAngle(0)
-                          .endAngle(Math.PI*2); //we need to map date to angle
-                //------BLOCK for arc plot----
-                // function to draw from death date to end of year
-                // var arcGenDeath = d3.arc()
-                //           .innerRadius(INNER_RADIUS) // this controls the width of the arc
-                //           .outerRadius(OUTER_RADIUS)
-                //           .startAngle(death_date_angle) //Always start at =
-                //           .endAngle(Math.PI*2); //we need to map date to angle
-                // // draw from 1st January to death date
-                // d3.select("#"+svg_element_id)
-                //     .append("path")
-                //     .attr("d", arcGenLife)
-                //     .attr("stroke", "#F9F0DA") //stroke is same as background to make it thineer
-                //     .attr("fill","#0B1A39")
-                //     .attr("stroke-width", 1)
-                //     .attr("transform", "translate(200,150)")
-
-
-                // draw from death date to end of the year
-                d3.select("#"+svg_element_id)
-                   .append("path")
-                   .attr("d", arcGenDeath)
-                   .attr("stroke", STROKE_COL)
-                   .attr("fill",STROKE_COL)
-                   .attr("stroke-width", 0.5)
-                   .attr("transform", "translate(200,150)");
+		// Complete circle for year
+		var arcGenDeath = d3.arc()
+							.innerRadius(INNER_RADIUS) // this controls the width of the arc
+							.outerRadius(OUTER_RADIUS)
+							.startAngle(0)
+							.endAngle(Math.PI*2); //we need to map date to angle
+		//------BLOCK for arc plot----
+		// function to draw from death date to end of year
+		// var arcGenDeath = d3.arc()
+		//           .innerRadius(INNER_RADIUS) // this controls the width of the arc
+		//           .outerRadius(OUTER_RADIUS)
+		//           .startAngle(death_date_angle) //Always start at =
+		//           .endAngle(Math.PI*2); //we need to map date to angle
+		// // draw from 1st January to death date
+		// d3.select("#"+svg_element_id)
+		//     .append("path")
+		//     .attr("d", arcGenLife)
+		//     .attr("stroke", "#F9F0DA") //stroke is same as background to make it thineer
+		//     .attr("fill","#0B1A39")
+		//     .attr("stroke-width", 1)
+		//     .attr("transform", "translate(200,150)")
 
 
-                   // marker for the start of the year
-                   var dot_marker3 =  d3.select("#"+svg_element_id)
-                           .append("circle")
-                           .attr("r",4.2)
-                           .attr("cx",X_YEAR)
-                           .attr("cy",Y_YEAR)
-                           .attr("stroke",STROKE_COL)
-                           .attr("fill","transparent");
-
-                   var dot_marker4 =  d3.select("#"+svg_element_id)
-                           .append("circle")
-                           .attr("r",4)
-                           .attr("cx",X_YEAR)
-                           .attr("cy",Y_YEAR)
-                           .attr("stroke",BG_COL)
-                           .attr("fill",BG_COL);
-
-                     // add death date text
-                     d3.select("#"+svg_element_id)
-                       .append("text")
-                     .text("2018")
-                     .attr("x",X_YEAR-6)
-                     .attr("y",Y_YEAR+12)
-                     .style("font", "7px HelveticaNeue-Light ")
-                     .style("fill", STROKE_COL);
+		// draw from death date to end of the year
+		d3.select("#"+svg_element_id)
+			 .append("path")
+			 .attr("d", arcGenDeath)
+			 .attr("stroke", STROKE_COL)
+			 .attr("fill",STROKE_COL)
+			 .attr("stroke-width", 0.5)
+			 .attr("transform", "translate(200,150)");
 
 
-                // add death date text
-                d3.select("#"+svg_element_id)
-                  .append("text")
-                .text(data.DATE)
-                .attr("transform","rotate("+ROT_TEXT+","+X_TEXT+","+Y_TEXT+")")
-                .attr("x",X_TEXT-2)
-                .attr("y",Y_TEXT-2)
-                .style("font", "7px  HelveticaNeue-Light")
-                .style("fill", STROKE_COL);
+		// marker for the start of the year
+		var dot_marker3 =  d3.select("#"+svg_element_id)
+						 .append("circle")
+						 .attr("r",4.2)
+						 .attr("cx",X_YEAR)
+						 .attr("cy",Y_YEAR)
+						 .attr("stroke",STROKE_COL)
+						 .attr("fill","transparent");
 
-                // append small line
-                var dot_line =  d3.select("#"+svg_element_id)
-                    .append("line")
-                    .attr("x1",d => x_marker(OUTER_RADIUS,data))
-                    .attr("x2",d => x_marker_line(OUTER_RADIUS,data))
-                    .attr("y1",d => y_marker(OUTER_RADIUS,data))
-                    .attr("y2",d => y_marker_line(OUTER_RADIUS,data))
-                    .attr("stroke",STROKE_COL)
-                    .attr("stroke-width",0.4);
+		var dot_marker4 =  d3.select("#"+svg_element_id)
+						 .append("circle")
+						 .attr("r",4)
+						 .attr("cx",X_YEAR)
+						 .attr("cy",Y_YEAR)
+						 .attr("stroke",BG_COL)
+						 .attr("fill",BG_COL);
 
-                // append small dot marker
-                var dot_marker1 = d3.select("#"+svg_element_id)
-                  .append("circle")
-                  .attr("r",4.4)
-                  .attr("cx",X_MARKER)
-                  .attr("cy",Y_MARKER)
-                  .attr("stroke",STROKE_COL)
-                  .attr("fill",STROKE_COL);
-
-                var dot_marker2 =  d3.select("#"+svg_element_id)
-                    .append("circle")
-                    .attr("r",4.2)
-                    .attr("cx",X_MARKER)
-                    .attr("cy",Y_MARKER)
-                    .attr("stroke",BG_COL)
-                    .attr("fill","transparent");
+		// add death date text
+		d3.select("#"+svg_element_id)
+			.append("text")
+			.text("2018")
+			.attr("x",X_YEAR-6)
+			.attr("y",Y_YEAR+12)
+			.style("font", "7px HelveticaNeue-Light ")
+			.style("fill", STROKE_COL);
 
 
+		// add death date text
+		d3.select("#"+svg_element_id)
+			.append("text")
+		.text(data.DATE)
+		.attr("transform","rotate("+ROT_TEXT+","+X_TEXT+","+Y_TEXT+")")
+		.attr("x",X_TEXT-2)
+		.attr("y",Y_TEXT-2)
+		.style("font", "7px  HelveticaNeue-Light")
+		.style("fill", STROKE_COL);
 
+		// append small line
+		var dot_line =  d3.select("#"+svg_element_id)
+				.append("line")
+				.attr("x1",d => x_marker(OUTER_RADIUS,data))
+				.attr("x2",d => x_marker_line(OUTER_RADIUS,data))
+				.attr("y1",d => y_marker(OUTER_RADIUS,data))
+				.attr("y2",d => y_marker_line(OUTER_RADIUS,data))
+				.attr("stroke",STROKE_COL)
+				.attr("stroke-width",0.4);
 
+		// append small dot marker
+		var dot_marker1 = d3.select("#"+svg_element_id)
+			.append("circle")
+			.attr("r",4.4)
+			.attr("cx",X_MARKER)
+			.attr("cy",Y_MARKER)
+			.attr("stroke",STROKE_COL)
+			.attr("fill",STROKE_COL);
 
-
-
-              }
-
+		var dot_marker2 =  d3.select("#"+svg_element_id)
+				.append("circle")
+				.attr("r",4.2)
+				.attr("cx",X_MARKER)
+				.attr("cy",Y_MARKER)
+				.attr("stroke",BG_COL)
+				.attr("fill","transparent");
+	}
 }
 // // update death date plot
 // function update_death_date(outer_radius, data){
@@ -461,72 +389,70 @@ const states_dict = {"al"  :"m 643,467.4 .4,-7.3 -.9,-1.2 -1.7,-.7 -2.5,-2.8 .5,
 
 // State information
 class StatePlot{
-  constructor(svg_element_id, data){
+	constructor(svg_element_id, data){
 
-  // create circle marker
-  var test = d3.select('#'+svg_element_id)
-   .append("svg:defs")
-   .append("svg:marker")
-   .attr("id", "circle")
-   .attr("refX", 13)
-   .attr("refY", 5)
-   .attr("markerWidth", 30)
-   .attr("markerHeight", 30)
-   .append("circle")
-   .attr("cx", 13)
-   .attr("cy", 5)
-   .attr("r", 1.25)
-   .attr("fill",STROKE_COL);
+		// create circle marker
+		var test = d3.select('#'+svg_element_id)
+			.append("svg:defs")
+			.append("svg:marker")
+			.attr("id", "circle")
+			.attr("refX", 13)
+			.attr("refY", 5)
+			.attr("markerWidth", 30)
+			.attr("markerHeight", 30)
+			.append("circle")
+			.attr("cx", 13)
+			.attr("cy", 5)
+			.attr("r", 1.25)
+			.attr("fill",STROKE_COL);
 
 
-   // retrieve the SVG path
-   var state = data.STATE.toLowerCase()
-   var path = states_dict[state]
-  var STATE_COLOR ='#365259';//'#365259';//'#3E5E65';
-    //Select the DOM element with appropriate ID
-    var d3path = d3.select("#"+svg_element_id)
-        .append("path")  //add new child element
-        .attr("d",path)
-        .attr("stroke",STROKE_COL)
-        .attr("stroke-width",1)
-        .attr("fill",STATE_COLOR)
-        .attr("marker-end", "url(#circle)") // add markers
-        .attr("marker-mid", "url(#circle)")
-        .attr("marker-start", "url(#circle)")
-        ;
+		// retrieve the SVG path
+		var state = data.STATE.toLowerCase()
+		var path = states_dict[state]
+		var STATE_COLOR ='#365259';//'#365259';//'#3E5E65';
+		//Select the DOM element with appropriate ID
+		var d3path = d3.select("#"+svg_element_id)
+			.append("path")  //add new child element
+			.attr("d",path)
+			.attr("stroke",STROKE_COL)
+			.attr("stroke-width",1)
+			.attr("fill",STATE_COLOR)
+			.attr("marker-end", "url(#circle)") // add markers
+			.attr("marker-mid", "url(#circle)")
+			.attr("marker-start", "url(#circle)");
 
-        var nodes = d3path.node()
-        console.log(d3.select("#"+svg_element_id))
-        // access the bounding box dimensions
-        var myPathBox = d3.select("#"+svg_element_id).node().getBBox();
+		var nodes = d3path.node()
+		console.log(d3.select("#"+svg_element_id))
+		// access the bounding box dimensions
+		var myPathBox = d3.select("#"+svg_element_id).node().getBBox();
 
-        // translate path based on box size
-        var d3path = d3.select("#"+svg_element_id)
-        .select("path")
-        .attr("transform", "translate(-"+myPathBox.x+",-"+myPathBox.y+")")
+		// translate path based on box size
+		var d3path = d3.select("#"+svg_element_id)
+		.select("path")
+		.attr("transform", "translate(-"+myPathBox.x+",-"+myPathBox.y+")")
 
-    // transition
-    // path drawing
-    var pathLength= d3path.node().getTotalLength();
-    d3path
-    .attr("stroke-dasharray", pathLength + " " + pathLength)
-    .attr("stroke-dashoffset", pathLength)
-    .transition()
-    .duration(6000)
-    .attr("stroke-dashoffset", 0);
+		// transition
+		// path drawing
+		var pathLength= d3path.node().getTotalLength();
+		d3path
+			.attr("stroke-dasharray", pathLength + " " + pathLength)
+			.attr("stroke-dashoffset", pathLength)
+			.transition()
+			.duration(6000)
+			.attr("stroke-dashoffset", 0);
 
-    // add STATE name in the center of the box
-    d3.select("#"+svg_element_id)
-    .append("text")
-    .text(data.STATE)
-    .attr("x",myPathBox.width/2)
-    .attr("y",myPathBox.height/2)
-    .style("font", "12px  HelveticaNeue-Light")
-    .style("fill",STROKE_COL);
+		// add STATE name in the center of the box
+		d3.select("#"+svg_element_id)
+			.append("text")
+			.text(data.STATE)
+			.attr("x",myPathBox.width/2)
+			.attr("y",myPathBox.height/2)
+			.style("font", "12px  HelveticaNeue-Light")
+			.style("fill",STROKE_COL);
 
-    //.attr("transform", "translate(-225,-200)"); /!\ if you translate you translate also the path
-
-  }
+		//.attr("transform", "translate(-225,-200)"); /!\ if you translate you translate also the path
+	}
 }
 
 
@@ -540,390 +466,384 @@ class StatePlot{
 
 // function
 class RacePlot{
-  constructor(svg_element_id, data){
+	constructor(svg_element_id, data){
+		//dictionary creation
+		// Prepare data
+		// Association race->color
+		const colorList = [//"Latina/x":
+			'#AB2346',//"deeppink",// 'Black / African American':
+			'#FFC07F',//"maroon",// 'Asian':
+			"#00B295",	// 'White':
+			'#CEB8A1',//'#BCA68A',//"bisque",//   'Unknown / Unreleased':
+			'#365259',//"rgb(40, 40, 40)",// 'Other (see About Her)':
+			'#365259',//"rgb(40, 40, 40)",//   'Native American / Alaska Native':  "darkviolet",// 'Two or more races':
+			'#457EAC',//"rgb(40, 40, 40)",//   'Native Hawaiian / Other Pacific Islander':
+			"#9DB17C",
+			"#947EB0",//"darkblue",// "nan":
+			"#365259",  //   'Two or more races,Black / African American,White':
+			'#BCA68A']
 
+		const races_ethnicities = ['Latina/x','Black / African American','Asian','White','Unknown / Unreleased','Other (see About Her)','Native American / Alaska Native','Two or more races','Native Hawaiian / Other Pacific Islander',"nan",'Two or more races,Black / African American,White'];
+		var cx_circles = [10,10,20,20,20,30,30,40,40,50,50];
+		var cy_circles = [20,40,10,30,50,20,40,10,30,20,40];
 
-//dictionary creation
-// Prepare data
-// Association race->color
-const colorList = [//"Latina/x":
-  '#AB2346',//"deeppink",// 'Black / African American':
-  '#FFC07F',//"maroon",// 'Asian':
-  "#00B295",	// 'White':
-  '#CEB8A1',//'#BCA68A',//"bisque",//   'Unknown / Unreleased':
-   '#365259',//"rgb(40, 40, 40)",// 'Other (see About Her)':
-   '#365259',//"rgb(40, 40, 40)",//   'Native American / Alaska Native':  "darkviolet",// 'Two or more races':
-  '#457EAC',//"rgb(40, 40, 40)",//   'Native Hawaiian / Other Pacific Islander':
-  "#9DB17C",
-  "#947EB0",//"darkblue",// "nan":
-  "#365259",  //   'Two or more races,Black / African American,White':
-   '#BCA68A']
+		let race_ethnicity_data = races_ethnicities.map((value, index) => {
+			return {
+				'index': index,
+				'race_ethnicity': value,
+				'cx': cx_circles[index],
+				'cy': cy_circles[index],
+				'color':colorList[index]
+			};
+		});
 
-const races_ethnicities = ['Latina/x','Black / African American','Asian','White','Unknown / Unreleased','Other (see About Her)','Native American / Alaska Native','Two or more races','Native Hawaiian / Other Pacific Islander',"nan",'Two or more races,Black / African American,White'];
-var cx_circles = [10,10,20,20,20,30,30,40,40,50,50];
-var cy_circles = [20,40,10,30,50,20,40,10,30,20,40];
+		// updates functions
+		function update_cx(dindex,her_race_ethnicity){
+			// find the index in the dictionary of non-moving on
+			const position = races_ethnicities.indexOf(her_race_ethnicity);
+			if (dindex != position){
+				return 40 + 30 * Math.cos(dindex * 360/9)// move it a r cos thetha ellipse
+			} else {
+				return 40 // stay central position
+			}
+		}
 
-let race_ethnicity_data = races_ethnicities.map((value, index) => {
-                return {'index' :index,'race_ethnicity': value, 'cx': cx_circles[index], 'cy': cy_circles[index], 'color':colorList[index]};
-        });
+		function update_cy(dindex,her_race_ethnicity){
+			// find the index in the dictionary of non-moving on
+			const position = races_ethnicities.indexOf(her_race_ethnicity);
+			if (dindex != position){
+				var move = 30 + 20 * Math.sin(dindex * 360/9)//  move it  b r sin thetha ellipse
+				return move
+			} else {
+				return 30 // stay central position
+			}
+		}
 
-// updates functions
-function update_cx(dindex,her_race_ethnicity){
-    // find the index in the dictionary of non-moving on
-    const position = races_ethnicities.indexOf(her_race_ethnicity);
-    if (dindex != position){
-      return 40 + 30 * Math.cos(dindex * 360/9)// move it a r cos thetha ellipse
-    }else{
-      return 40 // stay central position
-    }
-}
-
-function update_cy(dindex,her_race_ethnicity){
-    // find the index in the dictionary of non-moving on
-    const position = races_ethnicities.indexOf(her_race_ethnicity);
-    if (dindex != position){
-      var move = 30 + 20 * Math.sin(dindex * 360/9)//  move it  b r sin thetha ellipse
-      return move
-    }else{
-      return 30 // stay central position
-    }
-}
-
-function update_opacity(dindex,her_race_ethnicity){
-    // find the index in the dictionary of non-moving on
-    const position = races_ethnicities.indexOf(her_race_ethnicity);
-    if (dindex != position){
-      return '100%'//no opacity change
-    }else{
-      return '90%' // change
-    }
-}
-
-
-
-var HER_RACE_ETHNICITY = data['HER RACE / ETHNICITY']
-// background of the race plot
-var svg = d3.select("#"+svg_element_id)
-var el = svg.selectAll("circle")
-  .data(race_ethnicity_data)
-  .enter()
-  .append("circle")
-    .attr("r", 3)
-    .attr("cx",40)
-    .attr("cy",30)
-    .attr("stroke", "white")
-    .attr("stroke-width", 0.2)
-    .style("opacity",'50%')
-    .style("fill", d => d.color)
-    .transition()
-    .duration(2000)
-    .attr("cy", d => update_cy(d.index, HER_RACE_ETHNICITY))
-    .attr("cx", d => update_cx(d.index, HER_RACE_ETHNICITY))
-    .style("opacity", d => update_opacity(d.index, HER_RACE_ETHNICITY))
+		function update_opacity(dindex,her_race_ethnicity){
+			// find the index in the dictionary of non-moving on
+			const position = races_ethnicities.indexOf(her_race_ethnicity);
+			if (dindex != position){
+				return '100%'//no opacity change
+			} else {
+				return '90%' // change
+			}
+		}
 
 
 
-
-// add text
-var race_ethnicity_text =   svg.append("text")
-    .text(HER_RACE_ETHNICITY)
-    .attr("x",43)
-    .attr("y",27)
-    .style("font", "6px HelveticaNeue-Light")
-    .style("fill", STROKE_COL);
+		var HER_RACE_ETHNICITY = data['HER RACE / ETHNICITY']
+		// background of the race plot
+		var svg = d3.select("#"+svg_element_id)
+		var el = svg.selectAll("circle")
+			.data(race_ethnicity_data)
+			.enter()
+			.append("circle")
+				.attr("r", 3)
+				.attr("cx",40)
+				.attr("cy",30)
+				.attr("stroke", "white")
+				.attr("stroke-width", 0.2)
+				.style("opacity",'50%')
+				.style("fill", d => d.color)
+				.transition()
+				.duration(2000)
+				.attr("cy", d => update_cy(d.index, HER_RACE_ETHNICITY))
+				.attr("cx", d => update_cx(d.index, HER_RACE_ETHNICITY))
+				.style("opacity", d => update_opacity(d.index, HER_RACE_ETHNICITY));
 
 
 
 
+		// add text
+		var race_ethnicity_text = svg.append("text")
+			.text(HER_RACE_ETHNICITY)
+			.attr("x",43)
+			.attr("y",27)
+			.style("font", "6px HelveticaNeue-Light")
+			.style("fill", STROKE_COL);
 
 
 
-// highlight of the race plot
-// selection with ID
-//console.log(data['HER RACE / ETHNICITY'])
 
-// var highlighted_circle = d3.select("#racePlot [name='"+data['HER RACE / ETHNICITY']+"']")
-//     .transition()
-//       .duration(4000)
-//       .style("opacity",'100%');
 
-    // .on("click", function(){
-    //     //el.attr("fill", "blue");
-    //     console.log('the click worked!')
-    //     svg.selectAll("circle").style("fill","blue");
-    // });
-}
+
+
+		// highlight of the race plot
+		// selection with ID
+		//console.log(data['HER RACE / ETHNICITY'])
+
+		// var highlighted_circle = d3.select("#racePlot [name='"+data['HER RACE / ETHNICITY']+"']")
+		//     .transition()
+		//       .duration(4000)
+		//       .style("opacity",'100%');
+
+				// .on("click", function(){
+				//     //el.attr("fill", "blue");
+				//     console.log('the click worked!')
+				//     svg.selectAll("circle").style("fill","blue");
+				// });
+	}
 }
 
 /// remove all child
 function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
+		while (parent.firstChild) {
+				parent.removeChild(parent.firstChild);
+		}
 }
 
 
 function myupdate(data) {
+	//remove
+	const race_container = document.querySelector('#racePlot');
+	removeAllChildNodes(race_container);
+
+	const date_age_container = document.querySelector('#date_and_age_Plot');
+	removeAllChildNodes(date_age_container);
 
 
-  //remove
-  const race_container = document.querySelector('#racePlot');
-  removeAllChildNodes(race_container);
+	const state_container = document.querySelector('#statePlot');
+	removeAllChildNodes(state_container);
 
-  const date_age_container = document.querySelector('#date_and_age_Plot');
-  removeAllChildNodes(date_age_container);
-
-
-  const state_container = document.querySelector('#statePlot');
-  removeAllChildNodes(state_container);
-
-  // update agePlot
-  let datePlot = new DatePlot('date_and_age_Plot', data[DATA_INDEX]);
-  let agePlot =new AgePlot('date_and_age_Plot', data[DATA_INDEX]);
-  let statePlot =new StatePlot('statePlot', data[DATA_INDEX]);
-  let racePlot = new RacePlot('racePlot', data[DATA_INDEX]);
+	// update agePlot
+	let datePlot = new DatePlot('date_and_age_Plot', data[DATA_INDEX]);
+	let agePlot = new AgePlot('date_and_age_Plot', data[DATA_INDEX]);
+	let statePlot =new StatePlot('statePlot', data[DATA_INDEX]);
+	let racePlot = new RacePlot('racePlot', data[DATA_INDEX]);
 }
 
 function make_portrait_buttons(b_id) {
-// Buttons
-// ---Explore button
-// random selector in dataset
-// Function to generate random number
-var MIN = 0;
-var MAX = 1840;
-function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
+	// Buttons
+	// ---Explore button
+	// random selector in dataset
+	// Function to generate random number
+	var MIN = 0;
+	var MAX = 1840;
+	function randomNumber(min, max) {
+		return Math.floor(Math.random() * (max - min) + min);
+	}
 
-// parameters
-var rec_width = 55;
-var rec_height = 15;
-
-
-
-var buttonExploreBorder = d3.select(b_id).append("rect")
-  .attr("width",rec_width)
-  .attr("height", rec_height)
-  .attr("stroke", STROKE_COL)
-  .attr("stroke-width", "0.5")
-  .attr("fill", "transparent")
-  .attr("transform", "translate(150,22.5)")
-  .on("click", function(d) {
-    DATA_INDEX = randomNumber(MIN,MAX);
-    d3.csv("/data/data.csv").then(result => myupdate(result))
-  });
+	// parameters
+	var rec_width = 55;
+	var rec_height = 15;
 
 
-  var buttonExplore = d3.select(b_id).append("rect")
-    .attr("width",rec_width)
-    .attr("height", rec_height)
-    .attr("stroke", STROKE_COL)
-    .attr("stroke-width", "0.5")
-    .attr("fill", "transparent")
-    .attr("transform", "translate(150,22.5)")
-    .on("click", function(d) {
-        DATA_INDEX = randomNumber(MIN,MAX);
-        d3.csv("/data/data.csv").then(result => myupdate(result))
-    })
-    .on("mouseover", function(){
 
-          buttonExplore.attr("fill",STROKE_COL);
-          buttonExplore_text.style("fill",BG_COL);
-    })
-    .on("mouseout", function(){
-
-          buttonExplore.attr("fill", 'transparent');
-          buttonExplore_text.style("fill",STROKE_COL);
-    });
+	var buttonExploreBorder = d3.select(b_id).append("rect")
+		.attr("width",rec_width)
+		.attr("height", rec_height)
+		.attr("stroke", STROKE_COL)
+		.attr("stroke-width", "0.5")
+		.attr("fill", "transparent")
+		.attr("transform", "translate(150,22.5)")
+		.on("click", function(d) {
+			DATA_INDEX = randomNumber(MIN,MAX);
+			d3.csv("/data/data.csv").then(result => myupdate(result))
+		});
 
 
-var buttonExplore_text = d3.select(b_id)
-  .append("text")
-  .text("EXPLORE")
-  .attr("x",150+rec_width/2-11.5) // rectangle x transform + half -px
-  .attr("y",25+rec_height/2)
-  .style("font", "6px HelveticaNeue-Light")
-  .style("fill",STROKE_COL)
-  .on("click", function(d) {
-      DATA_INDEX = randomNumber(MIN,MAX);
-      d3.csv("/data/data.csv").then(result => myupdate(result))
-  })
-  .on("mouseover", function(){
-        buttonExplore.attr("fill", STROKE_COL);
-        buttonExplore_text.style("fill",BG_COL);
-  })
-  .on("mouseout", function(){
-        buttonExplore.attr("fill", 'transparent');
-        buttonExplore_text.style("fill",STROKE_COL);
-  });
-
-// ---Next Button -- goes to ensemble view
-var buttonNextBorder = d3.select(b_id).append("rect")
-.attr("width",rec_width)
-.attr("height", rec_height)
-  .attr("stroke", STROKE_COL)
-    .attr("stroke-width", "0.5")
-  .attr("fill", "transparent")
-  .attr("transform", "translate(285,22.5)")
-  .on("click", function(d) {
-    const event_ensemble = new Event("go_to_ensemble");
-  document.getElementById("main_div").dispatchEvent(event_ensemble);
-  });
+	var buttonExplore = d3.select(b_id).append("rect")
+		.attr("width",rec_width)
+		.attr("height", rec_height)
+		.attr("stroke", STROKE_COL)
+		.attr("stroke-width", "0.5")
+		.attr("fill", "transparent")
+		.attr("transform", "translate(150,22.5)")
+		.on("click", function(d) {
+			DATA_INDEX = randomNumber(MIN,MAX);
+			d3.csv("/data/data.csv").then(result => myupdate(result))
+		})
+		.on("mouseover", function(){
+			buttonExplore.attr("fill",STROKE_COL);
+			buttonExplore_text.style("fill",BG_COL);
+		})
+		.on("mouseout", function(){
+			buttonExplore.attr("fill", 'transparent');
+			buttonExplore_text.style("fill",STROKE_COL);
+		});
 
 
-  var buttonNext = d3.select(b_id).append("rect")
-  .attr("width",rec_width)
-  .attr("height", rec_height)
-    .attr("stroke", STROKE_COL)
-      .attr("stroke-width", "0.5")
-    .attr("fill", "transparent")
-    .attr("transform", "translate(285,22.5)")
-    .on("click", function(d) {
-        //DATA_INDEX = DATA_INDEX + 1;
-        //d3.csv("/data/data.csv").then(result => myupdate(result))
-        const event_ensemble = new Event("go_to_ensemble");
-        document.getElementById("main_div").dispatchEvent(event_ensemble);
-    })
-    .on("mouseover", function(){
+	var buttonExplore_text = d3.select(b_id)
+		.append("text")
+		.text("EXPLORE")
+		.attr("x",150+rec_width/2-11.5) // rectangle x transform + half -px
+		.attr("y",25+rec_height/2)
+		.style("font", "6px HelveticaNeue-Light")
+		.style("fill",STROKE_COL)
+		.on("click", function(d) {
+			DATA_INDEX = randomNumber(MIN,MAX);
+			d3.csv("/data/data.csv").then(result => myupdate(result))
+		})
+		.on("mouseover", function(){
+			buttonExplore.attr("fill", STROKE_COL);
+			buttonExplore_text.style("fill",BG_COL);
+		})
+		.on("mouseout", function(){
+			buttonExplore.attr("fill", 'transparent');
+			buttonExplore_text.style("fill",STROKE_COL);
+		});
 
-          buttonNext.attr("fill", STROKE_COL);
-          buttonNext_text.style("fill",BG_COL);
-    })
-    .on("mouseout", function(){
+	// ---Next Button -- goes to ensemble view
+	var buttonNextBorder = d3.select(b_id).append("rect")
+	.attr("width",rec_width)
+	.attr("height", rec_height)
+		.attr("stroke", STROKE_COL)
+		.attr("stroke-width", "0.5")
+		.attr("fill", "transparent")
+		.attr("transform", "translate(285,22.5)")
+		.on("click", function(d) {
+			const event_ensemble = new Event("go_to_ensemble");
+		document.getElementById("main_div").dispatchEvent(event_ensemble);
+		});
 
-          buttonNext.attr("fill", 'transparent');
-          buttonNext_text.style("fill",STROKE_COL);
-    });
+
+	var buttonNext = d3.select(b_id).append("rect")
+	.attr("width",rec_width)
+	.attr("height", rec_height)
+		.attr("stroke", STROKE_COL)
+		.attr("stroke-width", "0.5")
+		.attr("fill", "transparent")
+		.attr("transform", "translate(285,22.5)")
+		.on("click", function(d) {
+			//DATA_INDEX = DATA_INDEX + 1;
+			//d3.csv("/data/data.csv").then(result => myupdate(result))
+			const event_ensemble = new Event("go_to_ensemble");
+			document.getElementById("main_div").dispatchEvent(event_ensemble);
+		})
+		.on("mouseover", function(){
+			buttonNext.attr("fill", STROKE_COL);
+			buttonNext_text.style("fill",BG_COL);
+		})
+		.on("mouseout", function(){
+			buttonNext.attr("fill", 'transparent');
+			buttonNext_text.style("fill",STROKE_COL);
+		});
 
 
-var buttonNext_text = d3.select(b_id)
-  .append("text")
-  .text(" ENSEMBLE VIEW")
-  .attr("x",285 + rec_width/2 - 23) // rectangle x transform + half
-  .attr("y",rec_height/2+25)
-  .style("font", "6px HelveticaNeue-Light")
-  .style("fill",STROKE_COL)
-  .style("textAlign", "center")
-  .on("click", function(d) {
-    const event_ensemble = new Event("go_to_ensemble");
+	var buttonNext_text = d3.select(b_id)
+		.append("text")
+		.text(" ENSEMBLE VIEW")
+		.attr("x",285 + rec_width/2 - 23) // rectangle x transform + half
+		.attr("y",rec_height/2+25)
+		.style("font", "6px HelveticaNeue-Light")
+		.style("fill",STROKE_COL)
+		.style("textAlign", "center")
+		.on("click", function(d) {
+			const event_ensemble = new Event("go_to_ensemble");
 
-    document.getElementById("main_div").dispatchEvent(event_ensemble);
-  })
-  .on("mouseover", function(){
-        buttonNext.attr("fill", STROKE_COL);
-        buttonNext_text.style("fill",BG_COL);
-  })
-  .on("mouseout", function(){
-        buttonNext.attr("fill", 'transparent');
-        buttonNext_text.style("fill",STROKE_COL);
-  });
-// ---Previous button
-var buttonPrevious = d3.select(b_id).append("rect")
-.attr("width",rec_width)
-.attr("height", rec_height)
-  .attr("fill", "transparent")
-  .attr("stroke", STROKE_COL)
-  .attr("stroke-width", "0.5")
-  .attr("transform", "translate(20,22.5)")
-  .on("click", function(d) {
-    //remove view
-    d3.select("#date_and_age_Plot")
-    .html(null);
-    d3.select("#statePlot")
-    .html(null);
-    d3.select("#racePlot")
-    .html(null);
-    d3.select("#buttons_portrait")
-    .html(null);
-    d3.select("#myPortrait")
-    .attr("height", "0");
-    d3.select("#plot")
-    .attr("height", "100%");
-    //statistics button
-    createButtons();
-    // statistics view
-    STATS_STATE.toggle_statistics()
-  })
+			document.getElementById("main_div").dispatchEvent(event_ensemble);
+		})
+		.on("mouseover", function(){
+					buttonNext.attr("fill", STROKE_COL);
+					buttonNext_text.style("fill",BG_COL);
+		})
+		.on("mouseout", function(){
+					buttonNext.attr("fill", 'transparent');
+					buttonNext_text.style("fill",STROKE_COL);
+		});
+	// ---Previous button
+	var buttonPrevious = d3.select(b_id).append("rect")
+	.attr("width",rec_width)
+	.attr("height", rec_height)
+		.attr("fill", "transparent")
+		.attr("stroke", STROKE_COL)
+		.attr("stroke-width", "0.5")
+		.attr("transform", "translate(20,22.5)")
+		.on("click", function(d) {
+			//remove view
+			d3.select("#date_and_age_Plot")
+			.html(null);
+			d3.select("#statePlot")
+			.html(null);
+			d3.select("#racePlot")
+			.html(null);
+			d3.select("#buttons_portrait")
+			.html(null);
+			d3.select("#myPortrait")
+			.attr("height", "0");
+			d3.select("#plot")
+			.attr("height", "100%");
+			//statistics button
+			createButtons();
+			// statistics view
+			STATS_STATE.toggle_statistics()
+		})
 
-var buttonPreviousBorder = d3.select(b_id).append("rect")
-.attr("width",rec_width)
-.attr("height", rec_height)
-  .attr("fill", "transparent")
-  .attr("stroke", STROKE_COL)
-  .attr("stroke-width", "0.5")
-  .attr("transform", "translate(20,22.5)")
-  .on("click", function(d) {
-        //remove view
-        d3.select("#date_and_age_Plot")
-        .html(null);
-        d3.select("#statePlot")
-        .html(null);
-        d3.select("#racePlot")
-        .html(null);
-        d3.select("#buttons_portrait")
-        .html(null);
-        d3.select("#myPortrait")
-        .attr("height", "0");
-        d3.select("#plot")
-        .attr("height", "100%");
-        //statistics button
-        createButtons();
-        // statistics view
-        STATS_STATE.toggle_statistics()
-    })
-  .on("mouseover", function(){
+	var buttonPreviousBorder = d3.select(b_id).append("rect")
+		.attr("width",rec_width)
+		.attr("height", rec_height)
+		.attr("fill", "transparent")
+		.attr("stroke", STROKE_COL)
+		.attr("stroke-width", "0.5")
+		.attr("transform", "translate(20,22.5)")
+		.on("click", function(d) {
+			//remove view
+			d3.select("#date_and_age_Plot")
+			.html(null);
+			d3.select("#statePlot")
+			.html(null);
+			d3.select("#racePlot")
+			.html(null);
+			d3.select("#buttons_portrait")
+			.html(null);
+			d3.select("#myPortrait")
+			.attr("height", "0");
+			d3.select("#plot")
+			.attr("height", "100%");
+			//statistics button
+			createButtons();
+			// statistics view
+			STATS_STATE.toggle_statistics()
+		})
+		.on("mouseover", function(){
+			buttonPrevious.attr("fill", STROKE_COL);
+			buttonPrevious_Text.style("fill",BG_COL);
+		})
+		.on("mouseout", function(){
+			buttonPrevious.attr("fill", 'transparent');
+			buttonPrevious_Text.style("fill",BG_COL);
+		});
 
-        buttonPrevious.attr("fill", STROKE_COL);
-        buttonPrevious_Text.style("fill",BG_COL);
-  })
-  .on("mouseout", function(){
-
-        buttonPrevious.attr("fill", 'transparent');
-        buttonPrevious_Text.style("fill",BG_COL);
-  });
-
-var buttonPrevious_Text = d3.select(b_id)
-  .append("text")
-  .text("STATISTICAL VIEW")
-  .attr("x",20 + rec_width/2 -23.5)
-  .attr("y",rec_height/2+25)
-  .style("font", "6px  HelveticaNeue-Light")
-  .style("fill",STROKE_COL)
-  .on("click", function(d) {
-    //remove view
-    d3.select("#date_and_age_Plot")
-    .html(null);
-    d3.select("#statePlot")
-    .html(null);
-    d3.select("#racePlot")
-    .html(null);
-    d3.select("#buttons_portrait")
-    .html(null);
-    d3.select("#myPortrait")
-    .attr("height", "0");
-    d3.select("#plot")
-    .attr("height", "100%");
-    //statistics button
-    createButtons();
-    // statistics view
-    STATS_STATE.toggle_statistics()
-  })
-  .on("mouseover", function(){
-
-        buttonPrevious.attr("fill", STROKE_COL);
-        buttonPrevious_Text.style("fill",BG_COL);
-  })
-  .on("mouseout", function(){
-
-        buttonPrevious.attr("fill", 'transparent');
-        buttonPrevious_Text.style("fill",BG_COL);
-  });
+	var buttonPrevious_Text = d3.select(b_id)
+		.append("text")
+		.text("STATISTICAL VIEW")
+		.attr("x",20 + rec_width/2 -23.5)
+		.attr("y",rec_height/2+25)
+		.style("font", "6px  HelveticaNeue-Light")
+		.style("fill",STROKE_COL)
+		.on("click", function(d) {
+			//remove view
+			d3.select("#date_and_age_Plot")
+			.html(null);
+			d3.select("#statePlot")
+			.html(null);
+			d3.select("#racePlot")
+			.html(null);
+			d3.select("#buttons_portrait")
+			.html(null);
+			d3.select("#myPortrait")
+			.attr("height", "0");
+			d3.select("#plot")
+			.attr("height", "100%");
+			//statistics button
+			createButtons();
+			// statistics view
+			STATS_STATE.toggle_statistics()
+		})
+		.on("mouseover", function(){
+			buttonPrevious.attr("fill", STROKE_COL);
+			buttonPrevious_Text.style("fill",BG_COL);
+		})
+		.on("mouseout", function(){
+			buttonPrevious.attr("fill", 'transparent');
+			buttonPrevious_Text.style("fill",BG_COL);
+		});
 }
 
 // Database
 function load_data() {
 	// Database
-d3.csv("/data/data.csv").then(result => myupdate(result))
+	d3.csv("/data/data.csv").then(result => myupdate(result))
 }
 var DATA_INDEX = 0
 
