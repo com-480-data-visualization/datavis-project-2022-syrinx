@@ -3,6 +3,7 @@
        https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
        Example:
        whenDocumentLoaded(() => {
+               console.log('loaded!');
                document.getElementById('some-element');
        });
 */
@@ -16,7 +17,10 @@ function whenDocumentLoaded(action) {
 }
 
 
-// helpers
+// colors
+BG_COL = '#051924';
+STROKE_COL = '#C2C1A5';
+STATE_COLOR = '#365259';//'#3E5E65';
 
 // Visualisation 1.1
 // Personal Information - Age
@@ -28,65 +32,96 @@ class AgePlot {
               	var len = end - start + 1;
               	var a = new Array(len);
                 // this is a starting radius that keeps space for the name
-                var SPACER = 45;
+                var SPACER = 50; // not more because 101
               	for (let i = 0; i < len; i++) a[i] = SPACER + start + i;
               	return a;
               }
               var age_text = d3.select("#"+svg_element_id)
                   .append("text")
                   .text(data['HER AGE'] + ' yo')
-                  .attr("x",-12)
-                  .attr("y",parseInt(data['HER AGE'])+12)
+                  .attr("x",188) //200-12
+                  .attr("y",165+parseInt(data['HER AGE']))
                   .style("font", "1px  HelveticaNeue-Light")
-                  .attr("transform", "translate(200,150)")
+                  .style("fill", STROKE_COL)
                      .transition()
                      .duration(4400)
                      .style("font", "8px  HelveticaNeue-Light")
+                     .style("fill", STROKE_COL)
 
 
 
               const names = data["HER NAME"].split(" ");
+              console.log(names.length)
                    	// Center the text a bit
 
                      // Split the name into first name / family name for each victim.
 
               var age_circle = d3.select("#"+svg_element_id)
-                  .append("circle")
-                     .attr("cx",200)
-                     .attr("cy",150)
-                     .attr("r", 1)
-                     .attr("stroke",'#0B1A39')
-                     .attr("fill",'transparent')
-                     .attr("stroke-width",0.2)
-                     .transition()
-                     .duration(data['HER AGE']*100)
-                     .attr("r",data['HER AGE'])
-                     .on('end',function(){
-                       d3.select("#"+svg_element_id)
-                       .transition()
-                             .duration(100)
-                             .on('end',function(){
-                               for (let i = 0; i <= names.length; i++) {
-                                 d3.select("#"+svg_element_id).
-                              		append("text")
-                              			.attr("x", 0)
-                              			.attr("y", -6+parseInt(12*(i)))
-                              			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
-                              			.attr("pointer-events", "none")
-                              			.style("text-anchor", "middle")
-                              			.style("font", "10px  HelveticaNeue-Light")
-                              			.attr("fill", "black")
-                                    .attr("transform", "translate(200,150)")
-                              	}
-                                // .append("text")
-                                // .attr("x",175)
-                                // .attr("y",150)
-                                // .style("font", "14px times")
-                                //   .text(data['HER NAME'])
-                                // .call(wrap,30)
-                               })
-                    })
-                    ;
+                  // .append("circle")
+                  //    .attr("cx",200)
+                  //    .attr("cy",150)
+                  //    .attr("r", 1)
+                  //    .attr("stroke",'#0B1A39')
+                  //    .attr("fill",'transparent')
+                  //    .attr("stroke-width",0.2)
+                  //    .transition()
+                  //    .duration(data['HER AGE']*100)
+                  //    .attr("r",data['HER AGE'])
+                  //    .on('end',function(){
+                  //      d3.select("#"+svg_element_id)
+                  //      .transition()
+                  //            .duration(100)
+                  //            .on('end',function(){
+                  //              for (let i = 0; i <= names.length; i++) {
+                  //                d3.select("#"+svg_element_id).
+                  //             		append("text")
+                  //             			.attr("x", 0)
+                  //             			.attr("y", -6+parseInt(12*(i)))
+                  //             			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
+                  //             			.attr("pointer-events", "none")
+                  //             			.style("text-anchor", "middle")
+                  //             			.style("font", "10px  HelveticaNeue-Light")
+                  //             			.attr("fill", "black")
+                  //                   .attr("transform", "translate(200,150)")
+                  //             	}
+                // })
+                // })
+
+/// multiple circles//
+//Produce a circle per year of age (at death time).
+// The center is random, and the ray is random.
+for (let i=0; i<data["HER AGE"]; i++) {
+  age_circle.append("circle")
+    .attr("id", "age_circle")
+    .attr("cx", 200)
+    .attr("cy",150)
+    .attr("r", 0)
+    .attr("pointer-events", "none")
+    .attr("fill", "none")
+    .attr("stroke", STROKE_COL)
+    .attr("stroke-width", 0.1)
+    .transition()
+    .duration(4000)
+      .attr("cx",  200 + 4 * (Math.random() - 0.5))
+      .attr("cy",  150 + 4 * (Math.random() - 0.5))
+      //.attr("r",   parseInt(data["HER AGE"]) + 10 * (Math.random()))
+      .attr("r",  parseInt(data["HER AGE"])+ 6 * (Math.random()))
+        .on('end',function(){
+                 for (let i = 0; i <= names.length; i++) {
+                   d3.select("#"+svg_element_id).
+                		append("text")
+                			.attr("x", 0)
+                			.attr("y", -6+parseInt(12*(i)))
+                			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
+                			.attr("pointer-events", "none")
+                			.style("text-anchor", "middle")
+                			.style("font", "10px  HelveticaNeue-Light")
+                			.style("fill", STROKE_COL)
+                      .attr("transform", "translate(200,150)")
+                	}
+                })
+      };
+      console.log(data["HER AGE"] + 4 * (Math.random()))
                    }
 
 
@@ -123,7 +158,7 @@ class AgePlot {
 // Date plot functions
 // CONSTANTS
 // PARAMETERS
- const INNER_RADIUS = 124
+ const INNER_RADIUS = 125
 const OUTER_RADIUS = 126
 
 
@@ -136,6 +171,7 @@ function date_to_angle(data){
 
   const date1 = new Date('2018/01/01');
   const date2 = new Date(data.DATE);
+console.log(data.DATE)
       // time difference
       const diffTime = Math.abs(date2 - date1);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -221,9 +257,9 @@ class DatePlot {
                 d3.select("#"+svg_element_id)
                    .append("path")
                    .attr("d", arcGenDeath)
-                   .attr("stroke", "#0B1A39")
-                   .attr("fill","#0B1A39")
-                   .attr("stroke-width", 0.1)
+                   .attr("stroke", STROKE_COL)
+                   .attr("fill",STROKE_COL)
+                   .attr("stroke-width", 0.5)
                    .attr("transform", "translate(200,150)");
 
 
@@ -233,7 +269,7 @@ class DatePlot {
                            .attr("r",4.2)
                            .attr("cx",X_YEAR)
                            .attr("cy",Y_YEAR)
-                           .attr("stroke",'#0B1A39')
+                           .attr("stroke",STROKE_COL)
                            .attr("fill","transparent");
 
                    var dot_marker4 =  d3.select("#"+svg_element_id)
@@ -241,8 +277,8 @@ class DatePlot {
                            .attr("r",4)
                            .attr("cx",X_YEAR)
                            .attr("cy",Y_YEAR)
-                           .attr("stroke",'#F9F0DA')
-                           .attr("fill","#F9F0DA");
+                           .attr("stroke",BG_COL)
+                           .attr("fill",BG_COL);
 
                      // add death date text
                      d3.select("#"+svg_element_id)
@@ -250,7 +286,8 @@ class DatePlot {
                      .text("2018")
                      .attr("x",X_YEAR-6)
                      .attr("y",Y_YEAR+12)
-                     .style("font", "6px HelveticaNeue-Light ");
+                     .style("font", "8px HelveticaNeue-Light ")
+                     .style("fill", STROKE_COL);
 
 
                 // add death date text
@@ -260,7 +297,8 @@ class DatePlot {
                 .attr("transform","rotate("+ROT_TEXT+","+X_TEXT+","+Y_TEXT+")")
                 .attr("x",X_TEXT)
                 .attr("y",Y_TEXT)
-                .style("font", "6px  HelveticaNeue-Light");
+                .style("font", "8px  HelveticaNeue-Light")
+                .style("fill", STROKE_COL);
 
 
                 // append small dot marker
@@ -269,15 +307,15 @@ class DatePlot {
                   .attr("r",4.4)
                   .attr("cx",X_MARKER)
                   .attr("cy",Y_MARKER)
-                  .attr("stroke",'#0B1A39')
-                  .attr("fill","#0B1A39");
+                  .attr("stroke",STROKE_COL)
+                  .attr("fill",STROKE_COL);
 
                 var dot_marker2 =  d3.select("#"+svg_element_id)
                     .append("circle")
                     .attr("r",4.2)
                     .attr("cx",X_MARKER)
                     .attr("cy",Y_MARKER)
-                    .attr("stroke",'#F9F0DA')
+                    .attr("stroke",BG_COL)
                     .attr("fill","transparent");
 
 
@@ -288,9 +326,14 @@ class DatePlot {
                     .attr("x2",d => x_marker_line(OUTER_RADIUS,data))
                     .attr("y1",d => y_marker(OUTER_RADIUS,data))
                     .attr("y2",d => y_marker_line(OUTER_RADIUS,data))
-                    .attr("stroke",'#0B1A39')
+                    .attr("stroke",STROKE_COL)
                     .attr("stroke-width",0.4);
+
+
+
+
               }
+
 }
 // // update death date plot
 // function update_death_date(outer_radius, data){
@@ -396,6 +439,7 @@ const states_dict = {"al"  :"m 643,467.4 .4,-7.3 -.9,-1.2 -1.7,-.7 -2.5,-2.8 .5,
 "dc"  :"m 803.5,252 -2.6,-1.8 -1,1.7 .5,.4 .4,.1 .6,.5 .3,.7 -.1,.5 .2,.5 z" ,
 "ut"  :"m 233.2,217.9 3.3,-21.9 -47.9,-8.2 -21,109 46.2,8.2 40,6 11.5,-88.3 z"
 }
+console.log(states_dict)
 // State information
 class StatePlot{
   constructor(svg_element_id, data){
@@ -412,8 +456,8 @@ class StatePlot{
    .append("circle")
    .attr("cx", 13)
    .attr("cy", 5)
-   .attr("r", 0.75)
-   .attr("fill","#0B1A39");
+   .attr("r", 1.05)
+   .attr("fill",STROKE_COL);
 
 
    // retrieve the SVG path
@@ -424,9 +468,9 @@ class StatePlot{
     var d3path = d3.select("#"+svg_element_id)
         .append("path")  //add new child element
         .attr("d",path)
-        .attr("stroke",'#0B1A39')
+        .attr("stroke",STROKE_COL)
         .attr("stroke-width",1)
-        .attr("fill","#E1EFE6")
+        .attr("fill",STATE_COLOR)
         .attr("marker-end", "url(#circle)") // add markers
         .attr("marker-mid", "url(#circle)")
         .attr("marker-start", "url(#circle)")
@@ -451,13 +495,16 @@ class StatePlot{
     .transition()
     .duration(6000)
     .attr("stroke-dashoffset", 0);
+    console.log(data.STATE)
     // add STATE name in the center of the box
     d3.select("#"+svg_element_id)
     .append("text")
     .text(data.STATE)
     .attr("x",myPathBox.width/2)
     .attr("y",myPathBox.height/2)
-    .style("font", "12px  HelveticaNeue-Light");
+    .style("font", "12px  HelveticaNeue-Light")
+    .style("fill",STROKE_COL);
+
     //.attr("transform", "translate(-225,-200)"); /!\ if you translate you translate also the path
 
   }
@@ -467,56 +514,76 @@ class StatePlot{
 
 // Visualization 1.2
 
-// Prepare data
-// Association race->color
-const colorList = [
-	//"Latina/x":
-  "deeppink",
-	// 'Black / African American':
-  "maroon",
-	// 'Asian':
-  "gold",
-	// 'White':
-  "bisque",
-  //   'Unknown / Unreleased':
-   "rgb(40, 40, 40)",
-	// 'Other (see About Her)':
-   "rgb(40, 40, 40)",
-  //   'Native American / Alaska Native':
-  "darkviolet",
-	// 'Two or more races':
-  "rgb(40, 40, 40)",
-  //   'Native Hawaiian / Other Pacific Islander':
-  "darkblue",
-	// "nan":
-  "rgb(40, 40, 40)",
-  //   'Two or more races,Black / African American,White':
-   "rgb(40, 40, 40)"
-]
 
-  var races_ethnicities= ['Latina/x',
- 'Black / African American',
- 'Asian',
- 'White',
- 'Unknown / Unreleased',
- 'Other (see About Her)',
- 'Native American / Alaska Native',
- 'Two or more races',
- 'Native Hawaiian / Other Pacific Islander',
- "Unknown",
- 'Two or more races,Black / African American,White'];
- var cx_circles = [10,10,20,20,20,30,30,40,40,50,50];
- var cy_circles = [20,40,10,30,50,20,40,10,30,20,40];
 
- let race_ethnicity_data = races_ethnicities.map((value, index) => {
-                return {'index' :index,'race_ethnicity': value, 'cx': cx_circles[index], 'cy': cy_circles[index], 'color':colorList[index]};
-        });
+
 
 
 // function
 class RacePlot{
   constructor(svg_element_id, data){
 
+
+//dictionary creation
+// Prepare data
+// Association race->color
+const colorList = [//"Latina/x":
+  "deeppink",// 'Black / African American':
+  "maroon",// 'Asian':
+  "gold",	// 'White':
+  "bisque",//   'Unknown / Unreleased':
+   "rgb(40, 40, 40)",// 'Other (see About Her)':
+   "rgb(40, 40, 40)",//   'Native American / Alaska Native':  "darkviolet",// 'Two or more races':
+  "rgb(40, 40, 40)",//   'Native Hawaiian / Other Pacific Islander':
+  "darkblue",// "nan":
+  "rgb(40, 40, 40)",  //   'Two or more races,Black / African American,White':
+   "rgb(40, 40, 40)"]
+
+const races_ethnicities = ['Latina/x','Black / African American','Asian','White','Unknown / Unreleased','Other (see About Her)','Native American / Alaska Native','Two or more races','Native Hawaiian / Other Pacific Islander',"Unknown",'Two or more races,Black / African American,White'];
+var cx_circles = [10,10,20,20,20,30,30,40,40,50,50];
+var cy_circles = [20,40,10,30,50,20,40,10,30,20,40];
+
+let race_ethnicity_data = races_ethnicities.map((value, index) => {
+                return {'index' :index,'race_ethnicity': value, 'cx': cx_circles[index], 'cy': cy_circles[index], 'color':colorList[index]};
+        });
+
+// updates functions
+function update_cx(dindex,her_race_ethnicity){
+    // find the index in the dictionary of non-moving on
+    const position = races_ethnicities.indexOf(her_race_ethnicity);
+    if (dindex != position){
+      return 40 + 30 * Math.cos(dindex * 360/9)// move it a r cos thetha ellipse
+    }else{
+      return 40 // stay central position
+    }
+}
+
+function update_cy(dindex,her_race_ethnicity){
+    // find the index in the dictionary of non-moving on
+    const position = races_ethnicities.indexOf(her_race_ethnicity);
+    if (dindex != position){
+      var move = 30 + 20 * Math.sin(dindex * 360/9)//  move it  b r sin thetha ellipse
+      return move
+    }else{
+      return 30 // stay central position
+    }
+}
+
+function update_opacity(dindex,her_race_ethnicity){
+    // find the index in the dictionary of non-moving on
+    const position = races_ethnicities.indexOf(her_race_ethnicity);
+    console.log(her_race_ethnicity)
+    console.log(dindex)
+    if (dindex != position){
+      return '50%'//no opacity change
+    }else{
+      return '90%' // change
+    }
+}
+
+
+console.log(data['HER RACE / ETHNICITY'])
+var HER_RACE_ETHNICITY = data['HER RACE / ETHNICITY']
 // background of the race plot
 var svg = d3.select("#"+svg_element_id)
 var el = svg.selectAll("circle")
@@ -524,25 +591,41 @@ var el = svg.selectAll("circle")
   .enter()
   .append("circle")
     .attr("r", 3)
-    .attr("name", d => d.race_ethnicity)
-    .attr("cx",d => d.cx)
-    .attr("cy",d => d.cy)
+    .attr("cx",40)
+    .attr("cy",30)
     .attr("stroke", "white")
     .attr("stroke-width", 0.2)
-    .style("opacity",'30%')
+    .style("opacity",'50%')
     .style("fill", d => d.color)
-    .on("click", function(){
-        //el.attr("fill", "blue");
-        svg.selectAll("circle").style("fill","blue");
-    });
+    .transition()
+    .duration(2000)
+    .attr("cy", d => update_cy(d.index, HER_RACE_ETHNICITY))
+    .attr("cx", d => update_cx(d.index, HER_RACE_ETHNICITY))
+    .style("opacity", d => update_opacity(d.index, HER_RACE_ETHNICITY))
+
+// add text
+var race_ethnicity_text =   svg.append("text")
+    .text(HER_RACE_ETHNICITY)
+    .attr("x",43)
+    .attr("y",27)
+    .style("font", "6px HelveticaNeue-Light")
+    .style("fill", STROKE_COL);
+
+
+
+
+
+
 
 // highlight of the race plot
 // selection with ID
 //console.log(data['HER RACE / ETHNICITY'])
-var highlighted_circle = d3.select("#racePlot [name='"+data['HER RACE / ETHNICITY']+"']")
-    .transition()
-      .duration(4000)
-      .style("opacity",'100%');
+
+// var highlighted_circle = d3.select("#racePlot [name='"+data['HER RACE / ETHNICITY']+"']")
+//     .transition()
+//       .duration(4000)
+//       .style("opacity",'100%');
+
     // .on("click", function(){
     //     //el.attr("fill", "blue");
     //     console.log('the click worked!')
@@ -561,7 +644,6 @@ function removeAllChildNodes(parent) {
 
 function myupdate(data) {
 
-  // the update function, actualize with the next or previous entry
 
   //remove
   const race_container = document.querySelector('#racePlot');
@@ -581,205 +663,196 @@ function myupdate(data) {
   let racePlot = new RacePlot('racePlot', data[DATA_INDEX]);
 }
 
-function make_portrait_buttons(b_id = "#buttons") {
-
-	// Buttons
-	// ---Explore button
-	// random selector in dataset
-	// Function to generate random number
-	var MIN = 0;
-	var MAX = 1840;
-	function randomNumber(min, max) {
-		return Math.floor(Math.random() * (max - min) + min);
-	}
-
-	// parameters
-	var rec_width = 60;
-	var rec_height = 20;
-
-	var buttonExploreBorder = d3.select(b_id).append("rect")
-	  .attr("width",rec_width)
-	  .attr("height", rec_height)
-	  .attr("stroke", "#0B1A39")
-		.attr("stroke-width", "0.5")
-	  .attr("fill", "transparent")
-	  .attr("transform", "translate(150,22.5)")
-	  .on("click", function(d) {
-		DATA_INDEX = randomNumber(MIN,MAX);
-		d3.csv("/data/data.csv").then(result => myupdate(result))
-	  });
-
-
-	  var buttonExplore = d3.select(b_id).append("rect")
-		.attr("width",rec_width)
-		.attr("height", rec_height)
-		.attr("stroke", "#0B1A39")
-		  .attr("stroke-width", "0.5")
-		.attr("fill", "transparent")
-		.attr("transform", "translate(150,22.5)")
-		.on("click", function(d) {
-			DATA_INDEX = randomNumber(MIN,MAX);
-			d3.csv("/data/data.csv").then(result => myupdate(result))
-		})
-		.on("mouseover", function(){
-			  buttonExplore.attr("fill", '#0B1A39');
-			  buttonExplore_text.style("fill",'white');
-		})
-		.on("mouseout", function(){
-			  buttonExplore.attr("fill", 'transparent');
-			  buttonExplore_text.style("fill",'#0B1A39');
-		});
-
-
-	var buttonExplore_text = d3.select(b_id)
-	  .append("text")
-	  .text("EXPLORE")
-	  .attr("x",150+rec_width/2-11.5) // rectangle x transform + half -px
-	  .attr("y",25+rec_height/2)
-	  .style("font", "6px HelveticaNeue-Light")
-	  .on("click", function(d) {
-		  DATA_INDEX = randomNumber(MIN,MAX);
-		  d3.csv("/data/data.csv").then(result => myupdate(result))
-	  })
-	  .on("mouseover", function(){
-			buttonExplore.attr("fill", '#0B1A39');
-			buttonExplore_text.style("fill",'white');
-	  })
-	  .on("mouseout", function(){
-			buttonExplore.attr("fill", 'transparent');
-			buttonExplore_text.style("fill",'#0B1A39');
-	  });
-
-	// ---Next Button -- goes to ensemble view
-	var buttonNextBorder = d3.select(b_id).append("rect")
-	.attr("width",rec_width)
-	.attr("height", rec_height)
-	  .attr("stroke", "#0B1A39")
-		.attr("stroke-width", "0.5")
-	  .attr("fill", "transparent")
-	  .attr("transform", "translate(285,22.5)")
-	  .on("click", function(d) {
-		DATA_INDEX = DATA_INDEX + 1;
-		d3.csv("/data/data.csv").then(result => myupdate(result))
-	  });
-
-
-	  var buttonNext = d3.select(b_id).append("rect")
-	  .attr("width",rec_width)
-	  .attr("height", rec_height)
-		.attr("stroke", "#0B1A39")
-		  .attr("stroke-width", "0.5")
-		.attr("fill", "transparent")
-		.attr("transform", "translate(285,22.5)")
-		.on("click", function(d) {
-			DATA_INDEX = DATA_INDEX + 1;
-			d3.csv("/data/data.csv").then(result => myupdate(result))
-		})
-		.on("mouseover", function(){
-			  buttonNext.attr("fill", '#0B1A39');
-			  buttonNext_text.style("fill",'white');
-		})
-		.on("mouseout", function(){
-			  buttonNext.attr("fill", 'transparent');
-			  buttonNext_text.style("fill",'#0B1A39');
-		});
-
-
-	var buttonNext_text = d3.select(b_id)
-	  .append("text")
-	  .text("ENSEMBLE VIEW")
-	  .attr("x",285 + rec_width/2 - 23) // rectangle x transform + half
-	  .attr("y",rec_height/2+25)
-	  .style("font", "6px HelveticaNeue-Light")
-	  .style("textAlign", "center")
-	  .on("click", function(d) {
-		  DATA_INDEX = DATA_INDEX + 1;
-		  // d3.csv("/data/data.csv").then(result => myupdate(result))
-		  const event_ensemble = new Event("go_to_ensemble");
-		  document.getElementById("main_div").dispatchEvent(event_ensemble);
-	  })
-	  .on("mouseover", function(){
-			buttonNext.attr("fill", '#0B1A39');
-			buttonNext_text.style("fill",'white');
-	  })
-	  .on("mouseout", function(){
-			buttonNext.attr("fill", 'transparent');
-			buttonNext_text.style("fill",'#0B1A39');
-	  });
-	// ---Previous button
-	var buttonPrevious = d3.select(b_id).append("rect")
-	.attr("width",rec_width)
-	.attr("height", rec_height)
-	  .attr("fill", "transparent")
-	  .attr("stroke", "#0B1A39")
-	  .attr("stroke-width", "0.5")
-	  .attr("transform", "translate(20,22.5)")
-	  .on("click", function(d) {
-		  myupdate(list_data[0])
-	  })
-
-	var buttonPreviousBorder = d3.select(b_id).append("rect")
-	.attr("width",rec_width)
-	.attr("height", rec_height)
-	  .attr("fill", "transparent")
-	  .attr("stroke", "#0B1A39")
-	  .attr("stroke-width", "0.5")
-	  .attr("transform", "translate(20,22.5)")
-	  .on("click", function(d) {
-		  myupdate(list_data[0])
-	  })
-	  .on("mouseover", function(){
-			buttonPrevious.attr("fill", '#0B1A39');
-			buttonPrevious_Text.style("fill",'white');
-	  })
-	  .on("mouseout", function(){
-			buttonPrevious.attr("fill", 'transparent');
-			buttonPrevious_Text.style("fill",'#0B1A39');
-	  });
-
-	var buttonPrevious_Text = d3.select(b_id)
-	  .append("text")
-	  .text("STATISTICAL VIEW")
-	  .attr("x",20 + rec_width/2 -23.5)
-	  .attr("y",rec_height/2+25)
-	  .style("font", "6px  HelveticaNeue-Light")
-	  .style("font", "6px HelveticaNeue-Light")
-	  .on("click", function(d) {
-		  myupdate(list_data[0])
-	  })
-	  .on("mouseover", function(){
-			buttonPrevious.attr("fill", '#0B1A39');
-			buttonPrevious_Text.style("fill",'white');
-	  })
-	  .on("mouseout", function(){
-			buttonPrevious.attr("fill", 'transparent');
-			buttonPrevious_Text.style("fill",'#0B1A39');
-	  });
+function make_portrait_buttons(b_id) {
+// Buttons
+// ---Explore button
+// random selector in dataset
+// Function to generate random number
+var MIN = 0;
+var MAX = 1840;
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
+// parameters
+var rec_width = 60;
+var rec_height = 20;
+
+var buttonExploreBorder = d3.select(b_id).append("rect")
+  .attr("width",rec_width)
+  .attr("height", rec_height)
+  .attr("stroke", STROKE_COL)
+    .attr("stroke-width", "0.5")
+  .attr("fill", "transparent")
+  .attr("transform", "translate(150,22.5)")
+  .on("click", function(d) {
+    DATA_INDEX = randomNumber(MIN,MAX);
+    d3.csv("/data/data.csv").then(result => myupdate(result))
+  });
 
 
+  var buttonExplore = d3.select(b_id).append("rect")
+    .attr("width",rec_width)
+    .attr("height", rec_height)
+    .attr("stroke", STROKE_COL)
+    .attr("stroke-width", "0.5")
+    .attr("fill", "transparent")
+    .attr("transform", "translate(150,22.5)")
+    .on("click", function(d) {
+        DATA_INDEX = randomNumber(MIN,MAX);
+        d3.csv("/data/data.csv").then(result => myupdate(result))
+    })
+    .on("mouseover", function(){
+          console.log('the mouseover worked!')
+          buttonExplore.attr("fill",STROKE_COL);
+          buttonExplore_text.style("fill",BG_COL);
+    })
+    .on("mouseout", function(){
+          console.log('the mouseover worked!')
+          buttonExplore.attr("fill", 'transparent');
+          buttonExplore_text.style("fill",STROKE_COL);
+    });
+
+
+var buttonExplore_text = d3.select(b_id)
+  .append("text")
+  .text("EXPLORE")
+  .attr("x",150+rec_width/2-11.5) // rectangle x transform + half -px
+  .attr("y",25+rec_height/2)
+  .style("font", "6px HelveticaNeue-Light")
+  .style("fill",STROKE_COL)
+  .on("click", function(d) {
+      DATA_INDEX = randomNumber(MIN,MAX);
+      d3.csv("/data/data.csv").then(result => myupdate(result))
+  })
+  .on("mouseover", function(){
+        buttonExplore.attr("fill", STROKE_COL);
+        buttonExplore_text.style("fill",BG_COL);
+  })
+  .on("mouseout", function(){
+        buttonExplore.attr("fill", 'transparent');
+        buttonExplore_text.style("fill",STROKE_COL);
+  });
+
+// ---Next Button -- goes to ensemble view
+var buttonNextBorder = d3.select(b_id).append("rect")
+.attr("width",rec_width)
+.attr("height", rec_height)
+  .attr("stroke", STROKE_COL)
+    .attr("stroke-width", "0.5")
+  .attr("fill", "transparent")
+  .attr("transform", "translate(285,22.5)")
+  .on("click", function(d) {
+    DATA_INDEX = DATA_INDEX + 1;
+    d3.csv("/data/data.csv").then(result => myupdate(result))
+  });
+
+
+  var buttonNext = d3.select(b_id).append("rect")
+  .attr("width",rec_width)
+  .attr("height", rec_height)
+    .attr("stroke", STROKE_COL)
+      .attr("stroke-width", "0.5")
+    .attr("fill", "transparent")
+    .attr("transform", "translate(285,22.5)")
+    .on("click", function(d) {
+        DATA_INDEX = DATA_INDEX + 1;
+        d3.csv("/data/data.csv").then(result => myupdate(result))
+    })
+    .on("mouseover", function(){
+          console.log('the mouseover worked!')
+          buttonNext.attr("fill", STROKE_COL);
+          buttonNext_text.style("fill",BG_COL);
+    })
+    .on("mouseout", function(){
+          console.log('the mouseover worked!')
+          buttonNext.attr("fill", 'transparent');
+          buttonNext_text.style("fill",STROKE_COL);
+    });
+
+
+var buttonNext_text = d3.select(b_id)
+  .append("text")
+  .text(" ENSEMBLE VIEW")
+  .attr("x",285 + rec_width/2 - 23) // rectangle x transform + half
+  .attr("y",rec_height/2+25)
+  .style("font", "6px HelveticaNeue-Light")
+  .style("fill",STROKE_COL)
+  .style("textAlign", "center")
+  .on("click", function(d) {
+      DATA_INDEX = DATA_INDEX + 1;
+      d3.csv("/data/data.csv").then(result => myupdate(result))
+  })
+  .on("mouseover", function(){
+        buttonNext.attr("fill", STROKE_COL);
+        buttonNext_text.style("fill",BG_COL);
+  })
+  .on("mouseout", function(){
+        buttonNext.attr("fill", 'transparent');
+        buttonNext_text.style("fill",STROKE_COL);
+  });
+// ---Previous button
+var buttonPrevious = d3.select(b_id).append("rect")
+.attr("width",rec_width)
+.attr("height", rec_height)
+  .attr("fill", "transparent")
+  .attr("stroke", STROKE_COL)
+  .attr("stroke-width", "0.5")
+  .attr("transform", "translate(20,22.5)")
+  .on("click", function(d) {
+      myupdate(list_data[0])
+  })
+
+var buttonPreviousBorder = d3.select(b_id).append("rect")
+.attr("width",rec_width)
+.attr("height", rec_height)
+  .attr("fill", "transparent")
+  .attr("stroke", STROKE_COL)
+  .attr("stroke-width", "0.5")
+  .attr("transform", "translate(20,22.5)")
+  .on("click", function(d) {
+      myupdate(list_data[0])
+  })
+  .on("mouseover", function(){
+        console.log('the mouseover worked!')
+        buttonPrevious.attr("fill", STROKE_COL);
+        buttonPrevious_Text.style("fill",BG_COL);
+  })
+  .on("mouseout", function(){
+        console.log('the mouseover worked!')
+        buttonPrevious.attr("fill", 'transparent');
+        buttonPrevious_Text.style("fill",BG_COL);
+  });
+
+var buttonPrevious_Text = d3.select(b_id)
+  .append("text")
+  .text("STATISTICAL VIEW")
+  .attr("x",20 + rec_width/2 -23.5)
+  .attr("y",rec_height/2+25)
+  .style("font", "6px  HelveticaNeue-Light")
+  .style("fill",STROKE_COL)
+  .on("click", function(d) {
+      myupdate(list_data[0])
+  })
+  .on("mouseover", function(){
+        console.log('the mouseover worked!')
+        buttonPrevious.attr("fill", STROKE_COL);
+        buttonPrevious_Text.style("fill",BG_COL);
+  })
+  .on("mouseout", function(){
+        console.log('the mouseover worked!')
+        buttonPrevious.attr("fill", 'transparent');
+        buttonPrevious_Text.style("fill",BG_COL);
+  });
+}
+
+// Database
 function load_data() {
 	// Database
-	d3.csv("/data/data.csv").then(result => myupdate(result))
+d3.csv("/data/data.csv").then(result => myupdate(result))
 }
-
 var DATA_INDEX = 0
 
-        let list_data = [{
-        name : 'Gladys \n Barrera',
-        race : 'white',
-        date:"2018/01/14",
-        age:45,
-        path: "M863.6,458l-4.8,0.8l-8.4,1.1l-8.6,0.9v2.2l0.2,2.1l0.6,3.4l3.4,7.9l2.4,9.9l1.5,6.1l1.6,4.8l1.5,7l2.1,6.3l2.6,3.4l0.5,3.4l1.9,0.8l0.2,2.1l-1.8,4.8l-0.5,3.2l-0.2,1.9l1.6,4.4l0.3,5.3l-0.8,2.4l0.6,0.8l1.5,0.8l0.6,3.4l2.6,3.9   l1.5,1.5l7.9,0.2l10.8-0.6l21.5-1.3l5.4-0.7l4.6,0l0.2,2.9l2.6,0.8l0.3-4.4l-1.6-4.5l1.1-1.6l5.8,0.8l5,0.3l-0.8-6.3l2.3-10   l1.5-4.2l-0.5-2.6l3.3-6.2l-0.5-1.4l-1.9,0.7l-2.6-1.3l-0.6-2.1l-1.3-3.6l-2.3-2.1l-2.6-0.6l-1.6-4.8l-2.9-6.3l-4.2-1.9l-2.1-1.9   l-1.3-2.6l-2.1-1.9l-2.3-1.3l-2.3-2.9l-3.1-2.3l-4.5-1.8l-0.5-1.5l-2.4-2.9l-0.5-1.5l-3.4-4.9l-3.4,0.2l-4.1-3l-1.3-1.3l-0.3-1.8   l0.8-1.9l2.4-1.2l-1.1-1.2l0.1-0.3l-5.8,1l-7,0.8L863.6,458z"},
-        {
-        name : 'Silvia Theresis',
-        race : 'white',
-        date:"2018/04/14",
-        age:16,
-        path: "M863.6,458l-4.8,0.8l-8.4,1.1l-8.6,0.9v2.2l-3.4-4.9l-3.4,0.2l-4.1-3l-1.3-1.3l-0.3-1.8   l0.8-1.9l2.4-1.2l-1.1-1.2l0.1-0.3l-5.8,1l-7,0.8L863.6,458z"}];
-
-
-        // call the update to change data
-        //var index = 0;
-        //myupdate(list_data[index])
+//specific to the portrait view without the Other
+load_data()
+make_portrait_buttons("#buttons")
