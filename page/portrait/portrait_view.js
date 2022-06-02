@@ -477,7 +477,7 @@ class StatePlot{
         ;
 
         var nodes = d3path.node()
-
+        console.log(d3.select("#"+svg_element_id))
         // access the bounding box dimensions
         var myPathBox = d3.select("#"+svg_element_id).node().getBBox();
 
@@ -572,8 +572,6 @@ function update_cy(dindex,her_race_ethnicity){
 function update_opacity(dindex,her_race_ethnicity){
     // find the index in the dictionary of non-moving on
     const position = races_ethnicities.indexOf(her_race_ethnicity);
-    console.log(her_race_ethnicity)
-    console.log(dindex)
     if (dindex != position){
       return '50%'//no opacity change
     }else{
@@ -582,7 +580,7 @@ function update_opacity(dindex,her_race_ethnicity){
 }
 
 
-console.log(data['HER RACE / ETHNICITY'])
+
 var HER_RACE_ETHNICITY = data['HER RACE / ETHNICITY']
 // background of the race plot
 var svg = d3.select("#"+svg_element_id)
