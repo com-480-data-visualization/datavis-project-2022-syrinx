@@ -826,7 +826,23 @@ var buttonPrevious = d3.select(b_id).append("rect")
   .attr("stroke-width", "0.5")
   .attr("transform", "translate(20,22.5)")
   .on("click", function(d) {
-      myupdate(list_data[0])
+    //remove view
+    d3.select("#date_and_age_Plot")
+    .html(null);
+    d3.select("#statePlot")
+    .html(null);
+    d3.select("#racePlot")
+    .html(null);
+    d3.select("#buttons_portrait")
+    .html(null);
+    d3.select("#myPortrait")
+    .attr("height", "0");
+    d3.select("#plot")
+    .attr("height", "100%");
+    //statistics button
+    createButtons();
+    // statistics view
+    STATS_STATE.toggle_statistics()
   })
 
 var buttonPreviousBorder = d3.select(b_id).append("rect")
@@ -837,8 +853,24 @@ var buttonPreviousBorder = d3.select(b_id).append("rect")
   .attr("stroke-width", "0.5")
   .attr("transform", "translate(20,22.5)")
   .on("click", function(d) {
-      myupdate(list_data[0])
-  })
+        //remove view
+        d3.select("#date_and_age_Plot")
+        .html(null);
+        d3.select("#statePlot")
+        .html(null);
+        d3.select("#racePlot")
+        .html(null);
+        d3.select("#buttons_portrait")
+        .html(null);
+        d3.select("#myPortrait")
+        .attr("height", "0");
+        d3.select("#plot")
+        .attr("height", "100%");
+        //statistics button
+        createButtons();
+        // statistics view
+        STATS_STATE.toggle_statistics()
+    })
   .on("mouseover", function(){
 
         buttonPrevious.attr("fill", STROKE_COL);
@@ -858,7 +890,23 @@ var buttonPrevious_Text = d3.select(b_id)
   .style("font", "6px  HelveticaNeue-Light")
   .style("fill",STROKE_COL)
   .on("click", function(d) {
-      myupdate(list_data[0])
+    //remove view
+    d3.select("#date_and_age_Plot")
+    .html(null);
+    d3.select("#statePlot")
+    .html(null);
+    d3.select("#racePlot")
+    .html(null);
+    d3.select("#buttons_portrait")
+    .html(null);
+    d3.select("#myPortrait")
+    .attr("height", "0");
+    d3.select("#plot")
+    .attr("height", "100%");
+    //statistics button
+    createButtons();
+    // statistics view
+    STATS_STATE.toggle_statistics()
   })
   .on("mouseover", function(){
 
