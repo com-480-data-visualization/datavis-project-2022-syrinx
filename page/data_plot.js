@@ -496,7 +496,6 @@ const REPLACE_REGEX1 = /\(|\)|,|\/|\s/g;
 const REPLACE_REGEX2 = /=/g;
 // Replace slashes and commas only
 const REPLACE_REGEX3 = /\/|,/g;
-/bin/bash: line 1: q: command not found
 const REPLACE_REGEX4 = /'/g;
 
 
