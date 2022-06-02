@@ -53,17 +53,17 @@ function* placeY(c0=0) {
 */
 // Association race->color
 const raceColorDict = {
-	"Latina/x": "deeppink",
-	'Black / African American': "maroon",
-	'Asian': "gold",
-	'White': "bisque",
-    'Unknown / Unreleased': "black",
-	'Other (see About Her)': "black",
-    'Native American / Alaska Native': "darkviolet",
-	'Two or more races': "black",
-    'Native Hawaiian / Other Pacific Islander': "darkblue",
-	"nan": "black",
-    'Two or more races,Black / African American,White': "black"
+	"Latina/x": '#AB2346',//"deeppink",
+	'Black / African American':'#FFC07F',// "maroon",
+	'Asian': '#00B295',
+	'White':   '#CEB8A1',//"bisque",
+    'Unknown / Unreleased':  '#365259',//"black",
+	'Other (see About Her)':  '#365259',
+    'Native American / Alaska Native':  '#457EAC',//"darkviolet",
+	'Two or more races':   "#947EB0",//"black",
+    'Native Hawaiian / Other Pacific Islander':  "#9DB17C",// "darkblue",
+	"nan":'#365259',//"black",
+    'Two or more races,Black / African American,White':'#EF959D',// "black"
 };
 const states = ['CA', 'GA', 'NY', 'OH', 'FL', 'TN', 'MD', 'NC', 'IL', 'NJ', 'AR',
        'MI', 'OR', 'PA', 'AL', 'AZ', 'KY', 'TX', 'KS', 'MN', 'NM', 'MA',
@@ -134,23 +134,25 @@ function remove_ensemble() {
 function show_personal_view(data_p) {
 	remove_ensemble();
 
-	// d3.select("#plotdiv")
-	// 	.append("svg")
-	// 	.attr("id", "Portrait")
-	// 	.attr("viewbox", "-10, -10, 400, 220")
-	// 	//.attr("preserveAspectRatio", "xMidYMid meet")
-	// 	.attr("width", "100%")
-  //   .attr("height", "100%")
-		//.attr("height", "450px");
-	//let sel_port = d3.select("#myPortrait");
-	// sel_port
-	// 	.append("svg")
-	// 	//.attr("x", 250)
-	// 	//.attr("y", 100)
-	// 	.attr("id", "date_and_age_Plot")
-	// 	.attr("viewbox", "-60, -20, 450, 300") // xmin y min width height
-	// 	.attr("width", "80%")
-	// 	.attr("height", "80%");
+
+  d3.select("#myPortrait")
+      .attr("height", "100%");
+//   .attr("id","additional_div")
+//    .append("svg")
+//   .attr("id","myPortrait")
+//   .attr("viewbox", "-10, -10, 400, 220")
+// 	.attr("width", "100%")
+//   .attr("height", "100%");
+//
+// let sel_port = d3.select("#myPortrait");
+// 	sel_port
+// 		.append("svg")
+// 		//.attr("x", 250)
+// 		//.attr("y", 100)
+// 		.attr("id", "date_and_age_Plot")
+// 		.attr("viewbox", "-30, -10, 400, 300") // xmin y min width height
+// 		.attr("width", "80%")
+// 		.attr("height", "80%");
 	// sel_port
 	// 	.append("svg")
 	// 	//attr("x", 300)
@@ -202,7 +204,17 @@ function show_personal_view(data_p) {
 
 	// Listen to the possible return of the ensemble view
 	document.getElementById("main_div").addEventListener("go_to_ensemble", () => {
-		d3.select("#additional_div").remove();
+		//d3.select("#additional_div").remove();
+    d3.select("#date_and_age_Plot")
+  		.html(null);
+    d3.select("#statePlot")
+    		.html(null);
+    d3.select("#racePlot")
+        		.html(null);
+   d3.select("#buttons_portrait")
+      .html(null);
+    d3.select("#myPortrait")
+        .attr("height", "0");
 		d3.select("#plot")
 			.attr("height", "100%");
 		clean_buttons();
@@ -382,7 +394,7 @@ function grow_details() {
 			.attr("pointer-events", "none")
 			.attr("fill", "none")
 			.attr("stroke", "white")
-			.attr("stroke-width", 0.1)
+			.attr("stroke-width", 0.01)
 			.transition(NEW_TRANSIT())
 			.attr("cx", center.x + 4 * (Math.random() - 0.5))
 			.attr("cy", center.y + 4 * (Math.random() - 0.5))
@@ -434,7 +446,7 @@ d3.selection.prototype.define_circles = function() {
 	return this
 		.attr("id", "circle")
 		.attr("stroke", "white")
-		.attr("stroke-width", 0.5)
+		.attr("stroke-width", 0.0)
 		.attr("r", 1.5)
     .on(
       "dblclick",  call_personal
@@ -479,9 +491,13 @@ function circles(data) {
 }
 
 
+// Replace parenthesis, commas, slashes, and spaces in ids
 const REPLACE_REGEX1 = /\(|\)|,|\/|\s/g;
 const REPLACE_REGEX2 = /=/g;
+// Replace slashes and commas only
 const REPLACE_REGEX3 = /\/|,/g;
+/bin/bash: line 1: q: command not found
+const REPLACE_REGEX4 = /'/g;
 
 
 // Moves all circles in the general view to a new position,
@@ -517,7 +533,7 @@ function sortBy(type, selected) {
 		})
 	// Put border on button
 	d3.selectAll(".circle_mover").style("opacity", 0.3)
-	d3.select("#" + selected.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".")).style("opacity", 1.0)
+	d3.select("#" + selected.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_")).style("opacity", 1.0)
 }
 
 // Show the list of buttons for the race selection
@@ -532,9 +548,9 @@ function show_race_selector() {
 	d3.select("#race_select").selectAll("button").data(Object.keys(raceColorDict))
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_"))
 		.attr("class", "circle_mover")
-		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d + "')")
+		.attr("onClick", d => "sortBy('HER RACE / ETHNICITY', '" + d.replace(REPLACE_REGEX4, "\\'") + "')")
 		.style("background-color", d => raceColorDict[d])
 		.style("width", "100%")
 		.style("border", d => "2px solid " + raceColorDict[d])
@@ -554,9 +570,9 @@ function show_state_selector() {
 	d3.select("#state_select").selectAll("button").data(states)
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_"))
 		.attr("class", "circle_mover")
-		.attr("onClick", d => "sortBy('STATE', '" + d + "')")
+		.attr("onClick", d => "sortBy('STATE', '" + d.replace(REPLACE_REGEX4, "\\'") + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
 		.style("border", d => "2px solid " + stringToColor(d))
@@ -577,9 +593,9 @@ function show_relationship_selector() {
 	d3.select("#relashionship_select").selectAll("button").data(relationships)
 		.enter()
 		.append("button")
-		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, "."))
+		.attr("id", d => d.replace(REPLACE_REGEX1, "_").replace(REPLACE_REGEX2, ".").replace(REPLACE_REGEX4, "_"))
 		.attr("class", "circle_mover")
-		.attr("onClick", d => "sortBy('RELATIONSHIP', '" + d + "')")
+		.attr("onClick", d => "sortBy('RELATIONSHIP', '" + d.replace(REPLACE_REGEX4, "\\'") + "')")
 		.style("background-color", d => stringToColor(d))
 		.style("width", "100%")
 		.style("border", d => "2px solid " + stringToColor(d))
@@ -763,22 +779,22 @@ function createButtons() {
 	type_buttons
 		.append("button")
 		.attr("onClick", _ => "show_race_selector()")
-		.style("background-color", "blue")
+		.style("background-color", "#07393C")
 		.attr('id', "Race_button")
-		.style("border", "2px solid blue")
+		.style("border", "2px solid #07393C")
 		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
-		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid blue")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid #07393C")})
 		.text(_ => "Race/Ethnicity");
 	type_buttons
 		.append("button")
 		.attr("onClick", _ => "show_state_selector()")
-		.style("background-color", "green")
+		.style("background-color", "#99B2DD")
 		.style("width", 100)
 		.style("height", 10)
 		.attr('id', "State_button")
-		.style("border", "2px solid green")
+		.style("border", "2px solid #99B2DD")
 		.on("mouseenter", function(_){d3.select(this).style("border", "2px solid #FFFFFF")})
-		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid green")})
+		.on("mouseleave", function(_){d3.select(this).style("border", "2px solid #99B2DD")})
 		.text(_ => "State");
 	type_buttons
 		.append("button")
