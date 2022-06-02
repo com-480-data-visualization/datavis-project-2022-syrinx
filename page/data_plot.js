@@ -131,51 +131,53 @@ function remove_ensemble() {
 }
 
 // Make the Iframe with the content of the personal view
-function show_personal_view(d_point) {
+function show_personal_view(data_p) {
 	remove_ensemble();
 
-	d3.select("#plotdiv")
-		.append("svg")
-		.attr("id", "Portrait")
-		.attr("viewbox", "-10, -10, 400, 220")
-		.attr("preserveAspectRatio", "xMidYMid meet")
-		.attr("width", "100%")
-		.attr("height", "450px");
-	let sel_port = d3.select("#Portrait");
-	sel_port
-		.append("svg")
-		.attr("x", 0)
-		.attr("y", 100)
-		.attr("id", "date_and_age_Plot")
-		.attr("viewbox", "-30, -10, 400, 300")
-		.attr("width", "100%")
-		.attr("height", "100%");
-	sel_port
-		.append("svg")
-		.attr("x", 300)
-		.attr("y", 0)
-		.attr("id", "statePlot")
-		.attr("viewbox", "-860 0 1065 800")
-		.attr("width", "100%")
-		.attr("height", "100%");
-	sel_port
-		.append("svg")
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("id", "racePlot")
-		.attr("viewbox", "50 0 400 300")
-		.attr("width", "100%")
-		.attr("height", "100%");
-	sel_port
-		.append("svg")
-		.attr("x", 20)
-		.attr("y", 400)
-		.attr("id", "buttons_portrait")
-		.attr("viewbox", "0 -100 400 100");
-	let datePlot = new DatePlot('date_and_age_Plot', d_point);
-	let agePlot = new AgePlot('date_and_age_Plot', d_point);
-	let statePlot = new StatePlot('statePlot', d_point);
-	let racePlot = new RacePlot('racePlot', d_point);
+	// d3.select("#plotdiv")
+	// 	.append("svg")
+	// 	.attr("id", "Portrait")
+	// 	.attr("viewbox", "-10, -10, 400, 220")
+	// 	//.attr("preserveAspectRatio", "xMidYMid meet")
+	// 	.attr("width", "100%")
+  //   .attr("height", "100%")
+		//.attr("height", "450px");
+	//let sel_port = d3.select("#myPortrait");
+	// sel_port
+	// 	.append("svg")
+	// 	//.attr("x", 250)
+	// 	//.attr("y", 100)
+	// 	.attr("id", "date_and_age_Plot")
+	// 	.attr("viewbox", "-60, -20, 450, 300") // xmin y min width height
+	// 	.attr("width", "80%")
+	// 	.attr("height", "80%");
+	// sel_port
+	// 	.append("svg")
+	// 	//attr("x", 300)
+	// 	//.attr("y", 0)
+	// 	.attr("id", "statePlot")
+	// 	.attr("viewbox", "-550 70 800 400")
+	// 	.attr("width", "100%")
+	// 	.attr("height", "100%");
+	// sel_port
+	// 	.append("svg")
+	// 	//.attr("x", 0)
+	// 	//.attr("y", 0)
+	// 	.attr("id", "racePlot")
+	// 	.attr("viewbox", "50 0 400 300")
+	// 	.attr("width", "100%")
+	// 	.attr("height", "100%");
+	// sel_port
+	// 	.append("svg")
+	// 	//.attr("x", 20)
+	// 	//.attr("y", 400)
+	// 	.attr("id", "buttons_portrait")
+	// 	.attr("viewbox", "0 -100 400 100");
+
+	let datePlot = new DatePlot('date_and_age_Plot', data_p);
+	let agePlot = new AgePlot('date_and_age_Plot', data_p);
+	let statePlot = new StatePlot('statePlot', data_p);
+	let racePlot = new RacePlot('racePlot', data_p);
 
 	// Remove selector buttons, and replace them by the new ones
 	const clean_buttons = () => {
@@ -200,7 +202,7 @@ function show_personal_view(d_point) {
 
 	// Listen to the possible return of the ensemble view
 	document.getElementById("main_div").addEventListener("go_to_ensemble", () => {
-		d3.select("#Portrait").remove();
+		d3.select("#additional_div").remove();
 		d3.select("#plot")
 			.attr("height", "100%");
 		clean_buttons();
@@ -260,13 +262,16 @@ function make_star(angle, end, data_p) {
 		return next;
 	}, accumulator);
 }
-
+function test_make_function(data_p){
+  console.log(' The double click gave this'+ data_p["DATE"])
+}
 // Builds the shooting star at a random angle
 function make_shooting_star(data_p) {
 	// Angle between pi and 3pi/2 (lower-left corner).
 	let angle = Math.PI * (1.0 + 0.5*Math.random());
 	let begin_ray = 70 + 4*Math.random();
 	let end_ray = 90 + 4*Math.random();
+
 	let center_text = (begin_ray + end_ray) / 2;
 	// Start point of the line
 	let begin = {
@@ -313,7 +318,9 @@ function make_shooting_star(data_p) {
 		.attr("dy", -5)
 		.attr("font-size", "5px")
 }
-
+function call_personal(){
+  show_personal_view(this.__data__)
+}
 function grow_details() {
 	// Grow the clicked circle
 	d3.select(this)
@@ -336,7 +343,7 @@ function grow_details() {
 		.transition(NEW_TRANSIT())
 		.attr("r", 120)
 		.attr("fill", "url(#gradient)")
-		.on("end", () => make_shooting_star(this.__data__));
+		//.on("end", () => make_shooting_star(this.__data__));
 	sel.append("circle")
 		.attr("id", "big")
 		.attr("cx", center.x)
@@ -429,6 +436,9 @@ d3.selection.prototype.define_circles = function() {
 		.attr("stroke", "white")
 		.attr("stroke-width", 0.5)
 		.attr("r", 1.5)
+    .on(
+      "dblclick",  call_personal
+    )
 		.on(
 			"mousedown", grow_details
 		)
@@ -439,6 +449,8 @@ d3.selection.prototype.define_circles = function() {
 			d => raceColorDict[d["HER RACE / ETHNICITY"]]
 		);
 }
+
+
 
 function circles(data) {
 	frame = d3.select('#data');
@@ -460,7 +472,8 @@ function circles(data) {
 		.attr("r", 1.5)
 		.attr("fill",
 			d => raceColorDict[d["HER RACE / ETHNICITY"]]
-		);
+		)
+    .transition()
 	circles.exit().remove(); // Handle excess data
 	DATA = data;
 }
