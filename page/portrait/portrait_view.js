@@ -18,7 +18,7 @@ function whenDocumentLoaded(action) {
 
 
 // colors
-BG_COL = '#051924';
+BG_COL = '#020D12'//'#051924';
 STROKE_COL = '#C2C1A5';
 STATE_COLOR = '#365259';//'#3E5E65';
 
@@ -546,16 +546,16 @@ class RacePlot{
 // Prepare data
 // Association race->color
 const colorList = [//"Latina/x":
-  "deeppink",// 'Black / African American':
-  "maroon",// 'Asian':
-  "gold",	// 'White':
-  "bisque",//   'Unknown / Unreleased':
-   "rgb(40, 40, 40)",// 'Other (see About Her)':
-   "rgb(40, 40, 40)",//   'Native American / Alaska Native':  "darkviolet",// 'Two or more races':
-  "rgb(40, 40, 40)",//   'Native Hawaiian / Other Pacific Islander':
-  "darkblue",// "nan":
-  "rgb(40, 40, 40)",  //   'Two or more races,Black / African American,White':
-   "rgb(40, 40, 40)"]
+  '#AB2346',//"deeppink",// 'Black / African American':
+  '#FFC07F',//"maroon",// 'Asian':
+  "#00B295",	// 'White':
+  '#F5F9E9',//'#BCA68A',//"bisque",//   'Unknown / Unreleased':
+   '#365259',//"rgb(40, 40, 40)",// 'Other (see About Her)':
+   '#365259',//"rgb(40, 40, 40)",//   'Native American / Alaska Native':  "darkviolet",// 'Two or more races':
+  '#457EAC',//"rgb(40, 40, 40)",//   'Native Hawaiian / Other Pacific Islander':
+  "#947EB0",//"darkblue",// "nan":
+  "#365259",  //   'Two or more races,Black / African American,White':
+   '#BCA68A']
 
 const races_ethnicities = ['Latina/x','Black / African American','Asian','White','Unknown / Unreleased','Other (see About Her)','Native American / Alaska Native','Two or more races','Native Hawaiian / Other Pacific Islander',"Unknown",'Two or more races,Black / African American,White'];
 var cx_circles = [10,10,20,20,20,30,30,40,40,50,50];
@@ -591,7 +591,7 @@ function update_opacity(dindex,her_race_ethnicity){
     // find the index in the dictionary of non-moving on
     const position = races_ethnicities.indexOf(her_race_ethnicity);
     if (dindex != position){
-      return '50%'//no opacity change
+      return '100%'//no opacity change
     }else{
       return '90%' // change
     }
