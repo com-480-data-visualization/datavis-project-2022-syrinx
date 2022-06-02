@@ -134,23 +134,24 @@ function remove_ensemble() {
 function show_personal_view(data_p) {
 	remove_ensemble();
 
-	// d3.select("#plotdiv")
-	// 	.append("svg")
-	// 	.attr("id", "Portrait")
-	// 	.attr("viewbox", "-10, -10, 400, 220")
-	// 	//.attr("preserveAspectRatio", "xMidYMid meet")
-	// 	.attr("width", "100%")
-  //   .attr("height", "100%")
-		//.attr("height", "450px");
-	//let sel_port = d3.select("#myPortrait");
-	// sel_port
-	// 	.append("svg")
-	// 	//.attr("x", 250)
-	// 	//.attr("y", 100)
-	// 	.attr("id", "date_and_age_Plot")
-	// 	.attr("viewbox", "-60, -20, 450, 300") // xmin y min width height
-	// 	.attr("width", "80%")
-	// 	.attr("height", "80%");
+  d3.select("#myPortrait")
+      .attr("height", "100%");
+//   .attr("id","additional_div")
+//    .append("svg")
+//   .attr("id","myPortrait")
+//   .attr("viewbox", "-10, -10, 400, 220")
+// 	.attr("width", "100%")
+//   .attr("height", "100%");
+//
+// let sel_port = d3.select("#myPortrait");
+// 	sel_port
+// 		.append("svg")
+// 		//.attr("x", 250)
+// 		//.attr("y", 100)
+// 		.attr("id", "date_and_age_Plot")
+// 		.attr("viewbox", "-30, -10, 400, 300") // xmin y min width height
+// 		.attr("width", "80%")
+// 		.attr("height", "80%");
 	// sel_port
 	// 	.append("svg")
 	// 	//attr("x", 300)
@@ -202,7 +203,17 @@ function show_personal_view(data_p) {
 
 	// Listen to the possible return of the ensemble view
 	document.getElementById("main_div").addEventListener("go_to_ensemble", () => {
-		d3.select("#additional_div").remove();
+		//d3.select("#additional_div").remove();
+    d3.select("#date_and_age_Plot")
+  		.html(null);
+    d3.select("#statePlot")
+    		.html(null);
+    d3.select("#racePlot")
+        		.html(null);
+   d3.select("#buttons_portrait")
+      .html(null);
+    d3.select("#myPortrait")
+        .attr("height", "0");
 		d3.select("#plot")
 			.attr("height", "100%");
 		clean_buttons();
