@@ -703,12 +703,12 @@ var buttonExploreBorder = d3.select(b_id).append("rect")
         d3.csv("/data/data.csv").then(result => myupdate(result))
     })
     .on("mouseover", function(){
-          console.log('the mouseover worked!')
+
           buttonExplore.attr("fill",STROKE_COL);
           buttonExplore_text.style("fill",BG_COL);
     })
     .on("mouseout", function(){
-          console.log('the mouseover worked!')
+
           buttonExplore.attr("fill", 'transparent');
           buttonExplore_text.style("fill",STROKE_COL);
     });
@@ -743,8 +743,8 @@ var buttonNextBorder = d3.select(b_id).append("rect")
   .attr("fill", "transparent")
   .attr("transform", "translate(285,22.5)")
   .on("click", function(d) {
-    DATA_INDEX = DATA_INDEX + 1;
-    d3.csv("/data/data.csv").then(result => myupdate(result))
+    const event_ensemble = new Event("go_to_ensemble");
+  document.getElementById("main_div").dispatchEvent(event_ensemble);
   });
 
 
@@ -756,16 +756,18 @@ var buttonNextBorder = d3.select(b_id).append("rect")
     .attr("fill", "transparent")
     .attr("transform", "translate(285,22.5)")
     .on("click", function(d) {
-        DATA_INDEX = DATA_INDEX + 1;
-        d3.csv("/data/data.csv").then(result => myupdate(result))
+        //DATA_INDEX = DATA_INDEX + 1;
+        //d3.csv("/data/data.csv").then(result => myupdate(result))
+        const event_ensemble = new Event("go_to_ensemble");
+        document.getElementById("main_div").dispatchEvent(event_ensemble);
     })
     .on("mouseover", function(){
-          console.log('the mouseover worked!')
+
           buttonNext.attr("fill", STROKE_COL);
           buttonNext_text.style("fill",BG_COL);
     })
     .on("mouseout", function(){
-          console.log('the mouseover worked!')
+
           buttonNext.attr("fill", 'transparent');
           buttonNext_text.style("fill",STROKE_COL);
     });
@@ -780,8 +782,9 @@ var buttonNext_text = d3.select(b_id)
   .style("fill",STROKE_COL)
   .style("textAlign", "center")
   .on("click", function(d) {
-      DATA_INDEX = DATA_INDEX + 1;
-      d3.csv("/data/data.csv").then(result => myupdate(result))
+    const event_ensemble = new Event("go_to_ensemble");
+    console.log('In the event_senmeble')
+    document.getElementById("main_div").dispatchEvent(event_ensemble);
   })
   .on("mouseover", function(){
         buttonNext.attr("fill", STROKE_COL);
@@ -854,5 +857,5 @@ d3.csv("/data/data.csv").then(result => myupdate(result))
 var DATA_INDEX = 0
 
 //specific to the portrait view without the Other
-load_data()
-make_portrait_buttons("#buttons")
+//load_data()
+//make_portrait_buttons("#buttons")
