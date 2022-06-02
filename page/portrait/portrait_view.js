@@ -20,7 +20,7 @@ function whenDocumentLoaded(action) {
 // colors
 BG_COL = '#020D12'//'#051924';
 STROKE_COL = '#C2C1A5';
-STATE_COLOR = '#365259';//'#3E5E65';
+
 
 // Visualisation 1.1
 // Personal Information - Age
@@ -131,6 +131,7 @@ for (let i=0; i<data["HER AGE"]; i++) {
          			.attr("y", -6+parseInt(14*(i)))
          			.text(names[i])//.text(() => names[i].replace(/^\s+|\s+$/g, ''))
               // doesnt work.style("font-size", "1 px" )//HelveticaNeue-Light")
+              .style("font", "10px HelveticaNeue-Light")
               .attr("opacity","0%")
          			.attr("pointer-events", "none")
          			.style("text-anchor", "middle")
@@ -474,14 +475,14 @@ class StatePlot{
    .append("circle")
    .attr("cx", 13)
    .attr("cy", 5)
-   .attr("r", 1.05)
+   .attr("r", 1.25)
    .attr("fill",STROKE_COL);
 
 
    // retrieve the SVG path
    var state = data.STATE.toLowerCase()
    var path = states_dict[state]
-
+  var STATE_COLOR ='#365259';//'#365259';//'#3E5E65';
     //Select the DOM element with appropriate ID
     var d3path = d3.select("#"+svg_element_id)
         .append("path")  //add new child element
@@ -549,15 +550,16 @@ const colorList = [//"Latina/x":
   '#AB2346',//"deeppink",// 'Black / African American':
   '#FFC07F',//"maroon",// 'Asian':
   "#00B295",	// 'White':
-  '#F5F9E9',//'#BCA68A',//"bisque",//   'Unknown / Unreleased':
+  '#CEB8A1',//'#BCA68A',//"bisque",//   'Unknown / Unreleased':
    '#365259',//"rgb(40, 40, 40)",// 'Other (see About Her)':
    '#365259',//"rgb(40, 40, 40)",//   'Native American / Alaska Native':  "darkviolet",// 'Two or more races':
   '#457EAC',//"rgb(40, 40, 40)",//   'Native Hawaiian / Other Pacific Islander':
+  "#9DB17C",
   "#947EB0",//"darkblue",// "nan":
   "#365259",  //   'Two or more races,Black / African American,White':
    '#BCA68A']
 
-const races_ethnicities = ['Latina/x','Black / African American','Asian','White','Unknown / Unreleased','Other (see About Her)','Native American / Alaska Native','Two or more races','Native Hawaiian / Other Pacific Islander',"Unknown",'Two or more races,Black / African American,White'];
+const races_ethnicities = ['Latina/x','Black / African American','Asian','White','Unknown / Unreleased','Other (see About Her)','Native American / Alaska Native','Two or more races','Native Hawaiian / Other Pacific Islander',"nan",'Two or more races,Black / African American,White'];
 var cx_circles = [10,10,20,20,20,30,30,40,40,50,50];
 var cy_circles = [20,40,10,30,50,20,40,10,30,20,40];
 
@@ -618,6 +620,9 @@ var el = svg.selectAll("circle")
     .attr("cy", d => update_cy(d.index, HER_RACE_ETHNICITY))
     .attr("cx", d => update_cx(d.index, HER_RACE_ETHNICITY))
     .style("opacity", d => update_opacity(d.index, HER_RACE_ETHNICITY))
+
+
+
 
 // add text
 var race_ethnicity_text =   svg.append("text")
