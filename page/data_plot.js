@@ -53,17 +53,17 @@ function* placeY(c0=0) {
 */
 // Association race->color
 const raceColorDict = {
-	"Latina/x": "deeppink",
-	'Black / African American': "maroon",
-	'Asian': "gold",
-	'White': "bisque",
-    'Unknown / Unreleased': "black",
-	'Other (see About Her)': "black",
-    'Native American / Alaska Native': "darkviolet",
-	'Two or more races': "black",
-    'Native Hawaiian / Other Pacific Islander': "darkblue",
-	"nan": "black",
-    'Two or more races,Black / African American,White': "black"
+	"Latina/x": '#AB2346',//"deeppink",
+	'Black / African American':'#FFC07F',// "maroon",
+	'Asian': '#00B295',
+	'White':   '#CEB8A1',//"bisque",
+    'Unknown / Unreleased':  '#365259',//"black",
+	'Other (see About Her)':  '#365259',
+    'Native American / Alaska Native':  '#457EAC',//"darkviolet",
+	'Two or more races':   "#947EB0",//"black",
+    'Native Hawaiian / Other Pacific Islander':  "#9DB17C",// "darkblue",
+	"nan":'#365259',//"black",
+    'Two or more races,Black / African American,White':'#EF959D',// "black"
 };
 const states = ['CA', 'GA', 'NY', 'OH', 'FL', 'TN', 'MD', 'NC', 'IL', 'NJ', 'AR',
        'MI', 'OR', 'PA', 'AL', 'AZ', 'KY', 'TX', 'KS', 'MN', 'NM', 'MA',
@@ -393,7 +393,7 @@ function grow_details() {
 			.attr("pointer-events", "none")
 			.attr("fill", "none")
 			.attr("stroke", "white")
-			.attr("stroke-width", 0.1)
+			.attr("stroke-width", 0.01)
 			.transition(NEW_TRANSIT())
 			.attr("cx", center.x + 4 * (Math.random() - 0.5))
 			.attr("cy", center.y + 4 * (Math.random() - 0.5))
@@ -445,7 +445,7 @@ d3.selection.prototype.define_circles = function() {
 	return this
 		.attr("id", "circle")
 		.attr("stroke", "white")
-		.attr("stroke-width", 0.5)
+		.attr("stroke-width", 0.0)
 		.attr("r", 1.5)
     .on(
       "dblclick",  call_personal
