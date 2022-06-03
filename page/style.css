@@ -57,7 +57,8 @@ body {
 
 
 p, h1, h2, h3 {
-	color: #C2C1A5;
+	/*color: #C2C1A5;*/
+	color: #BADDE1;
 }
 h1 {
 	text-align: center;
@@ -70,7 +71,8 @@ p {
 	line-height: 1.5;
 }
 a {
-  color: #C2C1A5;
+	/*color: #C2C1A5;*/
+	color: #BADDE1;
 }
 
 /* https://www.w3schools.com/tags/tag_button.asp */
@@ -90,7 +92,8 @@ div.skeleton {
 	border-style: solid;
 	border-radius: 10;
 	margin: 10px;
-	border-color: #C2C1A5;
+	/*border-color: #C2C1A5;*/
+	border-color: #BADDE1;
 	overflow: auto;
 }
 #plotdiv {
