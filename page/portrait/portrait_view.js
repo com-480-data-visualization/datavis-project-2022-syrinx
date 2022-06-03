@@ -125,7 +125,7 @@ const OUTER_RADIUS = 121
 
 
 // function to transform date to angle /!\ this works for 2018 only
-function date_to_angle(_){
+function date_to_angle(data){
 
 	// parsing the DATE field of the csv file. Originally in the format 1/1/2018
 
