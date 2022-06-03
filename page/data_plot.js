@@ -665,14 +665,14 @@ var STATS_STATE = {
         .text("She")
         .style("font","20px")
         .attr("fill","white")
-        .attr("x",130)
+        .attr("x",170)
         .attr("y",40)
 
       pdiv_svg.append("text")
         .text("He")
         .style("font","20px")
         .attr("fill","white")
-        .attr("x",850)
+        .attr("x",1150)
         .attr("y",40);
 			pdiv
 				.append("div")
