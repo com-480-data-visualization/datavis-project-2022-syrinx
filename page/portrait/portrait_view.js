@@ -131,7 +131,7 @@ function date_to_angle(_){
 
 
 	const date1 = new Date('2018/01/01');
-	const date2 = new Date('2018/06/30');//new Date(data.DATE);
+	const date2 = new Date(data.DATE);
 
 	// time difference
 	const diffTime = Math.abs(date2 - date1);
