@@ -15,6 +15,9 @@
 [Milestone 2](Milestone2.md)
 
 ## Milestone 3
+### Femicide in the USA in 2018 
+See our [Process book](Dataviz_process_book_syrinx.pdf) describing the development of our project.
+We also suggest you to watch our [Screencast video](https://drive.google.com/file/d/1AMoACu4n9wucOniqN-sRiwAB5Z07CefC/view?usp=sharing) that demonstates features of our visualization.
 Our repository has the following structure:
 * `portait` directory contains 
     * `portait/portrait-view.js` code used to create the different elements for the portrait view
