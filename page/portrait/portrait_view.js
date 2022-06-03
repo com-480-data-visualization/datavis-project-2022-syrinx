@@ -807,7 +807,7 @@ function make_portrait_buttons(b_id) {
 	var buttonPrevious_Text = d3.select(b_id)
 		.append("text")
 		.text("STATISTICAL VIEW")
-		.attr("x",20 + rec_width/2 -23.5)
+		.attr("x",20 + rec_width/2 -25.5)
 		.attr("y",rec_height/2+25)
 		.style("font", "6px  HelveticaNeue-Light")
 		.style("fill",STROKE_COL)
