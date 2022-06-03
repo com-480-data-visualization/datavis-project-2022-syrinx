@@ -21,10 +21,10 @@ function whenDocumentLoaded(action) {
 
 // Scales to convert coordinates from the domain frame to the target "range" frame,
 //    in the coordinate system of the svg frame.
-const CIRCLE_PER_LINE = 40;
+const CIRCLE_PER_LINE = 70;
 const scaleX = d3.scaleLinear()
 	.domain([0, CIRCLE_PER_LINE])
-	.range([0, 200]);
+	.range([0, 385]);
 const scaleY = d3.scaleLinear()
 	.domain([0, 100])
 	.range([0, 600]);
