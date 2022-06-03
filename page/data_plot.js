@@ -651,16 +651,29 @@ var STATS_STATE = {
 		this.toggle = !this.toggle;
 		if (this.toggle) {
 			remove_ensemble();
-			let pdiv = d3.select("#plotdiv")
-				.attr("display", "flex")
-				.attr("overflow", "none")
-				.attr("flex-direction", "column");
-			pdiv
-				.append("svg")
-				.attr("id", "his_her_labels")
-				.attr("viewbox", "-10 -10 330 40")
-				.attr("height", "50px")
-				.attr("width", "50%");
+      let pdiv = d3.select("#plotdiv")
+    .attr("display", "flex")
+    .attr("overflow", "none")
+    .attr("flex-direction", "column");
+   var pdiv_svg = pdiv.append("svg")
+
+      pdiv_svg.attr("id", "his_her_labels")
+        .attr("viewbox", "-10 -10 330 40")
+        .attr("height", "50px")
+        .attr("width", "100%")
+        .append("text")
+        .text("She")
+        .style("font","20px")
+        .attr("fill","white")
+        .attr("x",130)
+        .attr("y",40)
+
+      pdiv_svg.append("text")
+        .text("He")
+        .style("font","20px")
+        .attr("fill","white")
+        .attr("x",850)
+        .attr("y",40);
 			pdiv
 				.append("div")
 				.attr("class", "mirrored")
@@ -700,6 +713,7 @@ var STATS_STATE = {
 						.attr("y", 0)
 					 	.attr("font-size", "2em")
 						.style('color', 'white');
+
 					break;
 				// 1 -> Race
 				case 1:
