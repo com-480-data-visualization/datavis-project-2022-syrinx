@@ -17,12 +17,12 @@
 ## Milestone 3
 Our repository has the following structure:
 * `portait` directory contains 
-    * `potrait-view.js` used to create the different elements for the portrait view
+    * `portait/portrait-view.js` code used to create the different elements for the portrait view
 * `` directory contains 
 * `` directory contains 
 * `page` directory contains the code to run our website
-    * `page/` contains the code used to create
-    * `page/` contains the code used to create
+    * `page/data_plot.js` contains the code used to create the ensemble and statistical views, as well as calling the portrait view.
+    * `page/index.html` contains the structure of the website
     * `page/` contains the code used to create
     * `page/` contains the code used to create
 
