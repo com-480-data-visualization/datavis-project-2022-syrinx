@@ -19,15 +19,20 @@
 See our [Process book](Dataviz_process_book_syrinx.pdf) describing the development of our project.
 We also suggest you to watch our [Screencast video](https://drive.google.com/file/d/1AMoACu4n9wucOniqN-sRiwAB5Z07CefC/view?usp=sharing) that demonstates features of our visualization.
 Our repository has the following structure:
-* `portait` directory contains 
-    * `portait/portrait-view.js` code used to create the different elements for the portrait view
-* `` directory contains 
-* `` directory contains 
 * `page` directory contains the code to run our website
-    * `page/data_plot.js` contains the code used to create the ensemble and statistical views, as well as calling the portrait view.
+    * `page/data_plot.js` contains the code used to create the ensemble view, to integrate it with the statistical view, as well as to call the portrait view.
     * `page/index.html` contains the structure of the website
-    * `page/` contains the code used to create
-    * `page/` contains the code used to create
+    * `page/style.css` setting the style of the webpage
+    * `page/portait` directory contains
+          * `portrait-view.js` code used to create different elements for the portrait view
+    * `page/Statistical_page` directory contains 
+          * `statistical_plot.js` code used to create the statistical view
+          * `Data_Aggregation_Statistical_View.ipynb` used to aggregate data for the statistical view
+          * `data_statistical` directory that contains the aggregated data in csv files for the statistical view
+* `Data_Exploration_Preprocessing` directory contains code used to explore and preprocess data
+* `milestone_imgs` directory contains images from the first two milestones
+* `Dataviz_process_book_syrinx.pdf` is our Process Book
+* `Milestone1.md`, `Milestone2.md` are the first two milestones
 
 To see the website, first download the data.csv file from our [Google Drive](https://drive.google.com/file/d/1fdk4ubsOctuRFj3aY4pa1Y2Azvg_L48U/view?usp=sharing) (access is limited to the professor and the teaching assistants of the Data Visualization course) and put it in the directory `page/data`. Then run from the `page` directory: 
 ```
