@@ -25,12 +25,15 @@ Our repository has the following structure:
     * `page/style.css` sets the style of the webpage
     * `page/portait` directory contains
     
-          * `portrait-view.js` code used to create different elements for the portrait view
+          `portrait-view.js` code used to create different elements for the portrait view
     * `page/Statistical_page` directory contains
     
-          * `statistical_plot.js` code used to create the statistical view
-          * `Data_Aggregation_Statistical_View.ipynb` used to aggregate data for the statistical view
-          * `data_statistical` directory that contains the aggregated data in csv files for the statistical view
+          `statistical_plot.js` code used to create the statistical view
+          
+          `Data_Aggregation_Statistical_View.ipynb` used to aggregate data for the statistical view
+          
+          `data_statistical` directory that contains the aggregated data in csv files for the statistical view
+          
 * `Data_Exploration_Preprocessing` directory contains code used to explore and preprocess data
 * `milestone_imgs` directory contains images from the first two milestones
 * `Dataviz_process_book_syrinx.pdf` is our Process Book
