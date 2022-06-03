@@ -111,7 +111,7 @@ function build_scaled_point(x, y) {
 
 // No scale center
 const center_ns = {
-	"x": 20,
+	"x": CIRCLE_PER_LINE / 2,
 	"y": 20
 };
 // Scaled center
