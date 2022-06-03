@@ -34,7 +34,7 @@ Our repository has the following structure:
 * `Dataviz_process_book_syrinx.pdf` is our Process Book
 * `Milestone1.md`, `Milestone2.md` are the first two milestones
 
-To see the website, first download the data.csv file from our [Google Drive](https://drive.google.com/file/d/1fdk4ubsOctuRFj3aY4pa1Y2Azvg_L48U/view?usp=sharing) (access is limited to the professor and the teaching assistants of the Data Visualization course) and put it in the directory `page/data`. Then run from the `page` directory: 
+To see the website, first download the data.csv file from our [Google Drive](https://drive.google.com/file/d/1fdk4ubsOctuRFj3aY4pa1Y2Azvg_L48U/view?usp=sharing) and put it in the directory `page/data` (access is limited to the professor and the teaching assistants of the Data Visualization course). Then run from the `page` directory: 
 ```
 python -m http.server 9000
 ```
