@@ -16,7 +16,8 @@
 
 ## Milestone 3
 Our repository has the following structure:
-* `` directory contains 
+* `portait` directory contains 
+    * `potrait-view.js` used to create the different elements for the portrait view
 * `` directory contains 
 * `` directory contains 
 * `page` directory contains the code to run our website
@@ -29,4 +30,4 @@ To see the website, first download the data.csv file from our [Google Drive](htt
 ```
 python -m http.server 9000
 ```
-And after that go to the page http://localhost:9000/ in your browser (we checked it for Google Chrome and Firefox).
+And after that go to the page http://localhost:9000/ in your browser (we checked it for Google Chrome, Firefox and Brave).
