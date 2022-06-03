@@ -22,7 +22,7 @@ Our repository has the following structure:
 * `page` directory contains the code to run our website
     * `page/data_plot.js` contains the code used to create the ensemble view, to integrate it with the statistical view, as well as to call the portrait view.
     * `page/index.html` contains the structure of the website
-    * `page/style.css` setting the style of the webpage
+    * `page/style.css` sets the style of the webpage
     * `page/portait` directory contains
           * `portrait-view.js` code used to create different elements for the portrait view
     * `page/Statistical_page` directory contains 
